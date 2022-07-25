@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        排序-堆排序 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8A%E4%BB%A3%E7%A0%81%E5%90%A7"><span class="toc-text">直接上代码吧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        排序-堆排序
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-01-18 22:04:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>继续补数据结构。。。这次记录一下堆排序算法，具体的分析就不班门弄斧了，这两篇文章已经解释的很清楚了（自己脑子慢半天才明白。。）</p>
+<ul>
+<li><a href="http://blog.csdn.net/jofranks/article/details/7802436" target="_blank"><code>http://blog.csdn.net/jofranks/article/details/7802436</code></a></li>
+<li><a href="http://blog.csdn.net/morewindows/article/details/6709644" target="_blank"><code>http://blog.csdn.net/morewindows/article/details/6709644</code></a></li>
+</ul>
+<span id="more"></span>
+
+
+<h3 id="直接上代码吧"><a href="#直接上代码吧" class="headerlink" title="直接上代码吧"></a>直接上代码吧</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**堆排序**/</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapIfy</span><span class="params">(<span class="type">int</span>* num, <span class="type">int</span> dad, <span class="type">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> larger = <span class="number">2</span>*dad + <span class="number">1</span>;    <span class="comment">//暂时将较大值指向左孩子</span></span><br><span class="line">    <span class="keyword">while</span>(larger &lt; size)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(larger+<span class="number">1</span> &lt; size &amp;&amp; num[larger+<span class="number">1</span>] &lt; num[larger]) <span class="comment">//找左右孩子中较小的</span></span><br><span class="line">            larger++;   <span class="comment">//如果右孩子小，就指向右孩子(right = letf+1)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(num[larger] &gt;= num[dad])   <span class="comment">//比较父节点与较小子节点</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">swap</span>(num[dad], num[larger]);   <span class="comment">//如果子节点小，与父节点交换</span></span><br><span class="line">        dad = larger; <span class="comment">//继续向下比较、交换，直到叶子节点（符合堆的条件）</span></span><br><span class="line">        larger = <span class="number">2</span>*dad + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> _heapIfy(<span class="type">int</span>* num, <span class="type">int</span> dad, <span class="type">int</span> size)   <span class="comment">//递归写法</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> larger = <span class="number">2</span>*dad + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(larger &gt;= size)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(larger+<span class="number">1</span> &lt; size &amp;&amp; num[larger+<span class="number">1</span>] &lt; num[larger])</span><br><span class="line">        larger++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(num[larger] &gt;= num[dad])</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap</span>(num[dad], num[larger]);</span><br><span class="line">    _heapIfy(num, larger, size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">buildHeap</span><span class="params">(<span class="type">int</span>* num, <span class="type">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*Tips:</span></span><br><span class="line"><span class="comment">        叶子结点已经是合格的堆，直接从叶子的父节点开始整理</span></span><br><span class="line"><span class="comment">        叶子 * 2 = 总结点</span></span><br><span class="line"><span class="comment">        建堆（大或小）取决于整理方法</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = (size/<span class="number">2</span> - <span class="number">1</span>); i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="built_in">minHeapFixDown</span>(num, i, size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapSort</span><span class="params">(<span class="type">int</span>* num, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        将根结点与最末尾结点交换，删掉最后结点，再整理</span></span><br><span class="line"><span class="comment">        最后会整理成一个相反的堆</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">swap</span>(num[i], num[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">heapIfy</span>(num, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">10</span>] = &#123;<span class="number">9</span>, <span class="number">12</span>, <span class="number">17</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">20</span>, <span class="number">60</span>, <span class="number">65</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="built_in">buildHeap</span>(num, <span class="number">10</span>);</span><br><span class="line">    <span class="built_in">heapSort</span>(num, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        cout &lt;&lt; num[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>堆这个数据结构在STL中也实现了，需要algorithm这个头文件，速度与我们自己编写相差无几，在<a href="http://blog.csdn.net/morewindows/article/details/6967409" target="_blank"><code>STL系列之四 heap 堆</code></a>这篇文章中有详细说明和测试（ps：还是我大快排厉害~~）<br>　　下次写写归并排序，To be continued~</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

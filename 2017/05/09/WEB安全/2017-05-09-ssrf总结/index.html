@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ssrf总结 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="toc-text">0x01漏洞简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3"><span class="toc-text">0x02漏洞危害</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E6%B5%8B%E8%AF%95"><span class="toc-text">0x03漏洞原理测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">0x04漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="toc-text">0x05绕过姿势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-text">0x06漏洞防御</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x07%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">0x07参考资料</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ssrf总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-05-09 16:04:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ssrf" title="ssrf">ssrf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="0x01漏洞简介"><a href="#0x01漏洞简介" class="headerlink" title="0x01漏洞简介"></a>0x01漏洞简介</h3><p>很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击（Server-side Request Forgery）</p>
+<span id="more"></span>
+
+<h3 id="0x02漏洞危害"><a href="#0x02漏洞危害" class="headerlink" title="0x02漏洞危害"></a>0x02漏洞危害</h3><ul>
+<li>可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息;</li>
+<li>攻击运行在内网或本地的应用程序（比如溢出）;</li>
+<li>对内网web应用进行指纹识别，通过访问默认文件实现;</li>
+<li>攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）;</li>
+<li>利用file协议读取本地文件等。</li>
+</ul>
+<h3 id="0x03漏洞原理测试"><a href="#0x03漏洞原理测试" class="headerlink" title="0x03漏洞原理测试"></a>0x03漏洞原理测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;SSRF TEST&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	Enter the url: http://&lt;input type=&quot;text&quot; name=&quot;url&quot; id=&quot;url&quot; size=&quot;60&quot;/&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; value=&quot;submit&quot; id=&quot;submit&quot; /&gt;</span><br><span class="line">	&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var xhr = function()&#123;</span><br><span class="line">			var request = false;</span><br><span class="line">			if(window.XMLHttpRequest)&#123;</span><br><span class="line">				request = new XMLHttpRequest();</span><br><span class="line">			&#125; else if(window.ActiveXObject)&#123;</span><br><span class="line">				try&#123;</span><br><span class="line">					request = new window.ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span><br><span class="line">				&#125; catch(e) &#123;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return request;</span><br><span class="line">		&#125;();</span><br><span class="line"></span><br><span class="line">		document.getElementById(&quot;submit&quot;).onclick = function() &#123;</span><br><span class="line">			var data = &#x27;url=http://&#x27; + document.getElementById(&quot;url&quot;).value;</span><br><span class="line">			xhr.open(&quot;POST&quot;, &quot;ssrfTest.php&quot;);</span><br><span class="line">			xhr.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">			xhr.send(data);</span><br><span class="line">			xhr.onreadystatechange = function() &#123;</span><br><span class="line">				if(xhr.readyState === 4)&#123;</span><br><span class="line">					if(xhr.status === 200)&#123;</span><br><span class="line">						document.getElementById(&quot;content&quot;).innerHTML = xhr.responseText;</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						alert(&quot;error: &quot; + xhr.status);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>后端处理代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	<span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;url&#x27;</span>]))&#123;</span><br><span class="line">		<span class="variable">$link</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">		<span class="variable">$filename</span> = <span class="string">&#x27;./curled&#x27;</span>.<span class="title function_ invoke__">rand</span>().<span class="string">&#x27;.txt&#x27;</span>;</span><br><span class="line">		<span class="variable">$curlObj</span> = <span class="title function_ invoke__">curl_init</span>(<span class="variable">$link</span>);	<span class="comment">//利用curl访问用户提交的网址</span></span><br><span class="line">		<span class="variable">$file</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$filename</span>, <span class="string">&#x27;w&#x27;</span>);</span><br><span class="line">		<span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curlObj</span>, CURLOPT_FILE, <span class="variable">$file</span>);	<span class="comment">//将访问结果写入文件中</span></span><br><span class="line">		<span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curlObj</span>, CURLOPT_HERDER, <span class="number">0</span>);</span><br><span class="line">		<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curlObj</span>);</span><br><span class="line">		<span class="title function_ invoke__">curl_close</span>(<span class="variable">$curlObj</span>);</span><br><span class="line">		<span class="title function_ invoke__">fclose</span>(<span class="variable">$file</span>);</span><br><span class="line"></span><br><span class="line">		<span class="variable">$file</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$filename</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$file</span>, <span class="title function_ invoke__">filesize</span>(<span class="variable">$filename</span>));	<span class="comment">//将访问结果读取出来</span></span><br><span class="line">		<span class="title function_ invoke__">fclose</span>(<span class="variable">$file</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">	&#125;	</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0x04漏洞利用"><a href="#0x04漏洞利用" class="headerlink" title="0x04漏洞利用"></a>0x04漏洞利用</h3><ol>
+<li>端口扫描</li>
+<li>攻击应用程序</li>
+<li>内网web应用指纹识别<ol>
+<li>通过访问下列连接判断是否安装phpmyadmin</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://localhost/phpMyAdmin/themes/original/img/b_tblimport.png">http://localhost/phpMyAdmin/themes/original/img/b_tblimport.png</a></li>
+<li><a target="_blank" rel="noopener" href="http://localhost/wp-content/themes/default/images/audio.jpg">http://localhost/wp-content/themes/default/images/audio.jpg</a></li>
+<li><a target="_blank" rel="noopener" href="http://localhost/profiles/minimal/translations/README.txt">http://localhost/profiles/minimal/translations/README.txt</a></li>
+</ul>
+<ol start="2">
+<li>访问portName.js判断是否是DLink路由器</li>
+<li>manager&#x2F;images&#x2F;tomcat.gif</li>
+</ol>
+</li>
+<li>攻击内网web应用</li>
+<li>读取本地文件</li>
+</ol>
+<h3 id="0x05绕过姿势"><a href="#0x05绕过姿势" class="headerlink" title="0x05绕过姿势"></a>0x05绕过姿势</h3><ol>
+<li>@    <a target="_blank" rel="noopener" href="http://abc@127.0.0.1/">http://abc@127.0.0.1</a></li>
+<li>添加端口号    <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a></li>
+<li>短地址    <a target="_blank" rel="noopener" href="http://dwz.cn/11SMa">http://dwz.cn/11SMa</a></li>
+<li>可以指向任意ip的域名：xip.io<ol>
+<li>10.0.0.1.xip.io  &#x3D;  10.0.0.1</li>
+<li><a target="_blank" rel="noopener" href="http://www.10.0.0.1.xip.io/">www.10.0.0.1.xip.io</a>  &#x3D;  10.0.0.1</li>
+<li>mysite.10.0.0.1.xip.io  &#x3D;  10.0.0.1</li>
+<li>foo.bar.10.0.0.1.xip.io  &#x3D;  10.0.0.1</li>
+<li>ip地址转换成进制来访问</li>
+</ol>
+</li>
+<li>ip地址转换成进制来访问    115.239.210.26 ＝ 16373751032</li>
+<li>302绕过</li>
+</ol>
+<h3 id="0x06漏洞防御"><a href="#0x06漏洞防御" class="headerlink" title="0x06漏洞防御"></a>0x06漏洞防御</h3><ol>
+<li>过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。</li>
+<li>统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</li>
+<li>限制请求的端口为http常用的端口，比如，80,443,8080,8090。</li>
+<li>黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网。</li>
+<li>禁用不需要的协议。仅仅允许http和https请求。可以防止类似于file:&#x2F;&#x2F;&#x2F;,gopher:&#x2F;&#x2F;,ftp:&#x2F;&#x2F; 等引起的问题。</li>
+</ol>
+<h3 id="0x07参考资料"><a href="#0x07参考资料" class="headerlink" title="0x07参考资料"></a>0x07参考资料</h3><p><a target="_blank" href="https://blog.chaitin.cn/gopher-attack-surfaces/"><code>利用 Gopher 协议拓展攻击面</code></a>  长亭大牛写的，好文章<br><a target="_blank" href="http://www.freebuf.com/articles/web/20407.html">[安全科普]SSRF攻击实例解析</a><br><a target="_blank" href="http://blog.csdn.net/qq_27446553/article/details/48712475"> SSRF的一些总结</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

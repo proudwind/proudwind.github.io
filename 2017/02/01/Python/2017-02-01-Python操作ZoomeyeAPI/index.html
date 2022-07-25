@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Python操作ZoomeyeAPI - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Python操作ZoomeyeAPI
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-02-01 16:44:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>最近用了用Zoomeye，发现是真好用，而且还免费开放了API，用Python封装了一个操作类，自己以后也用着方便。</p>
+<ul>
+<li>官方文档： <a href="https://www.zoomeye.org/api/doc" target="_blank">https://www.zoomeye.org/api/doc</a></li>
+</ul>
+<span id="more"></span>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ZoomeyeAPIAction</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, username, password</span>):</span><br><span class="line">        self.__username = username</span><br><span class="line">        self.__password = password</span><br><span class="line">        self.__accessToken = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__login</span>(<span class="params">self</span>):</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span>: self.__username,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>: self.__password,</span><br><span class="line">        &#125;</span><br><span class="line">        jsonData = json.dumps(data, indent=<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.post(<span class="string">&#x27;https://api.zoomeye.org/user/login&#x27;</span>, data=jsonData)</span><br><span class="line">            result = json.loads(r.text)</span><br><span class="line">            self.__accessToken = result[<span class="string">&#x27;access_token&#x27;</span>]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[-] Username or password is wrong&#x27;</span>)</span><br><span class="line">            os._exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__saveFile</span>(<span class="params">self, filename, content</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;a&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(content+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            f.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__readFile</span>(<span class="params">self, filename</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">return</span> f.readlines()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getAccessToken</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(<span class="string">&#x27;access_token.txt&#x27;</span>):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;access_token.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                self.__accessToken = f.read().strip()</span><br><span class="line">                f.close()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.__login()</span><br><span class="line">            self.__saveFile(<span class="string">&#x27;access_token.txt&#x27;</span>, self.__accessToken)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#flag开控制是主机搜索还是web应用搜索</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getQuery</span>(<span class="params">self, flag, query, page=<span class="string">&#x27;&#x27;</span>, facets=<span class="string">&#x27;&#x27;</span></span>):</span><br><span class="line">        query = <span class="string">&#x27;?query=&#x27;</span> + query</span><br><span class="line">        page = <span class="string">&#x27;&#x27;</span> <span class="keyword">if</span> <span class="keyword">not</span> page <span class="keyword">else</span> (<span class="string">&#x27;&amp;page=&#x27;</span>+<span class="built_in">str</span>(page))</span><br><span class="line">        facets = <span class="string">&#x27;&#x27;</span> <span class="keyword">if</span> <span class="keyword">not</span> facets <span class="keyword">else</span> (<span class="string">&#x27;&amp;facets=&#x27;</span>+<span class="built_in">str</span>(facets))</span><br><span class="line">        queryUrl = <span class="string">&#x27;https://api.zoomeye.org/&#x27;</span>+flag+<span class="string">&#x27;/search&#x27;</span>+query+page+facets</span><br><span class="line">        <span class="keyword">return</span> queryUrl</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#使用API会用页数限制，这里获取全部</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, flag, query, facets=<span class="string">&#x27;&#x27;</span></span>):</span><br><span class="line">        self.__getAccessToken()</span><br><span class="line">        page = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            queryUrl = self.__getQuery(flag, query, page=page, facets=facets)</span><br><span class="line">            r = requests.get(queryUrl, headers=&#123;<span class="string">&#x27;Authorization&#x27;</span>: <span class="string">&#x27;JWT &#x27;</span>+self.__accessToken&#125;)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;error&#x27;</span> <span class="keyword">in</span> json.loads(r.text).keys():</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;[-] Account was break, excceeding the max limitations. The page is&#x27;</span>, page)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            filename = query.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">0</span>]+<span class="string">&#x27;.json&#x27;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;:&#x27;</span> <span class="keyword">in</span> filename: filename = filename.replace(<span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;&quot;&#x27;</span> <span class="keyword">in</span> filename: filename = filename.replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            self.__saveFile(<span class="string">&#x27;searchResult/&#x27;</span>+filename, r.text)</span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">            #可在此处控制页数</span></span><br><span class="line"><span class="string">            if page &gt;= 10:</span></span><br><span class="line"><span class="string">                break</span></span><br><span class="line"><span class="string">            &#x27;&#x27;&#x27;</span></span><br><span class="line">            page += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#这里只写了一个获取查询结果ip的方法，其他可以自由扩展</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getIp</span>(<span class="params">self</span>):</span><br><span class="line">        jsonData = self.__readFile(<span class="string">&#x27;searchResult/product-Docker.json&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> jsonData:</span><br><span class="line">            data = json.loads(line)</span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> data[<span class="string">&#x27;matches&#x27;</span>]:</span><br><span class="line">                self.__saveFile(<span class="string">&#x27;searchResult/ip.txt&#x27;</span>, d[<span class="string">&#x27;ip&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    zoomeye = ZoomeyeAPIAction(<span class="string">&#x27;your_username&#x27;</span>, <span class="string">&#x27;your_password&#x27;</span>)</span><br><span class="line">    zoomeye.search(<span class="string">&#x27;host&#x27;</span>, <span class="string">&#x27;product:&quot;Docker Remote API&quot; country:&quot;US&quot;&#x27;</span>, <span class="string">&#x27;os&#x27;</span>)</span><br><span class="line">    zoomeye.getIp()</span><br></pre></td></tr></table></figure>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

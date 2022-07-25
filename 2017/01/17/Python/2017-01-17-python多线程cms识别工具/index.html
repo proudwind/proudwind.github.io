@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        python多线程cms识别工具 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0"><span class="toc-text">简述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E6%96%87%E4%BB%B6"><span class="toc-text">特征文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%8D%E6%89%AF%E4%B8%A4%E5%8F%A5%E3%80%82%E3%80%82"><span class="toc-text">再扯两句。。</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python多线程cms识别工具
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-01-17 21:36:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>今天整理资料的时候看到了两个python写的cms识别工具，一个是基于ico和robots.txt进行识别，另一个是基于页面和robots加上特殊的url的关键字匹配，放假之前就有写一个指纹识别的意愿，正好有参考，动手！</p>
+<span id="more"></span>
+
+
+<h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>看了一下两份代码，感觉各有优缺点，索性把两种方法综合起来。两个工具都使用了多线程，正好练习一下，此外还参考了<a href="https://github.com/wilson9x1/fenghuangscanner_v3" target="_blank">凤凰扫描器</a>的代码写法。<br>关于web指纹识别技术还有这一篇文章　　<a href="http://www.freebuf.com/articles/2555.html" target="_blank">http://www.freebuf.com/articles/2555.html</a><br><em>后面使用的时候出现了一点小问题，把代码修改了一下</em></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">cmsRecognize</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, url, threads=<span class="number">50</span></span>):</span><br><span class="line">        self.url = url</span><br><span class="line">        self.filePath = <span class="string">&#x27;Bin/&#x27;</span></span><br><span class="line">        self.q = queue.Queue()</span><br><span class="line">        self.threads = threads</span><br><span class="line">        self.isKnown = <span class="literal">False</span></span><br><span class="line">        self.knew = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">request</span>(<span class="params">self, url</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(url, timeout=<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.Timeout <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.MissingSchema <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> r.text <span class="keyword">if</span> r.status_code == <span class="number">200</span> <span class="keyword">else</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#获取ico的md5值</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getMd5Info</span>(<span class="params">self, path=<span class="string">&#x27;/favicon.ico&#x27;</span></span>):</span><br><span class="line">        url = self.url + path</span><br><span class="line">        response = self.request(url)</span><br><span class="line">        <span class="keyword">if</span> response:</span><br><span class="line">            md5 = hashlib.md5()</span><br><span class="line">            md5.update(response.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">            <span class="keyword">return</span> md5.hexdigest()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">readFile</span>(<span class="params">self, filename</span>):</span><br><span class="line">        filename = self.filePath + filename</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">return</span> f.readlines()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compareIco</span>(<span class="params">self</span>):</span><br><span class="line">        res = self.getMd5Info()</span><br><span class="line">        <span class="keyword">if</span> res != <span class="literal">False</span>:</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> self.readFile(<span class="string">&#x27;ico.txt&#x27;</span>):</span><br><span class="line">                <span class="keyword">if</span> res == line.strip().split(<span class="string">&#x27;#&#x27;</span>)[<span class="number">1</span>]:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;[*]Based on favicon.ico:&#x27;</span>, line.strip().split(<span class="string">&#x27;#&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[-]Based on favicon.ico: Unknown&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getFeature</span>(<span class="params">self</span>):</span><br><span class="line">        files = os.listdir(self.filePath)</span><br><span class="line">        files.remove(<span class="string">&#x27;ico.txt&#x27;</span>)</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        主要是此处做了修改，原本是将文件放入队列中，现在修改为读取之后将测试路径放到队列中</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> files:    </span><br><span class="line">            <span class="comment">#self.q.put(f)</span></span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> self.readFile(f):</span><br><span class="line">                i = i + <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> i &lt;= <span class="number">2</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                line = line.strip().split(<span class="string">&#x27;------&#x27;</span>)</span><br><span class="line">                self.q.put(line)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compareFeature</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> self.q.empty():</span><br><span class="line">            <span class="comment">#i = 0</span></span><br><span class="line">            <span class="comment">#knew = 0</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># for line in self.readFile(self.q.get()):</span></span><br><span class="line">            <span class="comment">#     i = i + 1</span></span><br><span class="line">            <span class="comment">#     if i &lt;= 2:</span></span><br><span class="line">            <span class="comment">#         continue</span></span><br><span class="line"></span><br><span class="line">            content = self.q.get()</span><br><span class="line">            response = self.request(self.url + content[<span class="number">0</span>])</span><br><span class="line">            <span class="comment">#print(threading.current_thread(), content[0])</span></span><br><span class="line">            <span class="keyword">if</span> re.search(content[<span class="number">1</span>], <span class="built_in">str</span>(response)):</span><br><span class="line">                self.knew = self.knew + <span class="number">1</span></span><br><span class="line">                <span class="comment">#print(knew)</span></span><br><span class="line">                <span class="keyword">if</span> self.knew &gt;= <span class="number">3</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;[*]Based on feature:&#x27;</span>, content[<span class="number">2</span>])</span><br><span class="line">                    os._exit(<span class="number">0</span>) <span class="comment">#找到之后立即结束程序，减少开支</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        self.compareIco()</span><br><span class="line"></span><br><span class="line">        self.getFeature()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.threads):</span><br><span class="line">            t = threading.Thread(target=self.compareFeature)</span><br><span class="line">            t.setDaemon(<span class="literal">True</span>)</span><br><span class="line">            t.start()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#for i in range(self.threads):</span></span><br><span class="line">            <span class="comment">#t.join()</span></span><br><span class="line">        self.q.join()    <span class="comment">#线程数控制有问题，做了修改</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.isKnown:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[-]Based on feature: Unknown&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    cms = cmsRecognize(<span class="string">&#x27;http://www.seacms.net&#x27;</span>)</span><br><span class="line">    cms.run()</span><br></pre></td></tr></table></figure>
+<h3 id="特征文件"><a href="#特征文件" class="headerlink" title="特征文件"></a>特征文件</h3><p>一、<br>#范例：链接——关键字——CMS别称<br>#范例：连接——正则表达式——匹配关键字——CMS别称<br>&#x2F;dede&#x2F;——dedecms——DedeCMS(织梦)<br>&#x2F;data&#x2F;admin&#x2F;allowurl.txt——dedecms——DedeCMS(织梦)<br>&#x2F;data&#x2F;index.html——dedecms——DedeCMS(织梦)<br>……</p>
+<p>二、<br>Discuz#528a222ab4cfa5f4ee19aac95a56c0ca<br>Phpcms#18fb0c67f6a7e5c7ad62fc37c5ab7637<br>dedecms#7ef1f0a0093460fe46bb691578c07c95<br>……</p>
+<h3 id="再扯两句。。"><a href="#再扯两句。。" class="headerlink" title="再扯两句。。"></a>再扯两句。。</h3><p>基于ico的识别成功率应该不是太高，现在的网站基本会换一个ico。。。说了半天ico到底是什么呢？<br><img src="https://seaii-blog.com/usr/uploads/2017/01/3194212431.png" alt="ico.png"><br>看到左边的小标志了没~</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        WordPress任意文件删除漏洞分析 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-text">漏洞防御</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">参考文章</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        WordPress任意文件删除漏洞分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-07-04 21:39:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#php" title="php">php</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#wordpress" title="wordpress">wordpress</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个漏洞在去年就已经批露，但是wordpress官方一直没有修复。攻击者可以通过该漏洞删除<code>wp-config.php</code>，进而重装wordpress充值admin密码来getshell。唯一的一点限制就是需要媒体文件的修改权限，这里只需要作者权限即可，不需要管理员。看完之后，就想起了不久前的铁三，被wordpress支配的恐惧。。。</p>
+<span id="more"></span>
+
+
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/ef0EKaE6gF.png" alt="mark"></p>
+<p>首先上传一个图片文件，然后编辑这个图片。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/k58JiELcIL.png" alt="mark"></p>
+<p>从源码中找到_wpnonce的值，然后使用curl或burp构造http请求。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/idcBg9A8Ja.png" alt="mark"></p>
+<p>thumb参数为想删除的文件，接下来在编辑页面，点击永久删除。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/0EFA4BI8lE.png" alt="mark"></p>
+<p>若成功删除，页面会直接跳转到安装界面。</p>
+<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>既然是任意文件删除漏洞，那我们就从删除功能入手，先来看<code>wp-admin/post.php</code>的246-268行：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">&#x27;delete&#x27;</span>:</span><br><span class="line">	<span class="title function_ invoke__">check_admin_referer</span>(<span class="string">&#x27;delete-post_&#x27;</span> . <span class="variable">$post_id</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( ! <span class="variable">$post</span> )</span><br><span class="line">		<span class="title function_ invoke__">wp_die</span>( <span class="title function_ invoke__">__</span>( <span class="string">&#x27;This item has already been deleted.&#x27;</span> ) );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( ! <span class="variable">$post_type_object</span> )</span><br><span class="line">		<span class="title function_ invoke__">wp_die</span>( <span class="title function_ invoke__">__</span>( <span class="string">&#x27;Invalid post type.&#x27;</span> ) );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( ! <span class="title function_ invoke__">current_user_can</span>( <span class="string">&#x27;delete_post&#x27;</span>, <span class="variable">$post_id</span> ) )</span><br><span class="line">		<span class="title function_ invoke__">wp_die</span>( <span class="title function_ invoke__">__</span>( <span class="string">&#x27;Sorry, you are not allowed to delete this item.&#x27;</span> ) );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( <span class="variable">$post</span>-&gt;post_type == <span class="string">&#x27;attachment&#x27;</span> ) &#123; <span class="comment">//删除附件</span></span><br><span class="line">		<span class="variable">$force</span> = ( ! MEDIA_TRASH );</span><br><span class="line">		<span class="keyword">if</span> ( ! <span class="title function_ invoke__">wp_delete_attachment</span>( <span class="variable">$post_id</span>, <span class="variable">$force</span> ) )</span><br><span class="line">			<span class="title function_ invoke__">wp_die</span>( <span class="title function_ invoke__">__</span>( <span class="string">&#x27;Error in deleting.&#x27;</span> ) );</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> ( ! <span class="title function_ invoke__">wp_delete_post</span>( <span class="variable">$post_id</span>, <span class="literal">true</span> ) )</span><br><span class="line">			<span class="title function_ invoke__">wp_die</span>( <span class="title function_ invoke__">__</span>( <span class="string">&#x27;Error in deleting.&#x27;</span> ) );</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="title function_ invoke__">wp_redirect</span>( <span class="title function_ invoke__">add_query_arg</span>(<span class="string">&#x27;deleted&#x27;</span>, <span class="number">1</span>, <span class="variable">$sendback</span>) );</span><br><span class="line">	<span class="keyword">exit</span>();</span><br></pre></td></tr></table></figure>
+
+<p>由于我们删除的是图片附件，所以程序会进入<code>wp_delete_attachment</code>函数，跟进：</p>
+<p><code>wp-include/post.php</code>，函数太长，只截取关键部分，5061-5088行。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">前面的代码基本都是准备工作，从数据库将图片的各种信息取出来，删除与图片相关的评论、缓存等。然后到达关键部分</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( ! <span class="keyword">empty</span>(<span class="variable">$meta</span>[<span class="string">&#x27;thumb&#x27;</span>]) ) &#123;</span><br><span class="line">    <span class="comment">// Don&#x27;t delete the thumb if another attachment uses it.</span></span><br><span class="line">    <span class="keyword">if</span> (! <span class="variable">$wpdb</span>-&gt;<span class="title function_ invoke__">get_row</span>( <span class="variable">$wpdb</span>-&gt;<span class="title function_ invoke__">prepare</span>( <span class="string">&quot;SELECT meta_id FROM <span class="subst">$wpdb</span>-&gt;postmeta WHERE meta_key = &#x27;_wp_attachment_metadata&#x27; AND meta_value LIKE %s AND post_id &lt;&gt; %d&quot;</span>, <span class="string">&#x27;%&#x27;</span> . <span class="variable">$wpdb</span>-&gt;<span class="title function_ invoke__">esc_like</span>( <span class="variable">$meta</span>[<span class="string">&#x27;thumb&#x27;</span>] ) . <span class="string">&#x27;%&#x27;</span>, <span class="variable">$post_id</span>)) ) &#123;</span><br><span class="line">        <span class="variable">$thumbfile</span> = <span class="title function_ invoke__">str_replace</span>(<span class="title function_ invoke__">basename</span>(<span class="variable">$file</span>), <span class="variable">$meta</span>[<span class="string">&#x27;thumb&#x27;</span>], <span class="variable">$file</span>);</span><br><span class="line">        <span class="comment">/** This filter is documented in wp-includes/functions.php */</span></span><br><span class="line">        <span class="variable">$thumbfile</span> = <span class="title function_ invoke__">apply_filters</span>( <span class="string">&#x27;wp_delete_file&#x27;</span>, <span class="variable">$thumbfile</span> );</span><br><span class="line">        @ <span class="title function_ invoke__">unlink</span>( <span class="title function_ invoke__">path_join</span>(<span class="variable">$uploadpath</span>[<span class="string">&#x27;basedir&#x27;</span>], <span class="variable">$thumbfile</span>) );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Remove intermediate and backup images if there are any.</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="keyword">isset</span>( <span class="variable">$meta</span>[<span class="string">&#x27;sizes&#x27;</span>] ) &amp;&amp; <span class="title function_ invoke__">is_array</span>( <span class="variable">$meta</span>[<span class="string">&#x27;sizes&#x27;</span>] ) ) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> ( <span class="variable">$meta</span>[<span class="string">&#x27;sizes&#x27;</span>] <span class="keyword">as</span> <span class="variable">$size</span> =&gt; <span class="variable">$sizeinfo</span> ) &#123;</span><br><span class="line">        <span class="variable">$intermediate_file</span> = <span class="title function_ invoke__">str_replace</span>( <span class="title function_ invoke__">basename</span>( <span class="variable">$file</span> ), <span class="variable">$sizeinfo</span>[<span class="string">&#x27;file&#x27;</span>], <span class="variable">$file</span> );</span><br><span class="line">        <span class="comment">/** This filter is documented in wp-includes/functions.php */</span></span><br><span class="line">        <span class="variable">$intermediate_file</span> = <span class="title function_ invoke__">apply_filters</span>( <span class="string">&#x27;wp_delete_file&#x27;</span>, <span class="variable">$intermediate_file</span> );</span><br><span class="line">        @ <span class="title function_ invoke__">unlink</span>( <span class="title function_ invoke__">path_join</span>( <span class="variable">$uploadpath</span>[<span class="string">&#x27;basedir&#x27;</span>], <span class="variable">$intermediate_file</span> ) );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( <span class="title function_ invoke__">is_array</span>(<span class="variable">$backup_sizes</span>) ) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> ( <span class="variable">$backup_sizes</span> <span class="keyword">as</span> <span class="variable">$size</span> ) &#123;</span><br><span class="line">        <span class="variable">$del_file</span> = <span class="title function_ invoke__">path_join</span>( <span class="title function_ invoke__">dirname</span>(<span class="variable">$meta</span>[<span class="string">&#x27;file&#x27;</span>]), <span class="variable">$size</span>[<span class="string">&#x27;file&#x27;</span>] );</span><br><span class="line">        <span class="comment">/** This filter is documented in wp-includes/functions.php */</span></span><br><span class="line">        <span class="variable">$del_file</span> = <span class="title function_ invoke__">apply_filters</span>( <span class="string">&#x27;wp_delete_file&#x27;</span>, <span class="variable">$del_file</span> );</span><br><span class="line">        @ <span class="title function_ invoke__">unlink</span>( <span class="title function_ invoke__">path_join</span>(<span class="variable">$uploadpath</span>[<span class="string">&#x27;basedir&#x27;</span>], <span class="variable">$del_file</span>) );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( <span class="title function_ invoke__">is_array</span>(<span class="variable">$backup_sizes</span>) ) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> ( <span class="variable">$backup_sizes</span> <span class="keyword">as</span> <span class="variable">$size</span> ) &#123;</span><br><span class="line">        <span class="variable">$del_file</span> = <span class="title function_ invoke__">path_join</span>( <span class="title function_ invoke__">dirname</span>(<span class="variable">$meta</span>[<span class="string">&#x27;file&#x27;</span>]), <span class="variable">$size</span>[<span class="string">&#x27;file&#x27;</span>] );</span><br><span class="line">        <span class="comment">/** This filter is documented in wp-includes/functions.php */</span></span><br><span class="line">        <span class="variable">$del_file</span> = <span class="title function_ invoke__">apply_filters</span>( <span class="string">&#x27;wp_delete_file&#x27;</span>, <span class="variable">$del_file</span> );</span><br><span class="line">        @ <span class="title function_ invoke__">unlink</span>( <span class="title function_ invoke__">path_join</span>(<span class="variable">$uploadpath</span>[<span class="string">&#x27;basedir&#x27;</span>], <span class="variable">$del_file</span>) );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">wp_delete_file</span>( <span class="variable">$file</span> );</span><br></pre></td></tr></table></figure>
+
+<p>整个<code>wp_delete_attachment</code>函数只有这几处调用了<code>unlink</code>函数，虽然表面上我们只上传了一张图片，但是wordpress后端为了其他功能将图片处理成了很多张图片。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/FcI355kGGi.png" alt="mark"></p>
+<p>这几处中只有第一个，即删除<code>thumbfile</code>时，文件名是可能可控的。那么可控点在哪呢？还记得漏洞利用的第一步吗？现在我们就回到<code>wp-admin/post.php</code>看一下具体代码。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//178-189行</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">&#x27;editattachment&#x27;</span>:</span><br><span class="line">	<span class="title function_ invoke__">check_admin_referer</span>(<span class="string">&#x27;update-post_&#x27;</span> . <span class="variable">$post_id</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Don&#x27;t let these be changed</span></span><br><span class="line">	<span class="keyword">unset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;guid&#x27;</span>]);</span><br><span class="line">	<span class="variable">$_POST</span>[<span class="string">&#x27;post_type&#x27;</span>] = <span class="string">&#x27;attachment&#x27;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Update the thumbnail filename</span></span><br><span class="line">	<span class="variable">$newmeta</span> = <span class="title function_ invoke__">wp_get_attachment_metadata</span>( <span class="variable">$post_id</span>, <span class="literal">true</span> ); <span class="comment">//获取附件的属性</span></span><br><span class="line">	<span class="variable">$newmeta</span>[<span class="string">&#x27;thumb&#x27;</span>] = <span class="variable">$_POST</span>[<span class="string">&#x27;thumb&#x27;</span>];</span><br><span class="line"></span><br><span class="line">	<span class="title function_ invoke__">wp_update_attachment_metadata</span>( <span class="variable">$post_id</span>, <span class="variable">$newmeta</span> ); <span class="comment">//更新数据库中的信息</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里<code>$_POST[&#39;thumb&#39;]</code>没有经过任何过滤直接赋值，然后进入了数据库中。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180704/cl7ic4F02f.png" alt="mark"></p>
+<h3 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h3><ol>
+<li>过滤<code>. \</code>等关键字符</li>
+<li><code>$newmeta[&#39;thumb&#39;] = $_POST[&#39;thumb&#39;];</code>改为<code>$newmeta[&#39;thumb&#39;] = basename($_POST[&#39;thumb&#39;]);</code></li>
+</ol>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzUxOTYzMzU0NQ==&mid=2247484277&idx=1&sn=ebb59eea12497dfcf81771f56628523e&chksm=f9f7ec93ce8065858b47eeffbc932b0252b6fd8701281c7a1562dcd891e3c40ce85de43e11e2&scene=0#rd">wordpress任意文件删除漏洞分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.ripstech.com/2018/wordpress-file-delete-to-code-execution/">WARNING: WordPress File Delete to Code Execution</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

